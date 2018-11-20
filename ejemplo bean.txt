@@ -1,0 +1,137 @@
+package ManagedBean;
+
+import Mantenimiento.MantenimientoAcceso;
+import Mantenimiento.MantenimientoEscuela;
+import Persistencia.Acceso;
+import Persistencia.Escuelas;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
+/**
+ *
+ * @author ruth.ramosusam
+ */
+@ManagedBean
+@RequestScoped
+public class BeanEscuela {
+
+    private Escuelas escuela=new Escuelas();
+    private List<Escuelas> listE=new ArrayList();
+
+    
+    @PostConstruct
+    public void init() {
+         escuela.setIdAcceso(new Acceso());
+        MantenimientoEscuela mae = new MantenimientoEscuela();
+//        notas.setNie(new Alumnos());
+        listE = mae.consultar();
+
+    }
+    
+    public Escuelas getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(Escuelas escuela) {
+        this.escuela = escuela;
+    }
+
+    public List<Escuelas> getListE() {
+        return listE;
+    }
+
+    public void setListE(List<Escuelas> listE) {
+        this.listE = listE;
+    }
+    public void agregar(){
+        //Agregar Acceso
+        Acceso acceso=new Acceso();
+        
+        String nombre=escuela.getNombreDirector();
+        String usuario;
+        String password;
+        Integer idMax;
+        usuario = nombre.substring(0,6);
+        
+        int numeroAleatorio = (int) (Math.random()*999)+100;
+        password= usuario+numeroAleatorio;
+        
+        acceso.setContrasena(password);
+        acceso.setEstado("Activo");
+        acceso.setIdAcceso(0);
+        acceso.setUsuario(usuario);
+        acceso.setNivelAcceso("Director");
+        
+        MantenimientoAcceso ma=new MantenimientoAcceso();
+        ma.guardarAcesso(acceso);
+        
+        //idMaximo de acceso
+        idMax=ma.consultarMaxAcceso();
+        Acceso acces=new Acceso();
+        acces.setIdAcceso(idMax);
+        
+        escuela.setIdAcceso(acces);
+        escuela.setEstado("Activo");
+    
+        //Agregar Escuela
+        MantenimientoEscuela me=new MantenimientoEscuela();
+        me.guardar(escuela);
+        listE=me.consultar();
+        String adv="";
+        if (me.guardar(escuela)==1) {
+            adv="Guardado exitosamente";
+        } else {
+            adv="Error al guardar";
+        }
+        FacesMessage msg = new FacesMessage(adv);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void modificar(Escuelas escuela){
+        MantenimientoEscuela me=new MantenimientoEscuela();
+        escuela=me.consultarid(escuela.getCodigoEscuela());
+        this.escuela=escuela;
+        String adv="";
+        if (escuela!=null) {
+            adv="Consulta exitosa";
+        } else {
+            adv="Error al consultar";
+        }
+        FacesMessage msg = new FacesMessage(adv);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void eliminar(Escuelas escuela){
+        MantenimientoEscuela me=new MantenimientoEscuela();
+        me.eliminar(escuela);
+        listE=me.consultar();
+        String adv="";
+        if (me.eliminar(escuela)==1) {
+            adv="Se ha eliminado exitosamente";
+        } else {
+            adv="Error al eliminar";
+        }
+        FacesMessage msg = new FacesMessage(adv);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void actualizar(){
+        MantenimientoEscuela me= new MantenimientoEscuela();
+        me.Actualizar(escuela);
+        System.out.println("Actualizar: "+escuela);
+        
+        listE=me.consultar();
+        
+        System.out.println("esta se va actualizar: "+me.Actualizar(escuela));
+        String adv="";
+        if (me.Actualizar(escuela)==1) {
+            adv="Se ha actualizado Correctamente";
+        } else {
+            adv="Error al actualizar";
+        }
+        FacesMessage msg = new FacesMessage(adv);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+}
