@@ -1,0 +1,187 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Persistencia;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author eliseo.garciausam
+ */
+@Entity
+@Table(name = "usuarios")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
+    , @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuarios.findByNombres", query = "SELECT u FROM Usuarios u WHERE u.nombres = :nombres")
+    , @NamedQuery(name = "Usuarios.findByApellidos", query = "SELECT u FROM Usuarios u WHERE u.apellidos = :apellidos")
+    , @NamedQuery(name = "Usuarios.findByGenero", query = "SELECT u FROM Usuarios u WHERE u.genero = :genero")
+    , @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono")
+    , @NamedQuery(name = "Usuarios.findByCorreo", query = "SELECT u FROM Usuarios u WHERE u.correo = :correo")
+    , @NamedQuery(name = "Usuarios.findByContra", query = "SELECT u FROM Usuarios u WHERE u.contra = :contra")
+    , @NamedQuery(name = "Usuarios.findByNivelDeMando", query = "SELECT u FROM Usuarios u WHERE u.nivelDeMando = :nivelDeMando")})
+public class Usuarios implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
+    @Basic(optional = false)
+    @Column(name = "nombres")
+    private String nombres;
+    @Basic(optional = false)
+    @Column(name = "apellidos")
+    private String apellidos;
+    @Basic(optional = false)
+    @Column(name = "genero")
+    private String genero;
+    @Basic(optional = false)
+    @Column(name = "telefono")
+    private String telefono;
+    @Basic(optional = false)
+    @Column(name = "correo")
+    private String correo;
+    @Basic(optional = false)
+    @Column(name = "contra")
+    private String contra;
+    @Basic(optional = false)
+    @Column(name = "nivel_de_mando")
+    private int nivelDeMando;
+    @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
+    @ManyToOne(optional = false)
+    private TiposUsuarios idTipoUsuario;
+
+    public Usuarios() {
+    }
+
+    public Usuarios(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Usuarios(Integer idUsuario, String nombres, String apellidos, String genero, String telefono, String correo, String contra, int nivelDeMando) {
+        this.idUsuario = idUsuario;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.genero = genero;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.contra = contra;
+        this.nivelDeMando = nivelDeMando;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContra() {
+        return contra;
+    }
+
+    public void setContra(String contra) {
+        this.contra = contra;
+    }
+
+    public int getNivelDeMando() {
+        return nivelDeMando;
+    }
+
+    public void setNivelDeMando(int nivelDeMando) {
+        this.nivelDeMando = nivelDeMando;
+    }
+
+    public TiposUsuarios getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(TiposUsuarios idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuarios)) {
+            return false;
+        }
+        Usuarios other = (Usuarios) object;
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Persistencia.Usuarios[ idUsuario=" + idUsuario + " ]";
+    }
+    
+}
