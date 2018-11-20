@@ -44,7 +44,7 @@ public class Meses implements Serializable {
     private Integer idMes;
     @Basic(optional = false)
     @Column(name = "mes")
-    private int mes;
+    private String mes;
     @JoinColumn(name = "id_calendario", referencedColumnName = "id_calendario")
     @ManyToOne(optional = false)
     private Calendarios idCalendario;
@@ -58,7 +58,7 @@ public class Meses implements Serializable {
         this.idMes = idMes;
     }
 
-    public Meses(Integer idMes, int mes) {
+    public Meses(Integer idMes, String mes) {
         this.idMes = idMes;
         this.mes = mes;
     }
@@ -71,11 +71,11 @@ public class Meses implements Serializable {
         this.idMes = idMes;
     }
 
-    public int getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(int mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
 

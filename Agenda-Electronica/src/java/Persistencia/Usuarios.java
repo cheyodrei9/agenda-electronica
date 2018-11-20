@@ -6,7 +6,9 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -65,6 +69,10 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "nivel_de_mando")
     private int nivelDeMando;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private Collection<Notificaciones> notificacionesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private Collection<Cronogramas> cronogramasCollection;
     @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
     @ManyToOne(optional = false)
     private TiposUsuarios idTipoUsuario;
@@ -149,6 +157,24 @@ public class Usuarios implements Serializable {
 
     public void setNivelDeMando(int nivelDeMando) {
         this.nivelDeMando = nivelDeMando;
+    }
+
+    @XmlTransient
+    public Collection<Notificaciones> getNotificacionesCollection() {
+        return notificacionesCollection;
+    }
+
+    public void setNotificacionesCollection(Collection<Notificaciones> notificacionesCollection) {
+        this.notificacionesCollection = notificacionesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cronogramas> getCronogramasCollection() {
+        return cronogramasCollection;
+    }
+
+    public void setCronogramasCollection(Collection<Cronogramas> cronogramasCollection) {
+        this.cronogramasCollection = cronogramasCollection;
     }
 
     public TiposUsuarios getIdTipoUsuario() {

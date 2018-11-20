@@ -44,6 +44,8 @@ public class TiposUsuarios implements Serializable {
     @Column(name = "tipo")
     private String tipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
+    private Collection<Roles> rolesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
     private Collection<Usuarios> usuariosCollection;
 
     public TiposUsuarios() {
@@ -72,6 +74,15 @@ public class TiposUsuarios implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @XmlTransient
+    public Collection<Roles> getRolesCollection() {
+        return rolesCollection;
+    }
+
+    public void setRolesCollection(Collection<Roles> rolesCollection) {
+        this.rolesCollection = rolesCollection;
     }
 
     @XmlTransient

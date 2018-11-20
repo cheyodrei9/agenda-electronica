@@ -47,6 +47,9 @@ public class Actividades implements Serializable {
     @JoinColumn(name = "id_tipo_actividad", referencedColumnName = "id_tipo_actividad")
     @ManyToOne(optional = false)
     private TiposActividades idTipoActividad;
+    @JoinColumn(name = "id _fases", referencedColumnName = "id_fase")
+    @ManyToOne(optional = false)
+    private Fases idFases;
 
     public Actividades() {
     }
@@ -90,6 +93,14 @@ public class Actividades implements Serializable {
 
     public void setIdTipoActividad(TiposActividades idTipoActividad) {
         this.idTipoActividad = idTipoActividad;
+    }
+
+    public Fases getIdFases() {
+        return idFases;
+    }
+
+    public void setIdFases(Fases idFases) {
+        this.idFases = idFases;
     }
 
     @Override
