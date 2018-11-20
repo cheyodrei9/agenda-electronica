@@ -93,4 +93,24 @@ public class MantenimientoCalendarios {
         }
         return flag;
       }
+      
+       public int eliminar(Calendarios calendarios){
+      EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
+      Calendarios cal=null;
+      em.getTransaction().begin();
+      int flag=0;
+      try{
+          cal=em.find(Calendarios.class,calendarios.getIdCalendario());
+          em.remove(cal);
+          em.getTransaction().commit();
+          flag=1;
+          System.out.println("exito al eliminar");
+      }catch(Exception e){
+          em.getTransaction().rollback();
+          flag=0;
+      }finally{
+          em.close();
+      }
+      return flag;
+    }
 }
