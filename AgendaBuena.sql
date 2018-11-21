@@ -343,3 +343,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-11-20 14:37:18
+
+
+ALTER TABLE `agenda`.`actividades` 
+ADD COLUMN `fecha_actividad` DATE NOT NULL AFTER `nombrea_actividad`;
