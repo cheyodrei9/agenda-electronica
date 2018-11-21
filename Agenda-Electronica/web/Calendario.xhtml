@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script>
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+        </script>
+        <style>
+            .ui-dialog{
+                background: #6699ff !important;
+            }
+            .fc-center{
+                color: brown;
+            }
+            .fc th{
+                color: black !important;
+                background: bisque !important;
+            }
+            .fc-basic-view .fc-body .fc-row {
+                color: black !important;
+                background: #0066ff !important;
+            }
+            .ui-widget-content {
+                /*background-color: #99ccff;*/
+            }
+            .ui-dialog-titlebar{
+                color: black;
+                text-align: center;
+            }
+            .ui-icon{
+                color: black;
+            }
+            .ui-dialog .ui-dialog-content{
+                color: black;
+                text-align: center;
+            }
+            .ui-dialog .ui-dialog-content{
+                color: black;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+            
+            <h:panelGrid columnClasses="value">
+                <center><h1>AGENDA</h1></center>
+                <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
+                     <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventMove" listener="#{agendaEjemplo.onEventMove}" update="messages" />
+                    <p:ajax event="eventResize" listener="#{agendaEjemplo.onEventResize}" update="messages" />
+                </p:schedule>
+            </h:panelGrid>
+            <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip"><font></font>
+                <h:panelGrid id="eventDetails" columns="2"><font></font>
+                    <p:outputLabel value="Titulo:" /><font></font>
+                    <p:inputText value="#{agendaEjemplo.event.title}" required="true" /><font></font>
+                    <font></font>
+                    <p:outputLabel value="Fecha Inicio:" /><font></font>
+                    <p:calendar value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                    <font></font>
+                    <p:outputLabel  value="Fecha Finalización:" /><font></font>
+                    <p:calendar value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                    <font></font>
+                    <p:commandButton value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
+                </h:panelGrid><font></font>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
