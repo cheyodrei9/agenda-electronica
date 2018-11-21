@@ -5,7 +5,7 @@
  */
 package Mantenimiento;
 
-import Persistencia.Cronogramas;
+import Persistencia.Dias;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -14,14 +14,14 @@ import javax.persistence.Query;
  *
  * @author eliseo.garciausam
  */
-public class MantenimientoCronogramas {
+public class MantenimientoDias {
     
-    public int guardar(Cronogramas cronogramas) {
+    public int guardar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
         em.getTransaction().begin();
         try {
-            em.persist(cronogramas);
+            em.persist(dias);
             em.getTransaction().commit();
             flag = 1;
             System.out.println("exito al guardar");
@@ -35,12 +35,12 @@ public class MantenimientoCronogramas {
         return flag;
     }
     
-    public Cronogramas consultarid(int idCronograma) {
+    public Dias consultarid(int idDia) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        Cronogramas cronogramas = null;
+        Dias dias = null;
         em.getTransaction().begin();
         try {
-            cronogramas = em.find(Cronogramas.class, idCronograma);
+            dias = em.find(Dias.class, idDia);
             em.getTransaction().commit();
             System.out.println("exito consultarid");
         } catch (Exception e) {
@@ -49,60 +49,59 @@ public class MantenimientoCronogramas {
         } finally {
             em.close();
         }
-        return cronogramas;
+        return dias;
     }
     
-     public List<Cronogramas> consultar() {
-        List<Cronogramas> listaCR = null;
+    public List<Dias> consultar() {
+        List<Dias> listaD = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        try{
-            Query query=em.createQuery("SELECT c FROM Cronogramas c");
+        try {
+            Query query = em.createQuery("SELECT d FROM Dias d");
             em.getTransaction().commit();
-            listaCR=query.getResultList();
-            System.out.println(listaCR+"si");
-            return listaCR;
-        }catch(Exception e){
+            listaD = query.getResultList();
+            System.out.println(listaD + "si");
+            return listaD;
+        } catch (Exception e) {
             em.getTransaction().rollback();
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
-     
-        public int Actualizar(Cronogramas cronogramas){
-        EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
-        Cronogramas crono=null;
+    
+    public int Actualizar(Dias dias) {
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Dias di = null;
         em.getTransaction().begin();
-        int flag=0;
-        try{
-            crono=em.find(Cronogramas.class,cronogramas.getIdCronograma());
-            crono.setIdCronograma(cronogramas.getIdCronograma());
-            crono.setNombre(cronogramas.getNombre());
-            crono.setDescripcion(cronogramas.getDescripcion());
-            crono.setIdUsuario(cronogramas.getIdUsuario());
+        int flag = 0;
+        try {
+            di = em.find(Dias.class, dias.getIdDia());
+            di.setIdDia(dias.getIdDia());
+            di.setIdMes(dias.getIdMes());
+            di.setNombreDia(dias.getNombreDia());
             
             em.getTransaction().commit();
-            flag=1;
+            flag = 1;
             System.out.println("exitoso");
-        }catch(Exception e){
+        } catch (Exception e) {
             em.getTransaction().rollback();
-            flag=0;
-            System.out.println("error"+e);
-        }finally{
+            flag = 0;
+            System.out.println("error" + e);
+        } finally {
             em.close();
         }
         return flag;
     }
-        
-         public int eliminar(Cronogramas cronogramas){
+    
+        public int eliminar(Dias dias){
       EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
-      Cronogramas cro=null;
+      Dias dia=null;
       em.getTransaction().begin();
       int flag=0;
       try{
-          cro=em.find(Cronogramas.class,cronogramas.getIdCronograma());
-          em.remove(cro);
+          dia=em.find(Dias.class,dias.getIdDia());
+          em.remove(dia);
           em.getTransaction().commit();
           flag=1;
           System.out.println("exito al eliminar");
@@ -115,5 +114,4 @@ public class MantenimientoCronogramas {
       return flag;
     }
 }
-    
 
