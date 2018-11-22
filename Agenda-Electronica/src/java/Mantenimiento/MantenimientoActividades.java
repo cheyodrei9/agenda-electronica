@@ -28,7 +28,7 @@ public class MantenimientoActividades {
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("error al guardaractividades,ManteminientoActividades");
+            System.out.println("error al guardaractividades,ManteminientoActividades. "+e);
         } finally {
             em.close();
         }
