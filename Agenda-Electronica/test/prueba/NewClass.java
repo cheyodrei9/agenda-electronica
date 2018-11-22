@@ -6,6 +6,7 @@
 package prueba;
 
 import Mantenimiento.MantenimientoActividades;
+import Mantenimiento.MantenimientoTiposActividades;
 import Persistencia.Actividades;
 import Persistencia.Cronogramas;
 import Persistencia.Fases;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class NewClass {
     public static void main(String[] args) {
-        Actividades actividades = new Actividades();
+        /*Actividades actividades = new Actividades();
         Cronogramas cronogramas = new Cronogramas();
         TiposActividades tipos = new TiposActividades();
         Fases fases = new Fases();
@@ -30,7 +31,7 @@ public class NewClass {
         SimpleDateFormat formato = new SimpleDateFormat("YYYY-mm-dd");
         Date fecha=null;
         try {
-            fecha = formato.parse("2018-11-07");
+            fecha = formato.parse("2018-01-24");
         } catch (ParseException ex) {
             System.out.println("ERROR AL PARSEAR LA FECHA. "+ex);
         }
@@ -45,11 +46,18 @@ public class NewClass {
         fases.setIdFase(1);
         actividades.setIdFases(fases);
         
-        if (act.guardar(actividades)==1) {
+        /*if (act.guardar(actividades)==1) {
             System.out.println("Guardado");
         }else{
             System.out.println("No se pudo guardar");
-        }
+        }*/
+        
+        MantenimientoTiposActividades act = new MantenimientoTiposActividades();
+        TiposActividades tipos = new TiposActividades();
+        tipos.setIdTipoActividad(0);
+        tipos.setTipoActividad("gerencial");
+        
+        System.out.println(act.Guardar(tipos));       
         
     }
 }
