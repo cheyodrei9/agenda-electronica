@@ -81,6 +81,9 @@ public class MantenimientoActividades {
             acti.setNombreaActividad(actividades.getNombreaActividad());
             acti.setIdCronograma(actividades.getIdCronograma());
             acti.setIdTipoActividad(actividades.getIdTipoActividad());
+            acti.setFechaActividad(actividades.getFechaActividad());
+            acti.setIdFases(actividades.getIdFases());
+            
             
             em.getTransaction().commit();
             flag=1;
