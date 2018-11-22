@@ -1,0 +1,131 @@
+
+/*Estilos para los contenedores*/
+
+body{
+    background-color: black;
+    display: flex;
+}
+
+#calendario{
+    background-color: brown;
+    padding: 30px; 
+    width: 50%;
+    display: inline-block;
+}
+
+#tabla{
+    background-color: brown;
+    padding: 30px;
+    width: 40%;
+    display: inline-block;
+}
+
+#calendario, #tabla{
+    float: left;
+    border: 1px solid;
+}
+.value {
+    font-weight: bold;
+}
+
+/*Estilo para tabla de consulta*/
+.ui-datalist {
+    width:500px; 
+    margin-bottom: 5px;
+    margin-left: 40px;
+}
+
+.ui-datalist-item {
+    padding:3px;
+}
+
+.paginated .ui-datalist-data {
+    padding-left: 20px;
+}
+
+
+/*Estilos para los botones*/
+.fc button {
+    background-color: antiquewhite;
+    color:brown;
+}
+
+button.fc-agendaWeek-button.ui-button.ui-state-default{ 
+    display: none; 
+}
+
+.fc button:hover {
+    background-color: brown;
+    color:antiquewhite;
+}
+
+.fc button:active {
+    background-color: burlywood;
+    color:brown;
+}
+
+
+/*Estilos para el contenido del calendario*/
+.titulo{
+    font-family: cursive;
+    color:antiquewhite;
+}
+
+.ui-dialog{
+    background: rgba(152,46,46,0.8) !important;
+}
+
+.fc-center{
+    color: brown;
+    font-family: cursive;
+    color:antiquewhite;
+    padding-right: 90px;
+}
+
+.fc th{
+    color: brown !important;
+    background: antiquewhite !important;
+}
+
+.fc-basic-view .fc-body .fc-row {
+    color: brown;
+    background: antiquewhite;
+}
+.ui-widget-content {
+    background: antiquewhite;
+}
+
+.ui-dialog-titlebar{
+    color: brown;
+    text-align: center;
+    font-family: cursive;
+}
+
+.ui-dialog-titlebar:hover{
+    color: antiquewhite;
+    text-align: center;
+    font-family: cursive;
+}
+
+.ui-icon{
+    color: red;
+}
+
+.ui-dialog .ui-dialog-content{
+    color: antiquewhite;
+    text-align: center;
+    padding-left: 20px;
+}
+
+
+/*Estilos para el widget de insercion de actividades*/
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header { 
+    background-color: antiquewhite; 
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header:hover { 
+    background-color: rgba(156,32,32,0.005); 
+    color: antiquewhite;
+}
+

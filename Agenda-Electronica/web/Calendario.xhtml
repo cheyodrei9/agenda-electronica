@@ -10,8 +10,10 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Agenda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="Estilos.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="data:image/png;base64,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" />
         <script>
             PrimeFaces.locales['es'] = {
                 closeText: 'Cerrar',
@@ -40,67 +42,88 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-        <style>
-            .ui-dialog{
-                background: #6699ff !important;
-            }
-            .fc-center{
-                color: brown;
-            }
-            .fc th{
-                color: black !important;
-                background: bisque !important;
-            }
-            .fc-basic-view .fc-body .fc-row {
-                color: black !important;
-                background: #0066ff !important;
-            }
-            .ui-widget-content {
-                /*background-color: #99ccff;*/
-            }
-            .ui-dialog-titlebar{
-                color: black;
-                text-align: center;
-            }
-            .ui-icon{
-                color: black;
-            }
-            .ui-dialog .ui-dialog-content{
-                color: black;
-                text-align: center;
-            }
-            .ui-dialog .ui-dialog-content{
-                color: black;
-            }
-        </style>
     </h:head>
-    <h:body>
-        <h:form>
-            <p:growl id="messages" showDetail="true" />
-            
-            <h:panelGrid columnClasses="value">
-                <center><h1>AGENDA</h1></center>
-                <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
-                     <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                    <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                    <p:ajax event="eventMove" listener="#{agendaEjemplo.onEventMove}" update="messages" />
-                    <p:ajax event="eventResize" listener="#{agendaEjemplo.onEventResize}" update="messages" />
-                </p:schedule>
-            </h:panelGrid>
-            <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip"><font></font>
-                <h:panelGrid id="eventDetails" columns="2"><font></font>
-                    <p:outputLabel value="Titulo:" /><font></font>
-                    <p:inputText value="#{agendaEjemplo.event.title}" required="true" /><font></font>
-                    <font></font>
-                    <p:outputLabel value="Fecha Inicio:" /><font></font>
-                    <p:calendar value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
-                    <font></font>
-                    <p:outputLabel  value="Fecha Finalización:" /><font></font>
-                    <p:calendar value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
-                    <font></font>
-                    <p:commandButton value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
-                </h:panelGrid><font></font>
-            </p:dialog>
-        </h:form>
+    <h:body> 
+        <div id="calendario">
+            <h:form>
+                <p:growl id="messages" showDetail="true" />
+                <h:panelGrid columnClasses="value">
+                    <center><h1 class="titulo">AGENDA</h1></center>
+                    <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
+                        <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        <p:ajax event="eventMove" listener="#{agendaEjemplo.onEventMove}" update="messages" />
+                        <p:ajax event="eventResize" listener="#{agendaEjemplo.onEventResize}" update="messages" />
+                    </p:schedule>
+                </h:panelGrid>
+                <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
+                    <h:panelGrid id="eventDetails" columns="2"><font></font>
+                        <p:outputLabel value="Titulo:" /><font></font>
+                        <p:inputText value="#{agendaEjemplo.event.title}" required="true" /><font></font>
+                        <font></font>
+                        <p:outputLabel value="Fecha Inicio:" /><font></font>
+                        <p:calendar value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                        <font></font>
+                        <p:outputLabel  value="Fecha Finalización:" /><font></font>
+                        <p:calendar value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                        <font></font>
+                        <p:commandButton value="Guardar Evento" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
+                    </h:panelGrid><font></font>
+                </p:dialog>
+            </h:form>
+        </div>
+        <div id="tabla">
+            <h:form id="form">
+                <!--<p:dataList value="#{dataListView.cars1}" var="car" type="ordered">
+                    <f:facet name="header">
+                        Basic
+                    </f:facet>
+                #{car.brand}, #{car.year}
+            </p:dataList>
+
+            <p:dataList value="#{dataListView.cars2}" var="car" type="definition">
+                <f:facet name="header">
+                    Definition
+                </f:facet>
+                Brand: #{car.brand}, Year: #{car.year}
+                <f:facet name="description">
+                    <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+                </f:facet>
+            </p:dataList>-->
+
+                <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginatorPosition="bottom" paginator="true" rows="10" styleClass="paginated">
+                    <f:facet name="header">
+                        Paginator
+                    </f:facet>
+                    <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                        <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
+                        <h:outputText value="#{car.brand}, #{car.year}" />
+                    </p:commandLink>
+                    <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
+                </p:dataList>
+
+                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                    <p:outputPanel id="carDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                            </f:facet>
+
+                            <h:outputText value="Id:" />
+                            <h:outputText value="#{dataListView.selectedCar.id}" />
+
+                            <h:outputText value="Year" />
+                            <h:outputText value="#{dataListView.selectedCar.year}" />
+
+                            <h:outputText value="Color:" />
+                            <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/>
+
+                            <h:outputText value="Price" />
+                            <h:outputText value="$#{dataListView.selectedCar.price}" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+        </div>
     </h:body>
 </html>
