@@ -58,15 +58,21 @@ and open the template in the editor.
                 </h:panelGrid>
                 <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
                     <h:panelGrid id="eventDetails" columns="2"><font></font>
-                        <p:outputLabel value="Titulo:" /><font></font>
-                        <p:inputText value="#{agendaEjemplo.event.title}" required="true" /><font></font>
+                        <p:outputLabel value="Cronograma:" /><font></font>
+                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
                         <font></font>
-                        <p:outputLabel value="Fecha Inicio:" /><font></font>
-                        <p:calendar value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                        <p:outputLabel value="Tipo de actividad:" /><font></font>
+                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
                         <font></font>
-                        <p:outputLabel  value="Fecha Finalización:" /><font></font>
-                        <p:calendar value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/><font></font>
+                        <p:outputLabel value="Nombre de la actividad:" /><font></font>
+                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
                         <font></font>
+                        <p:outputLabel value="Fecha de la actividad:" /><font></font>
+                        <p:calendar value="#{memoCulero.event.startDate}" timeZone="GMT-6" pattern="dd/MM/yyyy"/><font></font>
+                        <font></font>
+                        <p:outputLabel  value="Fase:" /><font></font>
+                        <p:inputText value="#{memoCulero.event.title}" required="true" />
+                        <font></font>                        <font></font>
                         <p:commandButton value="Guardar Evento" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
                     </h:panelGrid><font></font>
                 </p:dialog>
@@ -74,26 +80,9 @@ and open the template in the editor.
         </div>
         <div id="tabla">
             <h:form id="form">
-                <!--<p:dataList value="#{dataListView.cars1}" var="car" type="ordered">
-                    <f:facet name="header">
-                        Basic
-                    </f:facet>
-                #{car.brand}, #{car.year}
-            </p:dataList>
-
-            <p:dataList value="#{dataListView.cars2}" var="car" type="definition">
-                <f:facet name="header">
-                    Definition
-                </f:facet>
-                Brand: #{car.brand}, Year: #{car.year}
-                <f:facet name="description">
-                    <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
-                </f:facet>
-            </p:dataList>-->
-
                 <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginatorPosition="bottom" paginator="true" rows="10" styleClass="paginated">
                     <f:facet name="header">
-                        Paginator
+                        Actividades Pendientes
                     </f:facet>
                     <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
                         <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
@@ -109,16 +98,19 @@ and open the template in the editor.
                                 <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
                             </f:facet>
 
-                            <h:outputText value="Id:" />
+                            <h:outputText value="Cronograma :" />
                             <h:outputText value="#{dataListView.selectedCar.id}" />
 
-                            <h:outputText value="Year" />
+                            <h:outputText value="Tipo Actividad" />
                             <h:outputText value="#{dataListView.selectedCar.year}" />
 
-                            <h:outputText value="Color:" />
-                            <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/>
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{dataListView.selectedCar.color}" />
 
-                            <h:outputText value="Price" />
+                            <h:outputText value="Fecha" />
+                            <h:outputText value="$#{dataListView.selectedCar.price}" />
+                            
+                            <h:outputText value="Fase" />
                             <h:outputText value="$#{dataListView.selectedCar.price}" />
                         </p:panelGrid>
                     </p:outputPanel>
