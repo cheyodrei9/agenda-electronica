@@ -59,19 +59,19 @@ and open the template in the editor.
                 <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
                     <h:panelGrid id="eventDetails" columns="2"><font></font>
                         <p:outputLabel value="Cronograma:" /><font></font>
-                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
+                        <p:inputText value="#{beansActividades.act.idCronograma.idCronograma}" required="true" /><font></font>
                         <font></font>
                         <p:outputLabel value="Tipo de actividad:" /><font></font>
-                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
+                        <p:inputText value="#{beansActividades.act.idTipoActividad.idTipoActividad}" required="true" /><font></font>
                         <font></font>
                         <p:outputLabel value="Nombre de la actividad:" /><font></font>
-                        <p:inputText value="#{memoCulero.event.title}" required="true" /><font></font>
+                        <p:inputText value="#{beansActividades.act.nombreaActividad}" required="true" /><font></font>
                         <font></font>
                         <p:outputLabel value="Fecha de la actividad:" /><font></font>
-                        <p:calendar value="#{memoCulero.event.startDate}" timeZone="GMT-6" pattern="dd/MM/yyyy"/><font></font>
+                        <p:calendar value="#{beansActividades.act.fechaActividad}" timeZone="GMT-6" pattern="dd/MM/yyyy"/><font></font>
                         <font></font>
                         <p:outputLabel  value="Fase:" /><font></font>
-                        <p:inputText value="#{memoCulero.event.title}" required="true" />
+                        <p:inputText value="#{beansActividades.act.idFases.idFase}" required="true" />
                         <font></font>                        <font></font>
                         <p:commandButton value="Guardar Evento" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
                     </h:panelGrid><font></font>
