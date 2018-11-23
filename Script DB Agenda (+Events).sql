@@ -122,3 +122,11 @@ DO
 BEGIN
 	
 END
+
+SELECT 
+    fecha, DAYOFWEEK(fecha)
+FROM
+    calendario
+WHERE
+    fecha BETWEEN '2017-02-01' AND '2017-02-15'
+        AND DAYOFWEEK(fecha) IN (2,3,4,5,6) /*--agregar--*/ and DAYOFWEEK(fecha) not in (feriado/*--sub-consulta--*/)
