@@ -78,15 +78,15 @@ public class MantenimientoUsusario {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            us = em.find(Usuarios.class, usuarios.getIdUsuario());
-            us.setIdTipoUsuario(usuarios.getIdTipoUsuario());
+            us = em.find(Usuarios.class, usuarios.getIdusuario());
+            us.setIdtipousuario(usuarios.getIdtipousuario());
             us.setNombres(usuarios.getNombres());
             us.setApellidos(usuarios.getApellidos());
             us.setGenero(usuarios.getGenero());
             us.setTelefono(usuarios.getTelefono());
             us.setCorreo(usuarios.getCorreo());
             us.setContra(usuarios.getContra());
-            us.setNivelDeMando(usuarios.getNivelDeMando());
+            us.setNiveldemando(usuarios.getNiveldemando());
 
             em.getTransaction().commit();
             flag = 1;
@@ -108,7 +108,7 @@ public class MantenimientoUsusario {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            us = em.find(Usuarios.class, usuarios.getIdUsuario());
+            us = em.find(Usuarios.class, usuarios.getIdusuario());
             em.remove(us);
 
             em.getTransaction().commit();

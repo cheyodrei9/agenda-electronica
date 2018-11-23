@@ -25,14 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "meses")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Meses.findAll", query = "SELECT m FROM Meses m")
-    , @NamedQuery(name = "Meses.findByIdMes", query = "SELECT m FROM Meses m WHERE m.idMes = :idMes")
+    , @NamedQuery(name = "Meses.findByIdmes", query = "SELECT m FROM Meses m WHERE m.idmes = :idmes")
     , @NamedQuery(name = "Meses.findByMes", query = "SELECT m FROM Meses m WHERE m.mes = :mes")})
 public class Meses implements Serializable {
 
@@ -40,35 +40,35 @@ public class Meses implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_mes")
-    private Integer idMes;
+    @Column(name = "idmes")
+    private Integer idmes;
     @Basic(optional = false)
     @Column(name = "mes")
     private String mes;
-    @JoinColumn(name = "id_calendario", referencedColumnName = "id_calendario")
+    @JoinColumn(name = "idcalendario", referencedColumnName = "idcalendario")
     @ManyToOne(optional = false)
-    private Calendarios idCalendario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMes")
+    private Calendarios idcalendario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmes")
     private Collection<Dias> diasCollection;
 
     public Meses() {
     }
 
-    public Meses(Integer idMes) {
-        this.idMes = idMes;
+    public Meses(Integer idmes) {
+        this.idmes = idmes;
     }
 
-    public Meses(Integer idMes, String mes) {
-        this.idMes = idMes;
+    public Meses(Integer idmes, String mes) {
+        this.idmes = idmes;
         this.mes = mes;
     }
 
-    public Integer getIdMes() {
-        return idMes;
+    public Integer getIdmes() {
+        return idmes;
     }
 
-    public void setIdMes(Integer idMes) {
-        this.idMes = idMes;
+    public void setIdmes(Integer idmes) {
+        this.idmes = idmes;
     }
 
     public String getMes() {
@@ -79,12 +79,12 @@ public class Meses implements Serializable {
         this.mes = mes;
     }
 
-    public Calendarios getIdCalendario() {
-        return idCalendario;
+    public Calendarios getIdcalendario() {
+        return idcalendario;
     }
 
-    public void setIdCalendario(Calendarios idCalendario) {
-        this.idCalendario = idCalendario;
+    public void setIdcalendario(Calendarios idcalendario) {
+        this.idcalendario = idcalendario;
     }
 
     @XmlTransient
@@ -99,7 +99,7 @@ public class Meses implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idMes != null ? idMes.hashCode() : 0);
+        hash += (idmes != null ? idmes.hashCode() : 0);
         return hash;
     }
 
@@ -110,7 +110,7 @@ public class Meses implements Serializable {
             return false;
         }
         Meses other = (Meses) object;
-        if ((this.idMes == null && other.idMes != null) || (this.idMes != null && !this.idMes.equals(other.idMes))) {
+        if ((this.idmes == null && other.idmes != null) || (this.idmes != null && !this.idmes.equals(other.idmes))) {
             return false;
         }
         return true;
@@ -118,7 +118,7 @@ public class Meses implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Meses[ idMes=" + idMes + " ]";
+        return "Persistencia.Meses[ idmes=" + idmes + " ]";
     }
     
 }

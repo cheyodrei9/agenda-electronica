@@ -17,8 +17,8 @@ import Persistencia.Cronogramas;
 import Persistencia.Dias;
 import Persistencia.Fases;
 import Persistencia.Meses;
-import Persistencia.TiposActividades;
-import Persistencia.TiposFases;
+import Persistencia.Tiposactividades;
+import Persistencia.Tiposfases;
 import Persistencia.Usuarios;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ public class NewClass {
     public static void main(String[] args) {
         Actividades acti = new Actividades();
         Cronogramas cro = new Cronogramas();
-        TiposActividades tip = new TiposActividades();
+        Tiposactividades tip = new Tiposactividades();
         Fases fa = new Fases();
         MantenimientoActividades act = new MantenimientoActividades();
         SimpleDateFormat formato = new SimpleDateFormat("YYYY-mm-dd");
@@ -45,15 +45,15 @@ public class NewClass {
             System.out.println("ERROR AL PARSEAR LA FECHA. "+ex);
         }
         
-        acti.setIdActividad(0);
-        cro.setIdCronograma(1);
-        acti.setIdCronograma(cro);
-        tip.setIdTipoActividad(1);
-        acti.setIdTipoActividad(tip);
-        acti.setNombreaActividad("administrativa");
-        acti.setFechaActividad(fecha);
-        fa.setIdFase(1);
-        acti.setIdFases(fa);
+        acti.setIdactividad(0);
+        cro.setIdcronograma(1);
+        acti.setIdcronograma(cro);
+        tip.setIdtipoactividad(1);
+        acti.setIdtipoactividad(tip);
+        acti.setNombreactividad("administrativa");
+        acti.setFechaactividad(fecha);
+        fa.setIdfase(1);
+        acti.setIdfase(fa);
         
         
         

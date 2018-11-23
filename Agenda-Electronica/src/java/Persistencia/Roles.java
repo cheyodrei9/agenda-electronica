@@ -21,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
-    , @NamedQuery(name = "Roles.findByIdRol", query = "SELECT r FROM Roles r WHERE r.idRol = :idRol")
+    , @NamedQuery(name = "Roles.findByIdrol", query = "SELECT r FROM Roles r WHERE r.idrol = :idrol")
     , @NamedQuery(name = "Roles.findByRol", query = "SELECT r FROM Roles r WHERE r.rol = :rol")})
 public class Roles implements Serializable {
 
@@ -36,33 +36,33 @@ public class Roles implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_rol")
-    private Integer idRol;
+    @Column(name = "idrol")
+    private Integer idrol;
     @Basic(optional = false)
     @Column(name = "rol")
     private String rol;
-    @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
+    @JoinColumn(name = "idtipousuario", referencedColumnName = "idtipousuario")
     @ManyToOne(optional = false)
-    private TiposUsuarios idTipoUsuario;
+    private Tiposusuarios idtipousuario;
 
     public Roles() {
     }
 
-    public Roles(Integer idRol) {
-        this.idRol = idRol;
+    public Roles(Integer idrol) {
+        this.idrol = idrol;
     }
 
-    public Roles(Integer idRol, String rol) {
-        this.idRol = idRol;
+    public Roles(Integer idrol, String rol) {
+        this.idrol = idrol;
         this.rol = rol;
     }
 
-    public Integer getIdRol() {
-        return idRol;
+    public Integer getIdrol() {
+        return idrol;
     }
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
+    public void setIdrol(Integer idrol) {
+        this.idrol = idrol;
     }
 
     public String getRol() {
@@ -73,18 +73,18 @@ public class Roles implements Serializable {
         this.rol = rol;
     }
 
-    public TiposUsuarios getIdTipoUsuario() {
-        return idTipoUsuario;
+    public Tiposusuarios getIdtipousuario() {
+        return idtipousuario;
     }
 
-    public void setIdTipoUsuario(TiposUsuarios idTipoUsuario) {
-        this.idTipoUsuario = idTipoUsuario;
+    public void setIdtipousuario(Tiposusuarios idtipousuario) {
+        this.idtipousuario = idtipousuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRol != null ? idRol.hashCode() : 0);
+        hash += (idrol != null ? idrol.hashCode() : 0);
         return hash;
     }
 
@@ -95,7 +95,7 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        if ((this.idRol == null && other.idRol != null) || (this.idRol != null && !this.idRol.equals(other.idRol))) {
+        if ((this.idrol == null && other.idrol != null) || (this.idrol != null && !this.idrol.equals(other.idrol))) {
             return false;
         }
         return true;
@@ -103,7 +103,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Roles[ idRol=" + idRol + " ]";
+        return "Persistencia.Roles[ idrol=" + idrol + " ]";
     }
     
 }

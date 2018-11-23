@@ -5,7 +5,7 @@
  */
 package Mantenimiento;
 
-import Persistencia.TiposFases;
+import Persistencia.Tiposfases;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,7 +15,8 @@ import javax.persistence.Query;
  * @author gerson.ruizusam
  */
 public class MantenimientoTiposFases {
-        public int Guardar(TiposFases tiposFases) {
+
+    public int Guardar(Tiposfases tiposFases) {
 
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -35,12 +36,12 @@ public class MantenimientoTiposFases {
         return flag;
     }
 
-    public TiposFases consultarid(Integer idTipoFase) {
+    public Tiposfases consultarid(Integer idTipoFase) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposFases tiposFases = null;
+        Tiposfases tiposFases = null;
         em.getTransaction().begin();
         try {
-            tiposFases = em.find(TiposFases.class, idTipoFase);
+            tiposFases = em.find(Tiposfases.class, idTipoFase);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID Fue exitosa");
         } catch (Exception e) {
@@ -52,8 +53,8 @@ public class MantenimientoTiposFases {
         return tiposFases;
     }
 
-    public List<TiposFases> consultar() {
-        List<TiposFases> listaTF = null;
+    public List<Tiposfases> consultar() {
+        List<Tiposfases> listaTF = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
@@ -71,15 +72,15 @@ public class MantenimientoTiposFases {
         }
     }
 
-    public int Actualizar(TiposFases tiposFases) {
+    public int Actualizar(Tiposfases tiposFases) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposFases tf = null;
+        Tiposfases tf = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            tf = em.find(TiposFases.class, tiposFases.getIdTipoFase());
-            tf.setTipoFase(tiposFases.getTipoFase());
-            
+            tf = em.find(Tiposfases.class, tiposFases.getIdtipofase());
+            tf.setTipofase(tiposFases.getTipofase());
+
             em.getTransaction().commit();
             flag = 1;
             System.out.println("EXITOSO");
@@ -94,13 +95,13 @@ public class MantenimientoTiposFases {
         return flag;
     }
 
-    public int eliminar(TiposFases tiposFases) {
+    public int eliminar(Tiposfases tiposFases) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposFases tf = null;
+        Tiposfases tf = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            tf = em.find(TiposFases.class, tiposFases.getIdTipoFase());
+            tf = em.find(Tiposfases.class, tiposFases.getIdtipofase());
             em.remove(tf);
 
             em.getTransaction().commit();
@@ -117,4 +118,3 @@ public class MantenimientoTiposFases {
         return flag;
     }
 }
-

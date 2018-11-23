@@ -23,55 +23,55 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
-@Table(name = "tipos_fases")
+@Table(name = "tiposfases")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposFases.findAll", query = "SELECT t FROM TiposFases t")
-    , @NamedQuery(name = "TiposFases.findByIdTipoFase", query = "SELECT t FROM TiposFases t WHERE t.idTipoFase = :idTipoFase")
-    , @NamedQuery(name = "TiposFases.findByTipoFase", query = "SELECT t FROM TiposFases t WHERE t.tipoFase = :tipoFase")})
-public class TiposFases implements Serializable {
+    @NamedQuery(name = "Tiposfases.findAll", query = "SELECT t FROM Tiposfases t")
+    , @NamedQuery(name = "Tiposfases.findByIdtipofase", query = "SELECT t FROM Tiposfases t WHERE t.idtipofase = :idtipofase")
+    , @NamedQuery(name = "Tiposfases.findByTipofase", query = "SELECT t FROM Tiposfases t WHERE t.tipofase = :tipofase")})
+public class Tiposfases implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_fase")
-    private Integer idTipoFase;
+    @Column(name = "idtipofase")
+    private Integer idtipofase;
     @Basic(optional = false)
-    @Column(name = "tipo_fase")
-    private String tipoFase;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoFase")
+    @Column(name = "tipofase")
+    private String tipofase;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipofase")
     private Collection<Fases> fasesCollection;
 
-    public TiposFases() {
+    public Tiposfases() {
     }
 
-    public TiposFases(Integer idTipoFase) {
-        this.idTipoFase = idTipoFase;
+    public Tiposfases(Integer idtipofase) {
+        this.idtipofase = idtipofase;
     }
 
-    public TiposFases(Integer idTipoFase, String tipoFase) {
-        this.idTipoFase = idTipoFase;
-        this.tipoFase = tipoFase;
+    public Tiposfases(Integer idtipofase, String tipofase) {
+        this.idtipofase = idtipofase;
+        this.tipofase = tipofase;
     }
 
-    public Integer getIdTipoFase() {
-        return idTipoFase;
+    public Integer getIdtipofase() {
+        return idtipofase;
     }
 
-    public void setIdTipoFase(Integer idTipoFase) {
-        this.idTipoFase = idTipoFase;
+    public void setIdtipofase(Integer idtipofase) {
+        this.idtipofase = idtipofase;
     }
 
-    public String getTipoFase() {
-        return tipoFase;
+    public String getTipofase() {
+        return tipofase;
     }
 
-    public void setTipoFase(String tipoFase) {
-        this.tipoFase = tipoFase;
+    public void setTipofase(String tipofase) {
+        this.tipofase = tipofase;
     }
 
     @XmlTransient
@@ -86,18 +86,18 @@ public class TiposFases implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoFase != null ? idTipoFase.hashCode() : 0);
+        hash += (idtipofase != null ? idtipofase.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposFases)) {
+        if (!(object instanceof Tiposfases)) {
             return false;
         }
-        TiposFases other = (TiposFases) object;
-        if ((this.idTipoFase == null && other.idTipoFase != null) || (this.idTipoFase != null && !this.idTipoFase.equals(other.idTipoFase))) {
+        Tiposfases other = (Tiposfases) object;
+        if ((this.idtipofase == null && other.idtipofase != null) || (this.idtipofase != null && !this.idtipofase.equals(other.idtipofase))) {
             return false;
         }
         return true;
@@ -105,7 +105,7 @@ public class TiposFases implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.TiposFases[ idTipoFase=" + idTipoFase + " ]";
+        return "Persistencia.Tiposfases[ idtipofase=" + idtipofase + " ]";
     }
     
 }

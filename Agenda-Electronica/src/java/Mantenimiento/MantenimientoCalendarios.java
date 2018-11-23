@@ -76,9 +76,9 @@ public class MantenimientoCalendarios {
         em.getTransaction().begin();
         int flag=0;
         try{
-           cale=em.find(Calendarios.class, calendarios.getIdCalendario());
-           cale.setIdCalendario(calendarios.getIdCalendario());
-           cale.setIdCronograma(calendarios.getIdCronograma());
+           cale=em.find(Calendarios.class, calendarios.getIdcalendario());
+           cale.setIdcalendario(calendarios.getIdcalendario());
+           cale.setIdcronograma(calendarios.getIdcronograma());
            cale.setAño(calendarios.getAño());
            
            em.getTransaction().commit();
@@ -100,7 +100,7 @@ public class MantenimientoCalendarios {
       em.getTransaction().begin();
       int flag=0;
       try{
-          cal=em.find(Calendarios.class,calendarios.getIdCalendario());
+          cal=em.find(Calendarios.class,calendarios.getIdcalendario());
           em.remove(cal);
           em.getTransaction().commit();
           flag=1;

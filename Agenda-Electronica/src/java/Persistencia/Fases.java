@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "fases")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Fases.findAll", query = "SELECT f FROM Fases f")
-    , @NamedQuery(name = "Fases.findByIdFase", query = "SELECT f FROM Fases f WHERE f.idFase = :idFase")
+    , @NamedQuery(name = "Fases.findByIdfase", query = "SELECT f FROM Fases f WHERE f.idfase = :idfase")
     , @NamedQuery(name = "Fases.findByEstado", query = "SELECT f FROM Fases f WHERE f.estado = :estado")
     , @NamedQuery(name = "Fases.findByFecha", query = "SELECT f FROM Fases f WHERE f.fecha = :fecha")})
 public class Fases implements Serializable {
@@ -44,8 +44,8 @@ public class Fases implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_fase")
-    private Integer idFase;
+    @Column(name = "idfase")
+    private Integer idfase;
     @Basic(optional = false)
     @Column(name = "estado")
     private String estado;
@@ -53,31 +53,31 @@ public class Fases implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFases")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfase")
     private Collection<Actividades> actividadesCollection;
-    @JoinColumn(name = "id_tipo_fase", referencedColumnName = "id_tipo_fase")
+    @JoinColumn(name = "idtipofase", referencedColumnName = "idtipofase")
     @ManyToOne(optional = false)
-    private TiposFases idTipoFase;
+    private Tiposfases idtipofase;
 
     public Fases() {
     }
 
-    public Fases(Integer idFase) {
-        this.idFase = idFase;
+    public Fases(Integer idfase) {
+        this.idfase = idfase;
     }
 
-    public Fases(Integer idFase, String estado, Date fecha) {
-        this.idFase = idFase;
+    public Fases(Integer idfase, String estado, Date fecha) {
+        this.idfase = idfase;
         this.estado = estado;
         this.fecha = fecha;
     }
 
-    public Integer getIdFase() {
-        return idFase;
+    public Integer getIdfase() {
+        return idfase;
     }
 
-    public void setIdFase(Integer idFase) {
-        this.idFase = idFase;
+    public void setIdfase(Integer idfase) {
+        this.idfase = idfase;
     }
 
     public String getEstado() {
@@ -105,18 +105,18 @@ public class Fases implements Serializable {
         this.actividadesCollection = actividadesCollection;
     }
 
-    public TiposFases getIdTipoFase() {
-        return idTipoFase;
+    public Tiposfases getIdtipofase() {
+        return idtipofase;
     }
 
-    public void setIdTipoFase(TiposFases idTipoFase) {
-        this.idTipoFase = idTipoFase;
+    public void setIdtipofase(Tiposfases idtipofase) {
+        this.idtipofase = idtipofase;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idFase != null ? idFase.hashCode() : 0);
+        hash += (idfase != null ? idfase.hashCode() : 0);
         return hash;
     }
 
@@ -127,7 +127,7 @@ public class Fases implements Serializable {
             return false;
         }
         Fases other = (Fases) object;
-        if ((this.idFase == null && other.idFase != null) || (this.idFase != null && !this.idFase.equals(other.idFase))) {
+        if ((this.idfase == null && other.idfase != null) || (this.idfase != null && !this.idfase.equals(other.idfase))) {
             return false;
         }
         return true;
@@ -135,7 +135,7 @@ public class Fases implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Fases[ idFase=" + idFase + " ]";
+        return "Persistencia.Fases[ idfase=" + idfase + " ]";
     }
     
 }

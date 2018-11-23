@@ -23,49 +23,49 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
-@Table(name = "tipos_usuarios")
+@Table(name = "tiposusuarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposUsuarios.findAll", query = "SELECT t FROM TiposUsuarios t")
-    , @NamedQuery(name = "TiposUsuarios.findByIdTipoUsuario", query = "SELECT t FROM TiposUsuarios t WHERE t.idTipoUsuario = :idTipoUsuario")
-    , @NamedQuery(name = "TiposUsuarios.findByTipo", query = "SELECT t FROM TiposUsuarios t WHERE t.tipo = :tipo")})
-public class TiposUsuarios implements Serializable {
+    @NamedQuery(name = "Tiposusuarios.findAll", query = "SELECT t FROM Tiposusuarios t")
+    , @NamedQuery(name = "Tiposusuarios.findByIdtipousuario", query = "SELECT t FROM Tiposusuarios t WHERE t.idtipousuario = :idtipousuario")
+    , @NamedQuery(name = "Tiposusuarios.findByTipo", query = "SELECT t FROM Tiposusuarios t WHERE t.tipo = :tipo")})
+public class Tiposusuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_usuario")
-    private Integer idTipoUsuario;
+    @Column(name = "idtipousuario")
+    private Integer idtipousuario;
     @Basic(optional = false)
     @Column(name = "tipo")
     private String tipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipousuario")
     private Collection<Roles> rolesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoUsuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipousuario")
     private Collection<Usuarios> usuariosCollection;
 
-    public TiposUsuarios() {
+    public Tiposusuarios() {
     }
 
-    public TiposUsuarios(Integer idTipoUsuario) {
-        this.idTipoUsuario = idTipoUsuario;
+    public Tiposusuarios(Integer idtipousuario) {
+        this.idtipousuario = idtipousuario;
     }
 
-    public TiposUsuarios(Integer idTipoUsuario, String tipo) {
-        this.idTipoUsuario = idTipoUsuario;
+    public Tiposusuarios(Integer idtipousuario, String tipo) {
+        this.idtipousuario = idtipousuario;
         this.tipo = tipo;
     }
 
-    public Integer getIdTipoUsuario() {
-        return idTipoUsuario;
+    public Integer getIdtipousuario() {
+        return idtipousuario;
     }
 
-    public void setIdTipoUsuario(Integer idTipoUsuario) {
-        this.idTipoUsuario = idTipoUsuario;
+    public void setIdtipousuario(Integer idtipousuario) {
+        this.idtipousuario = idtipousuario;
     }
 
     public String getTipo() {
@@ -97,18 +97,18 @@ public class TiposUsuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoUsuario != null ? idTipoUsuario.hashCode() : 0);
+        hash += (idtipousuario != null ? idtipousuario.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposUsuarios)) {
+        if (!(object instanceof Tiposusuarios)) {
             return false;
         }
-        TiposUsuarios other = (TiposUsuarios) object;
-        if ((this.idTipoUsuario == null && other.idTipoUsuario != null) || (this.idTipoUsuario != null && !this.idTipoUsuario.equals(other.idTipoUsuario))) {
+        Tiposusuarios other = (Tiposusuarios) object;
+        if ((this.idtipousuario == null && other.idtipousuario != null) || (this.idtipousuario != null && !this.idtipousuario.equals(other.idtipousuario))) {
             return false;
         }
         return true;
@@ -116,7 +116,7 @@ public class TiposUsuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.TiposUsuarios[ idTipoUsuario=" + idTipoUsuario + " ]";
+        return "Persistencia.Tiposusuarios[ idtipousuario=" + idtipousuario + " ]";
     }
     
 }

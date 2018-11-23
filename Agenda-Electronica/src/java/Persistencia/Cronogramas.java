@@ -25,14 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "cronogramas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cronogramas.findAll", query = "SELECT c FROM Cronogramas c")
-    , @NamedQuery(name = "Cronogramas.findByIdCronograma", query = "SELECT c FROM Cronogramas c WHERE c.idCronograma = :idCronograma")
+    , @NamedQuery(name = "Cronogramas.findByIdcronograma", query = "SELECT c FROM Cronogramas c WHERE c.idcronograma = :idcronograma")
     , @NamedQuery(name = "Cronogramas.findByNombre", query = "SELECT c FROM Cronogramas c WHERE c.nombre = :nombre")
     , @NamedQuery(name = "Cronogramas.findByDescripcion", query = "SELECT c FROM Cronogramas c WHERE c.descripcion = :descripcion")})
 public class Cronogramas implements Serializable {
@@ -41,41 +41,41 @@ public class Cronogramas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_cronograma")
-    private Integer idCronograma;
+    @Column(name = "idcronograma")
+    private Integer idcronograma;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCronograma")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcronograma")
     private Collection<Calendarios> calendariosCollection;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCronograma")
+    private Usuarios idusuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcronograma")
     private Collection<Actividades> actividadesCollection;
 
     public Cronogramas() {
     }
 
-    public Cronogramas(Integer idCronograma) {
-        this.idCronograma = idCronograma;
+    public Cronogramas(Integer idcronograma) {
+        this.idcronograma = idcronograma;
     }
 
-    public Cronogramas(Integer idCronograma, String nombre, String descripcion) {
-        this.idCronograma = idCronograma;
+    public Cronogramas(Integer idcronograma, String nombre, String descripcion) {
+        this.idcronograma = idcronograma;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
-    public Integer getIdCronograma() {
-        return idCronograma;
+    public Integer getIdcronograma() {
+        return idcronograma;
     }
 
-    public void setIdCronograma(Integer idCronograma) {
-        this.idCronograma = idCronograma;
+    public void setIdcronograma(Integer idcronograma) {
+        this.idcronograma = idcronograma;
     }
 
     public String getNombre() {
@@ -103,12 +103,12 @@ public class Cronogramas implements Serializable {
         this.calendariosCollection = calendariosCollection;
     }
 
-    public Usuarios getIdUsuario() {
-        return idUsuario;
+    public Usuarios getIdusuario() {
+        return idusuario;
     }
 
-    public void setIdUsuario(Usuarios idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdusuario(Usuarios idusuario) {
+        this.idusuario = idusuario;
     }
 
     @XmlTransient
@@ -123,7 +123,7 @@ public class Cronogramas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCronograma != null ? idCronograma.hashCode() : 0);
+        hash += (idcronograma != null ? idcronograma.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +134,7 @@ public class Cronogramas implements Serializable {
             return false;
         }
         Cronogramas other = (Cronogramas) object;
-        if ((this.idCronograma == null && other.idCronograma != null) || (this.idCronograma != null && !this.idCronograma.equals(other.idCronograma))) {
+        if ((this.idcronograma == null && other.idcronograma != null) || (this.idcronograma != null && !this.idcronograma.equals(other.idcronograma))) {
             return false;
         }
         return true;
@@ -142,7 +142,7 @@ public class Cronogramas implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Cronogramas[ idCronograma=" + idCronograma + " ]";
+        return "Persistencia.Cronogramas[ idcronograma=" + idcronograma + " ]";
     }
     
 }

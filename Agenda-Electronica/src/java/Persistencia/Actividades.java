@@ -24,106 +24,106 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "actividades")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Actividades.findAll", query = "SELECT a FROM Actividades a")
-    , @NamedQuery(name = "Actividades.findByIdActividad", query = "SELECT a FROM Actividades a WHERE a.idActividad = :idActividad")
-    , @NamedQuery(name = "Actividades.findByNombreaActividad", query = "SELECT a FROM Actividades a WHERE a.nombreaActividad = :nombreaActividad")
-    , @NamedQuery(name = "Actividades.findByFechaActividad", query = "SELECT a FROM Actividades a WHERE a.fechaActividad = :fechaActividad")})
+    , @NamedQuery(name = "Actividades.findByIdactividad", query = "SELECT a FROM Actividades a WHERE a.idactividad = :idactividad")
+    , @NamedQuery(name = "Actividades.findByNombreactividad", query = "SELECT a FROM Actividades a WHERE a.nombreactividad = :nombreactividad")
+    , @NamedQuery(name = "Actividades.findByFechaactividad", query = "SELECT a FROM Actividades a WHERE a.fechaactividad = :fechaactividad")})
 public class Actividades implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_actividad")
-    private Integer idActividad;
+    @Column(name = "idactividad")
+    private Integer idactividad;
     @Basic(optional = false)
-    @Column(name = "nombrea_actividad")
-    private String nombreaActividad;
+    @Column(name = "nombreactividad")
+    private String nombreactividad;
     @Basic(optional = false)
-    @Column(name = "fecha_actividad")
+    @Column(name = "fechaactividad")
     @Temporal(TemporalType.DATE)
-    private Date fechaActividad;
-    @JoinColumn(name = "id_cronograma", referencedColumnName = "id_cronograma")
+    private Date fechaactividad;
+    @JoinColumn(name = "idcronograma", referencedColumnName = "idcronograma")
     @ManyToOne(optional = false)
-    private Cronogramas idCronograma;
-    @JoinColumn(name = "id_tipo_actividad", referencedColumnName = "id_tipo_actividad")
+    private Cronogramas idcronograma;
+    @JoinColumn(name = "idtipoactividad", referencedColumnName = "idtipoactividad")
     @ManyToOne(optional = false)
-    private TiposActividades idTipoActividad;
-    @JoinColumn(name = "id _fases", referencedColumnName = "id_fase")
+    private Tiposactividades idtipoactividad;
+    @JoinColumn(name = "idfase", referencedColumnName = "idfase")
     @ManyToOne(optional = false)
-    private Fases idFases;
+    private Fases idfase;
 
     public Actividades() {
     }
 
-    public Actividades(Integer idActividad) {
-        this.idActividad = idActividad;
+    public Actividades(Integer idactividad) {
+        this.idactividad = idactividad;
     }
 
-    public Actividades(Integer idActividad, String nombreaActividad, Date fechaActividad) {
-        this.idActividad = idActividad;
-        this.nombreaActividad = nombreaActividad;
-        this.fechaActividad = fechaActividad;
+    public Actividades(Integer idactividad, String nombreactividad, Date fechaactividad) {
+        this.idactividad = idactividad;
+        this.nombreactividad = nombreactividad;
+        this.fechaactividad = fechaactividad;
     }
 
-    public Integer getIdActividad() {
-        return idActividad;
+    public Integer getIdactividad() {
+        return idactividad;
     }
 
-    public void setIdActividad(Integer idActividad) {
-        this.idActividad = idActividad;
+    public void setIdactividad(Integer idactividad) {
+        this.idactividad = idactividad;
     }
 
-    public String getNombreaActividad() {
-        return nombreaActividad;
+    public String getNombreactividad() {
+        return nombreactividad;
     }
 
-    public void setNombreaActividad(String nombreaActividad) {
-        this.nombreaActividad = nombreaActividad;
+    public void setNombreactividad(String nombreactividad) {
+        this.nombreactividad = nombreactividad;
     }
 
-    public Date getFechaActividad() {
-        return fechaActividad;
+    public Date getFechaactividad() {
+        return fechaactividad;
     }
 
-    public void setFechaActividad(Date fechaActividad) {
-        this.fechaActividad = fechaActividad;
+    public void setFechaactividad(Date fechaactividad) {
+        this.fechaactividad = fechaactividad;
     }
 
-    public Cronogramas getIdCronograma() {
-        return idCronograma;
+    public Cronogramas getIdcronograma() {
+        return idcronograma;
     }
 
-    public void setIdCronograma(Cronogramas idCronograma) {
-        this.idCronograma = idCronograma;
+    public void setIdcronograma(Cronogramas idcronograma) {
+        this.idcronograma = idcronograma;
     }
 
-    public TiposActividades getIdTipoActividad() {
-        return idTipoActividad;
+    public Tiposactividades getIdtipoactividad() {
+        return idtipoactividad;
     }
 
-    public void setIdTipoActividad(TiposActividades idTipoActividad) {
-        this.idTipoActividad = idTipoActividad;
+    public void setIdtipoactividad(Tiposactividades idtipoactividad) {
+        this.idtipoactividad = idtipoactividad;
     }
 
-    public Fases getIdFases() {
-        return idFases;
+    public Fases getIdfase() {
+        return idfase;
     }
 
-    public void setIdFases(Fases idFases) {
-        this.idFases = idFases;
+    public void setIdfase(Fases idfase) {
+        this.idfase = idfase;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idActividad != null ? idActividad.hashCode() : 0);
+        hash += (idactividad != null ? idactividad.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +134,7 @@ public class Actividades implements Serializable {
             return false;
         }
         Actividades other = (Actividades) object;
-        if ((this.idActividad == null && other.idActividad != null) || (this.idActividad != null && !this.idActividad.equals(other.idActividad))) {
+        if ((this.idactividad == null && other.idactividad != null) || (this.idactividad != null && !this.idactividad.equals(other.idactividad))) {
             return false;
         }
         return true;
@@ -142,7 +142,7 @@ public class Actividades implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Actividades[ idActividad=" + idActividad + " ]";
+        return "Persistencia.Actividades[ idactividad=" + idactividad + " ]";
     }
     
 }

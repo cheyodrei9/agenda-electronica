@@ -77,10 +77,10 @@ public class MantenimientoNotificaciones {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            not = em.find(Notificaciones.class, notificacion.getIdNotificacion());
-            not.setIdUsuario(notificacion.getIdUsuario());
+            not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
+            not.setIdusuario(notificacion.getIdusuario());
             not.setRango(notificacion.getRango());
-            not.setColor(notificacion.getColor());
+            
             
             em.getTransaction().commit();
             flag = 1;
@@ -101,7 +101,7 @@ public class MantenimientoNotificaciones {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            not = em.find(Notificaciones.class, notificacion.getIdNotificacion());
+            not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
             em.remove(not);
             
             em.getTransaction().commit();

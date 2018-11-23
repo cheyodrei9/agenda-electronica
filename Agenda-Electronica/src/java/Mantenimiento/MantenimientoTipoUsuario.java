@@ -5,7 +5,7 @@
  */
 package Mantenimiento;
 
-import Persistencia.TiposUsuarios;
+import Persistencia.Tiposusuarios;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,8 +15,8 @@ import javax.persistence.Query;
  * @author gerson.ruizusam
  */
 public class MantenimientoTipoUsuario {
-    
-     public int Guardar(TiposUsuarios tiposUsuarios) {
+
+    public int Guardar(Tiposusuarios tiposUsuarios) {
 
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -36,12 +36,12 @@ public class MantenimientoTipoUsuario {
         return flag;
     }
 
-    public TiposUsuarios consultarid(Integer idTipoUsuario) {
+    public Tiposusuarios consultarid(Integer idTipoUsuario) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposUsuarios tiposUsuarios = null;
+        Tiposusuarios tiposUsuarios = null;
         em.getTransaction().begin();
         try {
-            tiposUsuarios = em.find(TiposUsuarios.class, idTipoUsuario);
+            tiposUsuarios = em.find(Tiposusuarios.class, idTipoUsuario);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID Fue exitosa");
         } catch (Exception e) {
@@ -53,8 +53,8 @@ public class MantenimientoTipoUsuario {
         return tiposUsuarios;
     }
 
-    public List<TiposUsuarios> consultar() {
-        List<TiposUsuarios> listaTU = null;
+    public List<Tiposusuarios> consultar() {
+        List<Tiposusuarios> listaTU = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
@@ -72,15 +72,15 @@ public class MantenimientoTipoUsuario {
         }
     }
 
-    public int Actualizar(TiposUsuarios tiposUsuarios) {
+    public int Actualizar(Tiposusuarios tiposUsuarios) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposUsuarios tu = null;
+        Tiposusuarios tu = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            tu = em.find(TiposUsuarios.class, tiposUsuarios.getIdTipoUsuario());
+            tu = em.find(Tiposusuarios.class, tiposUsuarios.getIdtipousuario());
             tu.setTipo(tiposUsuarios.getTipo());
-            
+
             em.getTransaction().commit();
             flag = 1;
             System.out.println("EXITOSO");
@@ -95,13 +95,13 @@ public class MantenimientoTipoUsuario {
         return flag;
     }
 
-    public int eliminar(TiposUsuarios tiposUsuarios) {
+    public int eliminar(Tiposusuarios tiposUsuarios) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposUsuarios tu = null;
+        Tiposusuarios tu = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            tu = em.find(TiposUsuarios.class, tiposUsuarios.getIdTipoUsuario());
+            tu = em.find(Tiposusuarios.class, tiposUsuarios.getIdtipousuario());
             em.remove(tu);
 
             em.getTransaction().commit();
@@ -118,6 +118,3 @@ public class MantenimientoTipoUsuario {
         return flag;
     }
 }
-
-
-

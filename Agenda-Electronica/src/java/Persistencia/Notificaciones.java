@@ -21,53 +21,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "notificaciones")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Notificaciones.findAll", query = "SELECT n FROM Notificaciones n")
-    , @NamedQuery(name = "Notificaciones.findByIdNotificacion", query = "SELECT n FROM Notificaciones n WHERE n.idNotificacion = :idNotificacion")
-    , @NamedQuery(name = "Notificaciones.findByRango", query = "SELECT n FROM Notificaciones n WHERE n.rango = :rango")
-    , @NamedQuery(name = "Notificaciones.findByColor", query = "SELECT n FROM Notificaciones n WHERE n.color = :color")})
+    , @NamedQuery(name = "Notificaciones.findByIdnotificacion", query = "SELECT n FROM Notificaciones n WHERE n.idnotificacion = :idnotificacion")
+    , @NamedQuery(name = "Notificaciones.findByRango", query = "SELECT n FROM Notificaciones n WHERE n.rango = :rango")})
 public class Notificaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_notificacion")
-    private Integer idNotificacion;
+    @Column(name = "idnotificacion")
+    private Integer idnotificacion;
     @Basic(optional = false)
     @Column(name = "rango")
     private String rango;
-    @Basic(optional = false)
-    @Column(name = "color")
-    private String color;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsuario;
+    private Usuarios idusuario;
 
     public Notificaciones() {
     }
 
-    public Notificaciones(Integer idNotificacion) {
-        this.idNotificacion = idNotificacion;
+    public Notificaciones(Integer idnotificacion) {
+        this.idnotificacion = idnotificacion;
     }
 
-    public Notificaciones(Integer idNotificacion, String rango, String color) {
-        this.idNotificacion = idNotificacion;
+    public Notificaciones(Integer idnotificacion, String rango) {
+        this.idnotificacion = idnotificacion;
         this.rango = rango;
-        this.color = color;
     }
 
-    public Integer getIdNotificacion() {
-        return idNotificacion;
+    public Integer getIdnotificacion() {
+        return idnotificacion;
     }
 
-    public void setIdNotificacion(Integer idNotificacion) {
-        this.idNotificacion = idNotificacion;
+    public void setIdnotificacion(Integer idnotificacion) {
+        this.idnotificacion = idnotificacion;
     }
 
     public String getRango() {
@@ -78,26 +73,18 @@ public class Notificaciones implements Serializable {
         this.rango = rango;
     }
 
-    public String getColor() {
-        return color;
+    public Usuarios getIdusuario() {
+        return idusuario;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public Usuarios getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuarios idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdusuario(Usuarios idusuario) {
+        this.idusuario = idusuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idNotificacion != null ? idNotificacion.hashCode() : 0);
+        hash += (idnotificacion != null ? idnotificacion.hashCode() : 0);
         return hash;
     }
 
@@ -108,7 +95,7 @@ public class Notificaciones implements Serializable {
             return false;
         }
         Notificaciones other = (Notificaciones) object;
-        if ((this.idNotificacion == null && other.idNotificacion != null) || (this.idNotificacion != null && !this.idNotificacion.equals(other.idNotificacion))) {
+        if ((this.idnotificacion == null && other.idnotificacion != null) || (this.idnotificacion != null && !this.idnotificacion.equals(other.idnotificacion))) {
             return false;
         }
         return true;
@@ -116,7 +103,7 @@ public class Notificaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Notificaciones[ idNotificacion=" + idNotificacion + " ]";
+        return "Persistencia.Notificaciones[ idnotificacion=" + idnotificacion + " ]";
     }
     
 }

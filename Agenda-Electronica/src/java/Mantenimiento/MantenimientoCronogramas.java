@@ -15,7 +15,7 @@ import javax.persistence.Query;
  * @author eliseo.garciausam
  */
 public class MantenimientoCronogramas {
-    
+
     public int guardar(Cronogramas cronogramas) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -34,7 +34,7 @@ public class MantenimientoCronogramas {
         }
         return flag;
     }
-    
+
     public Cronogramas consultarid(int idCronograma) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Cronogramas cronogramas = null;
@@ -51,69 +51,67 @@ public class MantenimientoCronogramas {
         }
         return cronogramas;
     }
-    
-     public List<Cronogramas> consultar() {
+
+    public List<Cronogramas> consultar() {
         List<Cronogramas> listaCR = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        try{
-            Query query=em.createQuery("SELECT c FROM Cronogramas c");
+        try {
+            Query query = em.createQuery("SELECT c FROM Cronogramas c");
             em.getTransaction().commit();
-            listaCR=query.getResultList();
-            System.out.println(listaCR+"si");
+            listaCR = query.getResultList();
+            System.out.println(listaCR + "si");
             return listaCR;
-        }catch(Exception e){
+        } catch (Exception e) {
             em.getTransaction().rollback();
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
-     
-        public int Actualizar(Cronogramas cronogramas){
-        EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
-        Cronogramas crono=null;
+
+    public int Actualizar(Cronogramas cronogramas) {
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Cronogramas crono = null;
         em.getTransaction().begin();
-        int flag=0;
-        try{
-            crono=em.find(Cronogramas.class,cronogramas.getIdCronograma());
-            crono.setIdCronograma(cronogramas.getIdCronograma());
+        int flag = 0;
+        try {
+            crono = em.find(Cronogramas.class, cronogramas.getIdcronograma());
+            crono.setIdcronograma(cronogramas.getIdcronograma());
             crono.setNombre(cronogramas.getNombre());
             crono.setDescripcion(cronogramas.getDescripcion());
-            crono.setIdUsuario(cronogramas.getIdUsuario());
-            
+            crono.setIdusuario(cronogramas.getIdusuario());
+
             em.getTransaction().commit();
-            flag=1;
+            flag = 1;
             System.out.println("exitoso");
-        }catch(Exception e){
+        } catch (Exception e) {
             em.getTransaction().rollback();
-            flag=0;
-            System.out.println("error"+e);
-        }finally{
+            flag = 0;
+            System.out.println("error" + e);
+        } finally {
             em.close();
         }
         return flag;
     }
-        
-         public int eliminar(Cronogramas cronogramas){
-      EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
-      Cronogramas cro=null;
-      em.getTransaction().begin();
-      int flag=0;
-      try{
-          cro=em.find(Cronogramas.class,cronogramas.getIdCronograma());
-          em.remove(cro);
-          em.getTransaction().commit();
-          flag=1;
-          System.out.println("exito al eliminar");
-      }catch(Exception e){
-          em.getTransaction().rollback();
-          flag=0;
-      }finally{
-          em.close();
-      }
-      return flag;
+
+    public int eliminar(Cronogramas cronogramas) {
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Cronogramas cro = null;
+        em.getTransaction().begin();
+        int flag = 0;
+        try {
+            cro = em.find(Cronogramas.class, cronogramas.getIdcronograma());
+            em.remove(cro);
+            em.getTransaction().commit();
+            flag = 1;
+            System.out.println("exito al eliminar");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            flag = 0;
+        } finally {
+            em.close();
+        }
+        return flag;
     }
 }
-    
-

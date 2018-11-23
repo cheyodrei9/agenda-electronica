@@ -78,9 +78,9 @@ public class MantenimientoRoles {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            rols = em.find(Roles.class, rol.getIdRol());
+            rols = em.find(Roles.class, rol.getIdrol());
             rols.setRol(rol.getRol());
-            rols.setIdTipoUsuario(rol.getIdTipoUsuario());
+            rols.setIdtipousuario(rol.getIdtipousuario());
             
             em.getTransaction().commit();
             flag = 1;
@@ -101,7 +101,7 @@ public class MantenimientoRoles {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            rols = em.find(Roles.class, rol.getIdRol());
+            rols = em.find(Roles.class, rol.getIdrol());
             em.remove(rols);
             
             em.getTransaction().commit();

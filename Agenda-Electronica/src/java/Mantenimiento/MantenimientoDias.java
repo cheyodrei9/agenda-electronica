@@ -15,7 +15,7 @@ import javax.persistence.Query;
  * @author eliseo.garciausam
  */
 public class MantenimientoDias {
-    
+
     public int guardar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -34,7 +34,7 @@ public class MantenimientoDias {
         }
         return flag;
     }
-    
+
     public Dias consultarid(int idDia) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Dias dias = null;
@@ -51,7 +51,7 @@ public class MantenimientoDias {
         }
         return dias;
     }
-    
+
     public List<Dias> consultar() {
         List<Dias> listaD = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -69,18 +69,18 @@ public class MantenimientoDias {
             em.close();
         }
     }
-    
+
     public int Actualizar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Dias di = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            di = em.find(Dias.class, dias.getIdDia());
-            di.setIdDia(dias.getIdDia());
-            di.setIdMes(dias.getIdMes());
-            di.setNombreDia(dias.getNombreDia());
-            
+            di = em.find(Dias.class, dias.getIddia());
+            di.setIddia(dias.getIddia());
+            di.setIdmes(dias.getIdmes());
+            di.setNombredia(dias.getNombredia());
+
             em.getTransaction().commit();
             flag = 1;
             System.out.println("exitoso");
@@ -93,25 +93,24 @@ public class MantenimientoDias {
         }
         return flag;
     }
-    
-        public int eliminar(Dias dias){
-      EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
-      Dias dia=null;
-      em.getTransaction().begin();
-      int flag=0;
-      try{
-          dia=em.find(Dias.class,dias.getIdDia());
-          em.remove(dia);
-          em.getTransaction().commit();
-          flag=1;
-          System.out.println("exito al eliminar");
-      }catch(Exception e){
-          em.getTransaction().rollback();
-          flag=0;
-      }finally{
-          em.close();
-      }
-      return flag;
+
+    public int eliminar(Dias dias) {
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Dias dia = null;
+        em.getTransaction().begin();
+        int flag = 0;
+        try {
+            dia = em.find(Dias.class, dias.getIddia());
+            em.remove(dia);
+            em.getTransaction().commit();
+            flag = 1;
+            System.out.println("exito al eliminar");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            flag = 0;
+        } finally {
+            em.close();
+        }
+        return flag;
     }
 }
-

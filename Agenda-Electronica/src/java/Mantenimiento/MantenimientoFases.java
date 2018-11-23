@@ -6,7 +6,6 @@
 package Mantenimiento;
 
 import Persistencia.Fases;
-import Persistencia.TiposUsuarios;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -79,10 +78,10 @@ public class MantenimientoFases {
         int flag = 0;
         try {
             
-            Fa = em.find(Fases.class,fases.getIdFase());
+            Fa = em.find(Fases.class,fases.getIdfase());
             Fa.setEstado(fases.getEstado());
             Fa.setFecha(fases.getFecha());
-            Fa.setIdTipoFase(fases.getIdTipoFase());
+            Fa.setIdtipofase(fases.getIdtipofase());
             
             em.getTransaction().commit();
             flag = 1;
@@ -104,7 +103,7 @@ public class MantenimientoFases {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            Fa= em.find(Fases.class, fases.getIdFase());
+            Fa= em.find(Fases.class, fases.getIdfase());
             em.remove(Fa);
 
             em.getTransaction().commit();

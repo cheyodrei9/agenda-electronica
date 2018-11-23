@@ -5,7 +5,7 @@
  */
 package Mantenimiento;
 
-import Persistencia.TiposActividades;
+import Persistencia.Tiposactividades;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,8 +15,8 @@ import javax.persistence.Query;
  * @author manuel.suarezusam
  */
 public class MantenimientoTiposActividades {
-    
-    public int Guardar(TiposActividades tActividad) {
+
+    public int Guardar(Tiposactividades tActividad) {
 
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -35,13 +35,13 @@ public class MantenimientoTiposActividades {
         }
         return flag;
     }
-    
-    public TiposActividades consultarid(Integer idTipoActividad) {
+
+    public Tiposactividades consultarid(Integer idTipoActividad) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposActividades tipos = null;
+        Tiposactividades tipos = null;
         em.getTransaction().begin();
         try {
-            tipos = em.find(TiposActividades.class, idTipoActividad);
+            tipos = em.find(Tiposactividades.class, idTipoActividad);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID Fue exitosa");
         } catch (Exception e) {
@@ -52,9 +52,9 @@ public class MantenimientoTiposActividades {
         }
         return tipos;
     }
-    
-    public List<TiposActividades> consultar() {
-        List<TiposActividades> listaTA = null;
+
+    public List<Tiposactividades> consultar() {
+        List<Tiposactividades> listaTA = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
@@ -71,16 +71,16 @@ public class MantenimientoTiposActividades {
             em.close();
         }
     }
-    
-    public int Actualizar(TiposActividades tiposA) {
+
+    public int Actualizar(Tiposactividades tiposA) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposActividades ta = null;
+        Tiposactividades ta = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            ta = em.find(TiposActividades.class, tiposA.getIdTipoActividad());
-            ta.setTipoActividad(tiposA.getTipoActividad());
-            
+            ta = em.find(Tiposactividades.class, tiposA.getIdtipoactividad());
+            ta.setTipoactividad(tiposA.getTipoactividad());
+
             em.getTransaction().commit();
             flag = 1;
             System.out.println("Actualizacion Exitosa");
@@ -94,14 +94,14 @@ public class MantenimientoTiposActividades {
         }
         return flag;
     }
-    
-    public int eliminar(TiposActividades tiposAc) {
+
+    public int eliminar(Tiposactividades tiposAc) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        TiposActividades ta = null;
+        Tiposactividades ta = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
-            ta = em.find(TiposActividades.class, tiposAc.getIdTipoActividad());
+            ta = em.find(Tiposactividades.class, tiposAc.getIdtipoactividad());
             em.remove(ta);
 
             em.getTransaction().commit();

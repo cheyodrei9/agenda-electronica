@@ -25,29 +25,29 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author david.floresusam
  */
 @Entity
 @Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
-    , @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuarios.findByIdusuario", query = "SELECT u FROM Usuarios u WHERE u.idusuario = :idusuario")
     , @NamedQuery(name = "Usuarios.findByNombres", query = "SELECT u FROM Usuarios u WHERE u.nombres = :nombres")
     , @NamedQuery(name = "Usuarios.findByApellidos", query = "SELECT u FROM Usuarios u WHERE u.apellidos = :apellidos")
     , @NamedQuery(name = "Usuarios.findByGenero", query = "SELECT u FROM Usuarios u WHERE u.genero = :genero")
     , @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono")
     , @NamedQuery(name = "Usuarios.findByCorreo", query = "SELECT u FROM Usuarios u WHERE u.correo = :correo")
     , @NamedQuery(name = "Usuarios.findByContra", query = "SELECT u FROM Usuarios u WHERE u.contra = :contra")
-    , @NamedQuery(name = "Usuarios.findByNivelDeMando", query = "SELECT u FROM Usuarios u WHERE u.nivelDeMando = :nivelDeMando")})
+    , @NamedQuery(name = "Usuarios.findByNiveldemando", query = "SELECT u FROM Usuarios u WHERE u.niveldemando = :niveldemando")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_usuario")
-    private Integer idUsuario;
+    @Column(name = "idusuario")
+    private Integer idusuario;
     @Basic(optional = false)
     @Column(name = "nombres")
     private String nombres;
@@ -67,40 +67,40 @@ public class Usuarios implements Serializable {
     @Column(name = "contra")
     private String contra;
     @Basic(optional = false)
-    @Column(name = "nivel_de_mando")
-    private int nivelDeMando;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    @Column(name = "niveldemando")
+    private int niveldemando;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Notificaciones> notificacionesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Cronogramas> cronogramasCollection;
-    @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
+    @JoinColumn(name = "idtipousuario", referencedColumnName = "idtipousuario")
     @ManyToOne(optional = false)
-    private TiposUsuarios idTipoUsuario;
+    private Tiposusuarios idtipousuario;
 
     public Usuarios() {
     }
 
-    public Usuarios(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuarios(Integer idusuario) {
+        this.idusuario = idusuario;
     }
 
-    public Usuarios(Integer idUsuario, String nombres, String apellidos, String genero, String telefono, String correo, String contra, int nivelDeMando) {
-        this.idUsuario = idUsuario;
+    public Usuarios(Integer idusuario, String nombres, String apellidos, String genero, String telefono, String correo, String contra, int niveldemando) {
+        this.idusuario = idusuario;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.genero = genero;
         this.telefono = telefono;
         this.correo = correo;
         this.contra = contra;
-        this.nivelDeMando = nivelDeMando;
+        this.niveldemando = niveldemando;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Integer getIdusuario() {
+        return idusuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdusuario(Integer idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getNombres() {
@@ -151,12 +151,12 @@ public class Usuarios implements Serializable {
         this.contra = contra;
     }
 
-    public int getNivelDeMando() {
-        return nivelDeMando;
+    public int getNiveldemando() {
+        return niveldemando;
     }
 
-    public void setNivelDeMando(int nivelDeMando) {
-        this.nivelDeMando = nivelDeMando;
+    public void setNiveldemando(int niveldemando) {
+        this.niveldemando = niveldemando;
     }
 
     @XmlTransient
@@ -177,18 +177,18 @@ public class Usuarios implements Serializable {
         this.cronogramasCollection = cronogramasCollection;
     }
 
-    public TiposUsuarios getIdTipoUsuario() {
-        return idTipoUsuario;
+    public Tiposusuarios getIdtipousuario() {
+        return idtipousuario;
     }
 
-    public void setIdTipoUsuario(TiposUsuarios idTipoUsuario) {
-        this.idTipoUsuario = idTipoUsuario;
+    public void setIdtipousuario(Tiposusuarios idtipousuario) {
+        this.idtipousuario = idtipousuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        hash += (idusuario != null ? idusuario.hashCode() : 0);
         return hash;
     }
 
@@ -199,7 +199,7 @@ public class Usuarios implements Serializable {
             return false;
         }
         Usuarios other = (Usuarios) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
             return false;
         }
         return true;
@@ -207,7 +207,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "Persistencia.Usuarios[ idUsuario=" + idUsuario + " ]";
+        return "Persistencia.Usuarios[ idusuario=" + idusuario + " ]";
     }
     
 }

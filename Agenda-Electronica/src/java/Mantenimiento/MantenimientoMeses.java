@@ -78,8 +78,8 @@ public class MantenimientoMeses {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            mess = em.find(Meses.class, mes.getIdMes());
-            mess.setIdCalendario(mes.getIdCalendario());
+            mess = em.find(Meses.class, mes.getIdmes());
+            mess.setIdcalendario(mes.getIdcalendario());
             mess.setMes(mes.getMes());
             
             em.getTransaction().commit();
@@ -101,7 +101,7 @@ public class MantenimientoMeses {
         em.getTransaction().begin();
         int flag = 0;
         try {
-            mess = em.find(Meses.class, mes.getIdMes());
+            mess = em.find(Meses.class, mes.getIdmes());
             em.remove(mess);
             
             em.getTransaction().commit();
