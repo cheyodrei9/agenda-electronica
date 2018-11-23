@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author david.floresusam
+ * @author eliseo.garciausam
  */
 @Entity
 @Table(name = "actividades")

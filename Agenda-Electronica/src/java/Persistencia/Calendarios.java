@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author david.floresusam
+ * @author eliseo.garciausam
  */
 @Entity
 @Table(name = "calendarios")
