@@ -65,24 +65,22 @@ and open the template in the editor.
                     </p:schedule>
                 </h:panelGrid>
                 <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
-                    <h:panelGrid id="eventDetails" columns="2"><font></font>
-                        <p:outputLabel value="Cronograma:" /><font></font>
-                        <p:inputText value="#{d}" required="true" /><font></font>
-                        <font></font>
-                        <p:outputLabel value="Tipo de actividad:" /><font></font>
-                        <p:inputText value="#{d}" required="true" /><font></font>
-                        <font></font>
-                        <p:outputLabel value="Nombre de la actividad:" /><font></font>
-                        <p:inputText value="#{d}" required="true" /><font></font>
-                        <font></font>
-                        <p:outputLabel value="Fecha de la actividad:" /><font></font>
-                        <p:calendar value="#{d}" timeZone="GMT-6" pattern="dd/MM/yyyy"/><font></font>
-                        <font></font>
-                        <p:outputLabel  value="Fase:" /><font></font>
-                        <p:inputText value="#{d}" required="true" />
-                        <font></font>                        <font></font>
-                        <p:commandButton value="Guardar Evento" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" /><font></font>
-                    </h:panelGrid><font></font>
+                    <h:panelGrid id="eventDetails" columns="2">
+            <p:outputLabel for="title" value="Titles:" />
+            <p:inputText id="title" value="#{agendaEjemplo.event.title}" required="true" />
+ 
+            <p:outputLabel for="from" value="From:" />
+            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+ 
+            <p:outputLabel for="to" value="To:" />
+            <p:calendar id="to" value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+ 
+            <p:outputLabel for="allDay" value="All Day:" />
+            <h:selectBooleanCheckbox id="allDay" value="#{agendaEjemplo.event.allDay}" />
+ 
+            <p:commandButton type="reset" value="Reset" />
+            <p:commandButton id="addButton" value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+        </h:panelGrid>
                 </p:dialog>
             </h:form>
         </div>
@@ -99,23 +97,29 @@ and open the template in the editor.
                     <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
                 </p:dataList>
 
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                    <h:panelGrid id="eventDetails" columns="2">
-            <p:outputLabel for="title" value="Titles:" />
-            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
- 
-            <p:outputLabel for="from" value="From:" />
-            <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
- 
-            <p:outputLabel for="to" value="To:" />
-            <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
- 
-            <p:outputLabel for="allDay" value="All Day:" />
-            <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
- 
-            <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" action="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-        </h:panelGrid>
+                 <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                    <p:outputPanel id="carDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                            </f:facet>
+
+                            <h:outputText value="Cronograma :" />
+                            <h:outputText value="#{dataListView.selectedCar.id}" />
+
+                            <h:outputText value="Tipo Actividad" />
+                            <h:outputText value="#{dataListView.selectedCar.year}" />
+
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{dataListView.selectedCar.color}" />
+
+                            <h:outputText value="Fecha" />
+                            <h:outputText value="$#{dataListView.selectedCar.price}" />
+                            
+                            <h:outputText value="Fase" />
+                            <h:outputText value="$#{dataListView.selectedCar.price}" />
+                        </p:panelGrid>
+                    </p:outputPanel>
                 </p:dialog>
             </h:form>
         </div>
