@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+import Mantenimiento.MantenimientoActividades;
+import Persistencia.Actividades;
+import Persistencia.Cronogramas;
+import Persistencia.Fases;
+import Persistencia.Tiposactividades;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -30,19 +35,32 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class AgendaEjemplo implements Serializable {
 private ScheduleModel eventModel;
-     
+     private Actividades actividades;
+
+    public Actividades getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(Actividades actividades) {
+        this.actividades = actividades;
+    }
     private ScheduleModel lazyEventModel;
  
     private ScheduleEvent event = new DefaultScheduleEvent();
  
     @PostConstruct
     public void init() {
+        
+        
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
-         
+        actividades = new Actividades();
+        actividades.setIdcronograma(new Cronogramas());
+        actividades.setIdtipoactividad(new Tiposactividades());
+        actividades.setIdfase(new Fases());
         lazyEventModel = new LazyScheduleModel() {
              
             @Override
@@ -165,14 +183,22 @@ private ScheduleModel eventModel;
     }
      
     public void addEvent() {
-        if(event.getId() == null)
+        if(event.getId() == null){
             eventModel.addEvent(event);
-        else
+          actividades.setNombreactividad(event.getTitle());
+          actividades.setFechaactividad(event.getStartDate());
+          MantenimientoActividades mact = new MantenimientoActividades();
+          mact.guardar(actividades);
+          actividades.setIdcronograma(new Cronogramas());
+        actividades.setIdtipoactividad(new Tiposactividades());
+        actividades.setIdfase(new Fases());
+        
+        }else{
             eventModel.updateEvent(event);
          
         event = new DefaultScheduleEvent();
     }
-     
+    } 
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
     }
