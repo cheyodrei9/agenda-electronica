@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            .ui-tabmenu{
+                border: none;
+            }
+            .ui-tabmenu .ui-tabmenu-nav {
+                margin: 0;
+                padding: .2em .2em 0;
+                background: black;
+            }
+            .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+                background: brown;
+            }
+            .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+                font-family: 'Bahnschrift SemiLight SemiConde';
+                padding-right: 90px;
+                color: antiquewhite;
+            }
+            form{
+                flex-direction: column;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:tabMenu >
+                <p:menuitem value="Hola !!" url="https://www.google.com">
+                </p:menuitem>
+                <p:menuitem value="Buenas" url="#">
+                </p:menuitem>
+                <p:menuitem  value="Tardes" url="#">
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
+    </h:body>
+</html>
