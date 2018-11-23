@@ -9,8 +9,8 @@ import Mantenimiento.MantenimientoActividades;
 import Persistencia.Actividades;
 import Persistencia.Cronogramas;
 import Persistencia.Fases;
-import Persistencia.TiposActividades;
-import Persistencia.TiposFases;
+import Persistencia.Tiposactividades;
+import Persistencia.Tiposfases;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,9 +34,9 @@ private List <Actividades> lista = new ArrayList();
     public void inicio (){
     
     act= new Actividades ();
-    act.setIdCronograma(new Cronogramas());
-    act.setIdTipoActividad(new TiposActividades());
-    act.setIdFases(new Fases());
+    act.setIdcronograma(new Cronogramas());
+    act.setIdtipoactividad(new Tiposactividades());
+    act.setIdfase(new Fases());
 MantenimientoActividades actividades = new MantenimientoActividades();    
   lista = actividades.consultar(); 
 }

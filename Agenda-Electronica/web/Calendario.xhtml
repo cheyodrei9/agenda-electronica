@@ -67,19 +67,19 @@ and open the template in the editor.
                 <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
                     <h:panelGrid id="eventDetails" columns="2">
             <p:outputLabel for="title" value="Titles:" />
-            <p:inputText id="title" value="#{agendaEjemplo.event.title}" required="true" />
+            <p:inputText id="title" value="#{a}" required="true" />
  
             <p:outputLabel for="from" value="From:" />
-            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+            <p:calendar id="from" value="#{a}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
  
             <p:outputLabel for="to" value="To:" />
-            <p:calendar id="to" value="#{agendaEjemplo.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+            <p:calendar id="to" value="#{a}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
  
             <p:outputLabel for="allDay" value="All Day:" />
-            <h:selectBooleanCheckbox id="allDay" value="#{agendaEjemplo.event.allDay}" />
+            <h:selectBooleanCheckbox id="allDay" value="#{a}" />
  
             <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+            <p:commandButton id="addButton" value="Save" action="#{a}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
         </h:panelGrid>
                 </p:dialog>
             </h:form>
