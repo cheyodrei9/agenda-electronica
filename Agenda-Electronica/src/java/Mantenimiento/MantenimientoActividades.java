@@ -6,6 +6,12 @@
 package Mantenimiento;
 
 import Persistencia.Actividades;
+import Persistencia.Cronogramas;
+import Persistencia.Fases;
+import Persistencia.TiposActividades;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -26,7 +32,7 @@ public class MantenimientoActividades {
             flag = 1;
             System.out.println("exito al guardar actividades,mantenimientoActividades");
         } catch (Exception ex) {
-            em.getTransaction().rollback();
+            //em.getTransaction().rollback();
             flag = 0;
             System.out.println("error al guardaractividades,ManteminientoActividades"+ex);
         } finally {
@@ -34,7 +40,7 @@ public class MantenimientoActividades {
         }
         return flag;
     }
-
+    
     public Actividades consultarid(int idActividad) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Actividades actividades = null;
