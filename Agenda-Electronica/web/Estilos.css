@@ -3,7 +3,9 @@
 
 body{
     background-color: black;
-    display: flex;
+}
+#container{
+    display:flex;
 }
 
 #calendario{
