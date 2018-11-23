@@ -25,10 +25,10 @@ public class MantenimientoActividades {
             em.getTransaction().commit();
             flag = 1;
             System.out.println("exito al guardar actividades,mantenimientoActividades");
-        } catch (Exception e) {
+        } catch (Exception ex) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("error al guardaractividades,ManteminientoActividades");
+            System.out.println("error al guardaractividades,ManteminientoActividades"+ex);
         } finally {
             em.close();
         }
