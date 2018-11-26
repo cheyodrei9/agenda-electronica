@@ -1,105 +1,119 @@
 
 /*Creacion de la base de datos*/
-DROP DATABASE agenda IF EXISTS;
+DROP DATABASE IF EXISTS agenda;
 CREATE DATABASE agenda;
 
 USE agenda;
 
-/*Tablas simples*/
+/*tablas simples*/
+CREATE TABLE tiposactividades(
+idtipoactividad int(11) NOT NULL AUTO_INCREMENT,
+tipoactividad varchar(150) NOT NULL,
+PRIMARY KEY (idtipoactividad)
+);
 
-CREATE TABLE tipos_usuarios(
-id_tipo_usuario INTEGER AUTO_INCREMENT NOT NULL,
+CREATE TABLE tiposfases(
+idtipofase INTEGER(11) NOT NULL AUTO_INCREMENT,
+tipofase VARCHAR(150) NOT NULL,
+PRIMARY KEY (idtipofase)
+);
+
+CREATE TABLE tiposusuarios(
+idtipousuario INTEGER(11) NOT NULL AUTO_INCREMENT,
 tipo VARCHAR(50) NOT NULL,
-PRIMARY KEY(id_tipo_usuario)
+PRIMARY KEY (idtipousuario)
 );
 
-CREATE TABLE roles(
-id_rol INTEGER AUTO_INCREMENT NOT NULL,
-rol VARCHAR(50) NOT NULL,
-PRIMARY KEY (id_rol)
-);
 
-CREATE TABLE tipos_actividades(
-id_tipo_actividad INTEGER AUTO_INCREMENT NOT NULL,
-tipo_actividad VARCHAR(150) NOT NULL,
-PRIMARY KEY (id_tipo_actividad)
-);
+/*tablas con foranea*/
 
-CREATE TABLE tipos_fases(
-id_tipo_fase INTEGER AUTO_INCREMENT NOT NULL,
-tipo_fase VARCHAR(150) NOT NULL,
-PRIMARY KEY(id_tipo_fase)
-);
-
-CREATE TABLE notificaciones(
-id_clasificacion INTEGER AUTO_INCREMENT NOT NULL,
-rango VARCHAR(50) NOT NULL,
-PRIMARY KEY (id_clasificacion)
-);
-
-CREATE TABLE cronogramas(
-id_cronograma INTEGER AUTO_INCREMENT NOT NULL,
-nombre VARCHAR(50) NOT NULL,
-descripcion VARCHAR(150) NOT NULL,
-PRIMARY KEY (id_cronograma)
-);
-
-/*Tablas con llaves foráneas*/
 CREATE TABLE usuarios(
-id_usuario INTEGER AUTO_INCREMENT NOT NULL,
-id_tipo_usuario INTEGER NOT NULL,
+idusuario INTEGER(11) NOT NULL AUTO_INCREMENT,
+idtipousuario INTEGER(11) NOT NULL,
 nombres VARCHAR(100) NOT NULL,
 apellidos VARCHAR(100) NOT NULL,
 genero VARCHAR(25) NOT NULL,
 telefono VARCHAR(25) NOT NULL,
 correo VARCHAR(50) NOT NULL,
 contra VARCHAR(16) NOT NULL,
-nivel_de_mando INTEGER(1) NOT NULL,
-PRIMARY KEY(id_usuario),
-FOREIGN KEY (id_tipo_usuario) REFERENCES tipos_usuarios(id_tipo_usuario)
+niveldemando INTEGER(1) NOT NULL,
+PRIMARY KEY (idusuario),
+FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
+);
+
+CREATE TABLE cronogramas(
+idcronograma INTEGER(11) NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(50) NOT NULL,
+descripcion VARCHAR(150) NOT NULL,
+idusuario INTEGER(11) NOT NULL,
+PRIMARY KEY (idcronograma),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
 );
 
 CREATE TABLE calendarios(
-id_calendario INTEGER AUTO_INCREMENT NOT NULL,
-id_cronograma INTEGER NOT NULL,
-año INTEGER NOT NULL,
-PRIMARY KEY (id_calendario),
-FOREIGN KEY (id_cronograma) REFERENCES cronogramas (id_cronograma)
+idcalendario INTEGER(11) NOT NULL AUTO_INCREMENT,
+idcronograma INTEGER(11) NOT NULL,
+año INTEGER(11) NOT NULL,
+PRIMARY KEY (idcalendario),
+FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma)
 );
 
 CREATE TABLE meses(
-id_mes INTEGER AUTO_INCREMENT NOT NULL,
-id_calendario INTEGER NOT NULL,
-mes INTEGER(2) NOT NULL,
-PRIMARY KEY (id_mes),
-FOREIGN KEY (id_calendario) REFERENCES calendarios(id_calendario)
+idmes INTEGER(11) NOT NULL AUTO_INCREMENT,
+idcalendario INTEGER(11) NOT NULL,
+mes VARCHAR(45) NOT NULL,
+PRIMARY KEY (idmes),
+FOREIGN KEY (idcalendario) REFERENCES calendarios (idcalendario)
 );
 
 CREATE TABLE dias(
-id_dia INTEGER AUTO_INCREMENT NOT NULL,
-id_mes INTEGER NOT NULL,
-nombre_dia VARCHAR (15) NOT NULL,
-PRIMARY KEY (id_dia),
-FOREIGN KEY (id_mes) REFERENCES meses(id_mes)
+iddia INTEGER(11) NOT NULL AUTO_INCREMENT,
+idmes INTEGER(11) NOT NULL,
+nombredia VARCHAR(15) NOT NULL,
+PRIMARY KEY (iddia),
+FOREIGN KEY (idmes) REFERENCES meses (idmes)
 );
 
-create TABLE actividades(
-id_actividad INTEGER AUTO_INCREMENT NOT NULL,
-id_cronograma INTEGER NOT NULL,
-id_tipo_actividad INTEGER NOT NULL,
-nombrea_actividad VARCHAR(150) NOT NULL,
-PRIMARY KEY (id_actividad),
-FOREIGN KEY (id_cronograma) REFERENCES cronogramas (id_cronograma),
-FOREIGN KEY (id_tipo_actividad) REFERENCES tipos_actividades(id_tipo_actividad)
-);
 
 CREATE TABLE fases(
-id_fase INTEGER AUTO_INCREMENT NOT NULL,
-id_tipo_fase INTEGER NOT NULL,
+idfase INTEGER(11) NOT NULL AUTO_INCREMENT,
+idtipofase INTEGER(11) NOT NULL,
 estado VARCHAR(50) NOT NULL,
 fecha DATE NOT NULL,
-PRIMARY KEY(id_fase),
-FOREIGN KEY(id_tipo_fase) REFERENCES tipos_fases(id_tipo_fase)
+PRIMARY KEY (idfase),
+FOREIGN KEY (idtipofase) REFERENCES tiposfases (idtipofase)
+);
+
+CREATE TABLE actividades(
+idactividad INTEGER(11) NOT NULL AUTO_INCREMENT,
+idcronograma INTEGER(11) NOT NULL,
+idtipoactividad INTEGER(11) NOT NULL,
+nombreactividad VARCHAR(150) NOT NULL,
+fechaactividad DATE NOT NULL,
+idfase INTEGER(11) NOT NULL,
+PRIMARY KEY (idactividad),
+FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma),
+FOREIGN KEY (idtipoactividad) REFERENCES tiposactividades (idtipoactividad),
+FOREIGN KEY (idfase) REFERENCES fases (idfase)
+);
+
+CREATE TABLE roles(
+idrol INTEGER(11) NOT NULL AUTO_INCREMENT,
+rol VARCHAR(50) NOT NULL,
+idtipousuario INTEGER(11) NOT NULL,
+PRIMARY KEY (idrol),
+FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
+);
+
+
+CREATE TABLE notificaciones(
+idnotificacion INTEGER(11) NOT NULL AUTO_INCREMENT,
+idusuario INTEGER(11) NOT NULL,
+idactividad INTEGER() NOT NULL,
+rango VARCHAR(50) NOT NULL,
+PRIMARY KEY (idnotificacion),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
+FOREIGN KEY (idactividad) REFERENCES actividades(idactividad)
 );
 
 SET GLOBAL event_scheduler = ON;
