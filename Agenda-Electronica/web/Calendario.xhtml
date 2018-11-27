@@ -60,29 +60,38 @@ and open the template in the editor.
                     <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
                         <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                        <p:ajax event="eventMove" listener="#{agendaEjemplo.onEventMove}" update="messages" />
-                        <p:ajax event="eventResize" listener="#{agendaEjemplo.onEventResize}" update="messages" />
-                    </p:schedule>
+                            </p:schedule>
                 </h:panelGrid>
-                <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip"><font></font>
+                <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip" modal="true"><font></font>
                     <h:panelGrid id="eventDetails" columns="2">
-            <p:outputLabel for="nombreact" value="Nombre Actividad" />
-            <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true" />
- 
-            <p:outputLabel for="tipoa" value="Tipo Actividad" />
-            <p:inputText id="tipoa" value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" required="true" />
-           
-            <p:outputLabel for="cronograma" value="Cronograma" />
-            <p:inputText id="cronograma" value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" required="true" />
-           
-           
-            <p:outputLabel for="from" value="fecha de actividad:" />
-            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="GMT+2" pattern="yyyy/MM/dd "/>
- 
-             <p:outputLabel for="fase" value="fase" />
-             <p:inputText id="fase" value="#{agendaEjemplo.actividades.idfase.idfase}" required="true" />
-           
- 
+             <p:outputLabel for="nombreact" value="Nombre Actividad" />
+                            <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true" />
+
+                            <p:outputLabel for="tipoa" value="Tipo Actividad" />
+                            
+                            <h:selectOneMenu id="tipoa"  value="#{beansActividades.act.idtipoactividad.idtipoactividad}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Tipo Actividad" />
+                                <f:selectItems value="#{beansActividades.listTA}" var="ta" itemLabel="#{ta.tipoactividad}" itemValue="#{ta.idtipoactividad}" />
+                            </h:selectOneMenu>
+                            
+                            <p:outputLabel for="cronograma" value="Cronograma" />
+
+                            <h:selectOneMenu id="cronograma"  value="#{beansActividades.act.idcronograma.idcronograma}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Cronograma" />
+                                <f:selectItems value="#{beansActividades.listCr}" var="cr" itemLabel="#{cr.nombre}" itemValue="#{cr.idcronograma}" />
+                            </h:selectOneMenu>
+
+
+                            <p:outputLabel for="from" value="fecha de actividad:" />
+                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="UTC-6" pattern="yyyy/MM/dd "/>
+
+                            <p:outputLabel for="fase" value="fase" />
+
+                            <h:selectOneMenu id="fase"  value="#{beansActividades.act.idfase.idfase}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Fase" />
+                                <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
+                            </h:selectOneMenu>
+
             <p:commandButton type="reset" value="Reset" />
             <p:commandButton id="addButton" value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
         </h:panelGrid>
