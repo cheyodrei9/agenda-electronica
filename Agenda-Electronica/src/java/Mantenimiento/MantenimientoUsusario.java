@@ -124,4 +124,23 @@ public class MantenimientoUsusario {
         }
         return flag;
     }
+    
+    public Usuarios iniciarSesion(String user, String password){
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Usuarios usuario;
+        int id_usuario;
+        try {
+            em.getTransaction().begin();
+            id_usuario = Integer.parseInt(em.createQuery("Select u.idusuario from Usuarios u where u.correo='"+user+"' and u.contra='"+password+"'").getSingleResult().toString());
+            em.getTransaction().commit();
+            usuario = this.consultarid(id_usuario);
+        } catch (NumberFormatException e) {
+            em.getTransaction().rollback();
+            usuario = null;
+            System.out.println("Error: "+e);
+        }finally{
+            em.close();
+        }
+        return usuario;
+    }
 }
