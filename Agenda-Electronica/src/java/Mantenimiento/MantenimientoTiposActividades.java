@@ -27,7 +27,7 @@ public class MantenimientoTiposActividades {
             flag = 1;
             System.out.println("El tipo de actividad fue Guardado Exitosamente");
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            //em.getTransaction().rollback();
             flag = 0;
             System.out.println("Error Al Guardar El tipo de actividad" + e);
         } finally {
@@ -36,12 +36,12 @@ public class MantenimientoTiposActividades {
         return flag;
     }
 
-    public Tiposactividades consultarid(Integer idTipoActividad) {
+    public Tiposactividades consultarid(Integer idtipoactividad) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Tiposactividades tipos = null;
         em.getTransaction().begin();
         try {
-            tipos = em.find(Tiposactividades.class, idTipoActividad);
+            tipos = em.find(Tiposactividades.class, idtipoactividad);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID Fue exitosa");
         } catch (Exception e) {
@@ -58,10 +58,10 @@ public class MantenimientoTiposActividades {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery("SELECT e FROM TiposActividades e");
-
+            Query query = em.createQuery("SELECT t FROM Tiposactividades t");
             em.getTransaction().commit();
             listaTA = query.getResultList();
+            System.out.println(listaTA +"si");
             return listaTA;
 
         } catch (Exception e) {
