@@ -51,7 +51,7 @@ private ScheduleModel eventModel;
     @PostConstruct
     public void init() {
         
-        
+       
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));

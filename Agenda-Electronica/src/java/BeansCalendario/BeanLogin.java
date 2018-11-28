@@ -56,7 +56,7 @@ public class BeanLogin {
     public BeanLogin() {
     }
     
-    public void loginAgenda(){
+    public String loginAgenda(){
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
@@ -65,12 +65,16 @@ public class BeanLogin {
             idusuario = usuario.getIdusuario();
             niveldemando = usuario.getNiveldemando();
             loggedIn = true;
+            
+            
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
+            return"Calendario.xhtml";
         }else{
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
         }
         FacesContext.getCurrentInstance().addMessage(null, message);
         PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
+    return null; 
     }
 }
