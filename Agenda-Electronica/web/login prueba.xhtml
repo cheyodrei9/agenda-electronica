@@ -6,11 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-        <style>
-            body{
-                background-image: url(Imagenes/logo-mitchell1.jpg);
-            }
-        </style>
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
@@ -30,6 +25,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                
+            }
+            body{
+                background-image: url(Imagenes/fondo12.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 100%;
+                height: auto;
             }
         </style>
     </h:head>
