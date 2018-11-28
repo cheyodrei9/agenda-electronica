@@ -100,16 +100,25 @@ and open the template in the editor.
             </div>
             <div id="tabla">
                 <h:form id="form">
-                    <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginatorPosition="bottom" paginator="true" rows="10" styleClass="paginated">
-                        <f:facet name="header">
-                            Actividades Pendientes
-                        </f:facet>
-                        <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
-                            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
-                            <h:outputText value="#{car.brand}, #{car.year}" />
-                        </p:commandLink>
-                        <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
-                    </p:dataList>
+                    <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="10">
+                    <p:column  headerText="Cronograma" styleClass="columna">
+                        <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="tipo de actividad" styleClass="columna">
+                        <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Actividad" styleClass="columna">
+                        <h:outputText value="#{lista.nombreactividad}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="fecha" styleClass="columna">
+                        <h:outputText value="#{lista.fechaactividad}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="fase" styleClass="columna">
+                        <h:outputText value="#{lista.idfase.estado}"></h:outputText>
+                    </p:column>
+                   
+                    
+                </p:dataTable>
 
                     <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
                         <p:outputPanel id="carDetail" style="text-align:center;">

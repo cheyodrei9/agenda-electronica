@@ -15,7 +15,9 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -32,7 +34,7 @@ import org.primefaces.model.ScheduleModel;
  * @author ruth.ramosusam
  */
 @ManagedBean
-@ViewScoped
+ @ViewScoped
 public class AgendaEjemplo implements Serializable {
 private ScheduleModel eventModel;
      private Actividades actividades;
