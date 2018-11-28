@@ -6,6 +6,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <style>
+            body{
+                background-image: url(Imagenes/logo-mitchell1.jpg);
+            }
+        </style>
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
@@ -15,6 +20,7 @@
                     $('#loginLink').fadeOut();
                 }
             }
+            
         </script>
     </h:head>
     <h:body>
