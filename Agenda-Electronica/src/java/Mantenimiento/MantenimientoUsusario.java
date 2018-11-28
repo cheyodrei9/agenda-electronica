@@ -127,11 +127,11 @@ public class MantenimientoUsusario {
     
     public Usuarios iniciarSesion(String user, String password){
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        Usuarios usuario;
-        int id_usuario;
+        Usuarios usuario = new Usuarios();
+        int id_usuario = 0;
         try {
             em.getTransaction().begin();
-            id_usuario = Integer.parseInt(em.createQuery("Select u.idusuario from Usuarios u where u.correo='"+user+"' and u.contra='"+password+"'").getSingleResult().toString());
+            id_usuario = Integer.parseInt(em.createNativeQuery("select idusuario from usuarios where correo = '"+user+"' and contra = '"+password+"';").getSingleResult().toString());
             em.getTransaction().commit();
             usuario = this.consultarid(id_usuario);
         } catch (NumberFormatException e) {

@@ -61,6 +61,7 @@ public class BeanLogin {
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
         boolean loggedIn;
+        System.out.println("datos usuario: "+usuario.toString());
         if (usuario != null) {
             idusuario = usuario.getIdusuario();
             niveldemando = usuario.getNiveldemando();
