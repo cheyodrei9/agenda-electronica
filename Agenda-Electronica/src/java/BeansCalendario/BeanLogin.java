@@ -20,7 +20,7 @@ import org.primefaces.PrimeFaces;
 @ManagedBean
 @RequestScoped
 public class BeanLogin {
-    
+
     private String user;
     private String password;
     private static int idusuario;
@@ -49,33 +49,40 @@ public class BeanLogin {
     public static int getNiveldemando() {
         return niveldemando;
     }
-    
+
     /**
      * Creates a new instance of BeanLogin
      */
     public BeanLogin() {
     }
-    
-    public String loginAgenda(){
+
+    public String loginAgenda() {
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
         boolean loggedIn;
-        System.out.println("datos usuario: "+usuario.toString());
-        if (usuario != null) {
-            idusuario = usuario.getIdusuario();
-            niveldemando = usuario.getNiveldemando();
-            loggedIn = true;
-            
-            
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
-            return"Calendario.xhtml";
-        }else{
-            loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
+        System.out.println("datos usuario: " + usuario.toString());
+
+        try {
+
+            if (usuario != null) {
+                idusuario = usuario.getIdusuario();
+                niveldemando = usuario.getNiveldemando();
+                loggedIn = true;
+
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Calendario.xhtml");
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
+                return "Calendario.xhtml";
+            } else {
+                loggedIn = false;
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
+            }
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
+        } catch (Exception e) {
+
         }
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
-    return null; 
+        return null;
     }
 }
