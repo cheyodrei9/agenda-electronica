@@ -42,7 +42,7 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-   <script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 // menu.html
                 $("#incluirPagina").load("menu.xhtml");
@@ -52,28 +52,28 @@ and open the template in the editor.
     <h:body style="box-decoration-break: initial">
         <div id="incluirPagina"></div> 
         <div id="container">
-        <div id="calendario">
-            <h:form>
-                <p:growl id="messages" showDetail="true" />
-                <h:panelGrid columnClasses="value">
-                    <center><h1 class="titulo">AGENDA</h1></center>
-                    <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
-                        <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                        <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                            </p:schedule>
-                </h:panelGrid>
-                <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip" modal="true"><font></font>
-                    <h:panelGrid id="eventDetails" columns="2">
-             <p:outputLabel for="nombreact" value="Nombre Actividad" />
+            <div id="calendario">
+                <h:form>
+                    <p:growl id="messages" showDetail="true" />
+                    <h:panelGrid columnClasses="value">
+                        <center><h1 class="titulo">AGENDA</h1></center>
+                        <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
+                            <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                            <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        </p:schedule>
+                    </h:panelGrid>
+                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip" modal="true"><font></font>
+                        <h:panelGrid id="eventDetails" columns="2">
+                            <p:outputLabel for="nombreact" value="Nombre Actividad" />
                             <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true" />
 
                             <p:outputLabel for="tipoa" value="Tipo Actividad" />
-                            
+
                             <h:selectOneMenu id="tipoa"  value="#{beansActividades.act.idtipoactividad.idtipoactividad}" style="width: 98%">
                                 <f:selectItem itemValue="" itemLabel="Escoger Tipo Actividad" />
                                 <f:selectItems value="#{beansActividades.listTA}" var="ta" itemLabel="#{ta.tipoactividad}" itemValue="#{ta.idtipoactividad}" />
                             </h:selectOneMenu>
-                            
+
                             <p:outputLabel for="cronograma" value="Cronograma" />
 
                             <h:selectOneMenu id="cronograma"  value="#{beansActividades.act.idcronograma.idcronograma}" style="width: 98%">
@@ -92,51 +92,51 @@ and open the template in the editor.
                                 <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
                             </h:selectOneMenu>
 
-            <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-        </h:panelGrid>
-                </p:dialog>
-            </h:form>
-        </div>
-        <div id="tabla">
-            <h:form id="form">
-                <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginatorPosition="bottom" paginator="true" rows="10" styleClass="paginated">
-                    <f:facet name="header">
-                        Actividades Pendientes
-                    </f:facet>
-                    <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
-                        <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
-                        <h:outputText value="#{car.brand}, #{car.year}" />
-                    </p:commandLink>
-                    <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
-                </p:dataList>
+                            <p:commandButton type="reset" value="Reset" />
+                            <p:commandButton id="addButton" value="Save" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </div>
+            <div id="tabla">
+                <h:form id="form">
+                    <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginatorPosition="bottom" paginator="true" rows="10" styleClass="paginated">
+                        <f:facet name="header">
+                            Actividades Pendientes
+                        </f:facet>
+                        <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
+                            <h:outputText value="#{car.brand}, #{car.year}" />
+                        </p:commandLink>
+                        <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
+                    </p:dataList>
 
-                 <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                    <p:outputPanel id="carDetail" style="text-align:center;">
-                        <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
-                            </f:facet>
+                    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
+                                <f:facet name="header">
+                                    <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                                </f:facet>
 
-                            <h:outputText value="Cronograma :" />
-                            <h:outputText value="#{dataListView.selectedCar.id}" />
+                                <h:outputText value="Cronograma :" />
+                                <h:outputText value="#{dataListView.selectedCar.id}" />
 
-                            <h:outputText value="Tipo Actividad" />
-                            <h:outputText value="#{dataListView.selectedCar.year}" />
+                                <h:outputText value="Tipo Actividad" />
+                                <h:outputText value="#{dataListView.selectedCar.year}" />
 
-                            <h:outputText value="Nombre:" />
-                            <h:outputText value="#{dataListView.selectedCar.color}" />
+                                <h:outputText value="Nombre:" />
+                                <h:outputText value="#{dataListView.selectedCar.color}" />
 
-                            <h:outputText value="Fecha" />
-                            <h:outputText value="$#{dataListView.selectedCar.price}" />
-                            
-                            <h:outputText value="Fase" />
-                            <h:outputText value="$#{dataListView.selectedCar.price}" />
-                        </p:panelGrid>
-                    </p:outputPanel>
-                </p:dialog>
-            </h:form>
-        </div>
+                                <h:outputText value="Fecha" />
+                                <h:outputText value="$#{dataListView.selectedCar.price}" />
+
+                                <h:outputText value="Fase" />
+                                <h:outputText value="$#{dataListView.selectedCar.price}" />
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
+            </div>
         </div>
     </h:body>
 </html>
