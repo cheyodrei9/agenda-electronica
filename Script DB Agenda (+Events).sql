@@ -7,8 +7,8 @@ USE agenda;
 
 /*tablas simples*/
 CREATE TABLE tiposactividades(
-idtipoactividad int(11) NOT NULL AUTO_INCREMENT,
-tipoactividad varchar(150) NOT NULL,
+idtipoactividad INTEGER(11) NOT NULL AUTO_INCREMENT,
+tipoactividad VARCHAR(150) NOT NULL,
 PRIMARY KEY (idtipoactividad)
 );
 
@@ -90,11 +90,21 @@ idcronograma INTEGER(11) NOT NULL,
 idtipoactividad INTEGER(11) NOT NULL,
 nombreactividad VARCHAR(150) NOT NULL,
 fechaactividad DATE NOT NULL,
-idfase INTEGER(11) NOT NULL,
+idfase int(11) NOT NULL,
 PRIMARY KEY (idactividad),
 FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma),
 FOREIGN KEY (idtipoactividad) REFERENCES tiposactividades (idtipoactividad),
 FOREIGN KEY (idfase) REFERENCES fases (idfase)
+);
+
+CREATE TABLE notificaciones(
+idnotificacion INTEGER(11) NOT NULL AUTO_INCREMENT,
+idusuario INTEGER(11) NOT NULL,
+idactividad INTEGER(11) NOT NULL,
+rango VARCHAR(50) NOT NULL,
+PRIMARY KEY (idnotificacion),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
+FOREIGN KEY (idactividad) REFERENCES actividades(idactividad)
 );
 
 CREATE TABLE roles(
@@ -105,20 +115,43 @@ PRIMARY KEY (idrol),
 FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
 );
 
-
-CREATE TABLE notificaciones(
-idnotificacion INTEGER(11) NOT NULL AUTO_INCREMENT,
-idusuario INTEGER(11) NOT NULL,
-idactividad INTEGER() NOT NULL,
-rango VARCHAR(50) NOT NULL,
-PRIMARY KEY (idnotificacion),
-FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
-FOREIGN KEY (idactividad) REFERENCES actividades(idactividad)
-);
-
-SET GLOBAL event_scheduler = ON;
+DELIMITER \\
+DROP PROCEDURE IF EXISTS alertas_actividades \\
+CREATE PROCEDURE alertas_actividades()
+BEGIN
+	DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE id_activity INTEGER;
+    DECLARE id_schedule INTEGER;
+	DECLARE make_notification CURSOR FOR SELECT idactividades, idcronograma FROM actividades WHERE DATEDIFF(fechaactividad, curdate()) = 10;
+    DECLARE CONTINUE handler FOR NOT FOUND SET done = TRUE;
+    OPEN make_notification;
+    make_notification_loop: LOOP
+		FETCH make_notification INTO id_activity, id_schedule;
+		IF done THEN
+			leave make_notification_loop;
+        END IF;
+        IF (SELECT CASE WHEN EXISTS (SELECT * FROM notificaciones WHERE idactividades=id_activity AND idusuario = (SELECT idusuario FROM cronograma WHERE idcronograma = id_schedule)) THEN FALSE ELSE TRUE END)
+			THEN
+				INSERT INTO notificaciones VALUES ((SELECT idusuario FROM cronograma WHERE idcronograma = id_schedule), id_activity, CONCAT('10-#00FF00-', (SELECT nombreactividad FROM actividades WHERE idactividad=id_activity)));
+        END IF;
+	END LOOP;
+    CLOSE make_notification;
+    END \\
 
 SET lc_time_names = 'es_ES';
+
+SET GLOBAL EVENT_SCHEDULER = on;
+
+DROP EVENT IF EXISTS notificacion;
+CREATE EVENT notificacion ON SCHEDULE EVERY 1 DAY
+STARTS '2018-01-01 00:00:00'
+DOUBLE
+BEGIN
+	
+    
+END ;
+
+/*-------O-------*/
 SELECT CONCAT(UPPER(LEFT(DAYNAME(CURDATE()),1)), SUBSTR(DAYNAME(CURDATE()), 2)) AS nombre_dia;
 
 DROP EVENT IF EXISTS nombre_mes;
