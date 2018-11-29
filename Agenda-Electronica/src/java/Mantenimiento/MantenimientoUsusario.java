@@ -8,6 +8,7 @@ package Mantenimiento;
 import Persistencia.Usuarios;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 /**
@@ -16,25 +17,13 @@ import javax.persistence.Query;
  */
 public class MantenimientoUsusario {
 
-    public int Guardar(Usuarios usuario) {
-
-        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        int flag = 0;
+public void insertar(Usuarios usuario){
+        EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        try {
-            em.persist(usuario);
-            em.getTransaction().commit();
-            flag = 1;
-            System.out.println("El usuario fue Guardado Exitosamente");
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            flag = 0;
-            System.out.println("Error Al Guardar El Usuario" + e);
-        } finally {
-            em.close();
-        }
-        return flag;
-    }
+        em.persist(em.merge(usuario));
+        em.getTransaction().commit();
+}
 
     public Usuarios consultarid(Integer idUsuario) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();

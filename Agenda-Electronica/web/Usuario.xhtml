@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Usuario</title>
+    </h:head>
+    <h:body>
+        <div id="incluirPagina"/>
+        <h:form style="margin: 20px" id="form">
+            <p:panel header="#{beanUsuario.accion} Usuario">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel value="Tipo De usuario:" />
+                    <p:inputText value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" placeholder="ID Tipo Usuario"/>
+                    
+                    <p:outputLabel value="Nombre:" />
+                    <p:inputText value="#{beanUsuario.usuario.nombres}" placeholder="1er y 2do Nombre"/>
+
+                    <p:outputLabel value="Apellidos:" />
+                    <p:inputText  value="#{beanUsuario.usuario.apellidos}" placeholder="1er y 2do Apellido"/>
+                    
+                    <p:outputLabel value="Genero:" />
+                    <p:selectOneMenu value="#{beanUsuario.usuario.genero}" effect="fold" style="width:160px">
+                        <f:selectItem itemLabel="Seleccione su Genero" itemValue="" />
+                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                        <f:selectItem itemLabel="Indefinido" itemValue="Indefinido" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel value="Telefono:" />
+                    <p:inputText  value="#{beanUsuario.usuario.telefono}" placeholder="Tel.: 0000-0000"/>
+                    
+                    <p:outputLabel value="Correo" />
+                    <p:inputText  value="#{beanUsuario.usuario.correo}" placeholder="ej.: @UserName123"/>
+                    
+                   <p:outputLabel value="Contraseña" />
+                   <p:password value="#{beanUsuario.usuario.contra}" placeholder="ej.: ********"/>
+                    
+                    <p:outputLabel value="Nivel de Mando:" />
+                    <p:inputText  value="#{beanUsuario.usuario.niveldemando}" placeholder=""/>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanUsuario.guardar()}" update=":form"/>
+                    </f:facet>
+                </h:panelGrid>           
+            </p:panel>    
+        </h:form>
+    </h:body>
+</html>
+
+
