@@ -43,12 +43,13 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-        <script type="text/javascript">
+         <script type="text/javascript">
             $(function () {
                 // menu.html
-                $("#incluirPagina").load("menu.xhtml");
+                $("#incluirPagina").load("Menu.xhtml");
             });
-        </script> 
+        </script>
+        
     </h:head>
     <h:body style="box-decoration-break: initial">
         <div id="incluirPagina"></div> 
@@ -94,34 +95,23 @@ and open the template in the editor.
                             </h:selectOneMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
-                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="@form" />
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
             </div>
             <div id="tabla">
                 <h:form id="form">
-                    <div id="select" style="position: relative;">
-                        <h:panelGrid columns="2" cellpadding="5">
-
-                            <center><h3 class="titulo">Ordenar por:</h3></center>
-                            <p:selectCheckboxMenu id="menu" value="#{beanSelect.selectedCities}" label="Tipo Actividades"
-                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                <f:selectItems value="#{beanSelect.cities}" />
-                            </p:selectCheckboxMenu>
-
-                        </h:panelGrid>
-                    </div>
-                    <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="10">
+                    <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="4">
                         <p:column  headerText="Cronograma" styleClass="columna">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
                         <p:column headerText="tipo de actividad" styleClass="columna">
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="Actividad" styleClass="columna">
-                            <h:outputText value="#{lista.nombreactividad}"></h:outputText>
-                        </p:column>
+                        <p:column headerText="Nombre actividad" filterBy="#{lista.nombreactividad}" filterMatchMode="contains">
+                        <h:outputText value="#{lista.nombreactividad}"></h:outputText>
+                    </p:column>
                         <p:column headerText="fecha" styleClass="columna">
                             <h:outputText value="#{lista.fechaactividad}"></h:outputText>
                         </p:column>

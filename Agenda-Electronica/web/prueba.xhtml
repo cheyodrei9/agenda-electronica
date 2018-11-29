@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Agenda</title>
+     
+        
+         </h:head>  
+        <h:body style="box-decoration-break: initial">
+            
+            <div class="container">
+            <div id="calendario">
+                <h:form>
+                    <p:growl id="messages" showDetail="true" />
+                    <h:panelGrid columnClasses="value">
+                        <center><h1 class="titulo">AGENDA</h1></center>
+                        <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
+                            <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                            <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        </p:schedule>
+                    </h:panelGrid>
+                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip" modal="true"><font></font>
+                        <h:panelGrid id="eventDetails" columns="2">
+                            <p:outputLabel for="nombreact" value="Nombre Actividad" />
+                            <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true"/>
+
+                            <p:outputLabel for="tipoa" value="Tipo Actividad" />
+
+                            <h:selectOneMenu id="tipoa"  value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Tipo Actividad" />
+                                <f:selectItems value="#{beansActividades.listTA}" var="ta" itemLabel="#{ta.tipoactividad}" itemValue="#{ta.idtipoactividad}" />
+                            </h:selectOneMenu>
+
+                            <p:outputLabel for="cronograma" value="Cronograma" />
+
+                            <h:selectOneMenu id="cronograma"  value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Cronograma" />
+                                <f:selectItems value="#{beansActividades.listCr}" var="cr" itemLabel="#{cr.nombre}" itemValue="#{cr.idcronograma}" />
+                            </h:selectOneMenu>
+
+
+                            <p:outputLabel for="from" value="fecha de actividad:" />
+                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="UTC-6" pattern="yyyy/MM/dd "/>
+
+                            <p:outputLabel for="fase" value="fase" />
+
+                            <h:selectOneMenu id="fase"  value="#{agendaEjemplo.actividades.idfase.idfase}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Fase" />
+                                <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
+                            </h:selectOneMenu>
+
+                            <p:commandButton type="reset" value="Limpiar Campos" />
+                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </div>
+            <div id="tabla"> 
+             
+            <h:form>
+            <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="4">
+                    <p:column  headerText="Cronograma" styleClass="columna">
+                        <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
+                    </p:column>
+                <p:column headerText="tipo de actividad" styleClass="columna" filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
+                        <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
+                    </p:column>
+                <p:column headerText="Nombre actividad" filterBy="#{lista.nombreactividad}" filterMatchMode="contains">
+                        <h:outputText value="#{lista.nombreactividad}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="fecha" styleClass="columna">
+                        <h:outputText value="#{lista.fechaactividad}"></h:outputText>
+                    
+                    </p:column>
+                    
+                    <p:column headerText="fase" styleClass="columna">
+                        <h:outputText value="#{lista.idfase.estado}"></h:outputText>
+                    </p:column>
+                    
+                </p:dataTable> 
+            
+                
+                
+                
+            </h:form>    
+            
+            
+            </div>    
+                
+                
+            </div>
+            
+        </h:body>
+   
+</html>
