@@ -95,7 +95,7 @@ and open the template in the editor.
                             </h:selectOneMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
-                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="@form" />
+                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Tabla" />
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
