@@ -135,3 +135,5 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
     color: antiquewhite;
 }
 
+.ui-paginator-first .ui-icon , .ui-paginator-prev .ui-icon, .ui-paginator-next .ui-icon, ui-paginator-first .ui-icon, .ui-paginator-last .ui-icon{ 
+    display: none !important; border: none; background-color: rgba(0,1,0,0.6) }

@@ -1,37 +1,46 @@
 body{
     background-image: url(Imagenes/fondo.png);
-    background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
-    height: auto;
+    background-repeat: no-repeat;
 }
 
 .padre {
-    height: 275px;
-    width: 1500px;
+    height: 100%;
+    width: 100%;
     /*IMPORTANTE*/
     position:absolute;
-    top:350px;
-    left:895px;
+    top:10px;
+}
+.hijo{
+    height: 100%;
+    width: 100%;
+    /*IMPORTANTE*/
+    position:absolute;
+    top:100px;
     border:none;
 }
 
-.madre {
-    height: 275px;
-    width: 1200px;
-    /*IMPORTANTE*/
+.sesion{
+    font-family: cursive;
+    color: brown;
     position:absolute;
-    top:515px;
-    left:1390px;
-    border:none;
+    top:200px;
+    left:10px;
 }
-.hijo{
-    height: 1100px;
-    width: 1100px;
-    /*IMPORTANTE*/
-    position:absolute;
-    top:585px;
-    left:1395px;
-    border:none;
+
+.ui-dialog-titlebar{/*Panel en el q dice login*/
+    background-color: #720000;
+    color: antiquewhite;
+    font-family: fantasy;
+}
+.ui-dialog-content{/*Letra*/
+    color: darkgoldenrod;
+}
+.ui-dialog .ui-dialog-content {/*Fondo*/
+    background-color: antiquewhite;
+}
+.ui-button-text-only .ui-button-text {/*Boton */
+    background: darkgoldenrod;
+    color: antiquewhite;
 }
 
