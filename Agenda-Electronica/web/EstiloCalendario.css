@@ -1,4 +1,3 @@
-
 /*Estilos para los contenedores*/
 
 body{
@@ -11,14 +10,16 @@ body{
 }
 
 #calendario{
-    background-image: url(Imagenes/fondo.jpg) ;
+    /*background-image: url(Imagenes/fondo.jpg) ;*/
+    background: rgba(152,46,46,0.5) !important;
     padding: 30px; 
     width: 50%;
     display: inline-block;
 }
 
 #tabla{
-    background-image: url(Imagenes/fondo1.jpg) ;
+    /*background-image: url(Imagenes/fondo1.jpg) ;*/
+    background: rgba(152,46,46,0.5) !important;
     padding: 30px;
     width: 40%;
     display: inline-block;
@@ -76,10 +77,6 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
     color:antiquewhite;
 }
 
-.ui-dialog{
-    background: rgba(152,46,46,0.8) !important;
-}
-
 .fc-center{
     color: brown;
     font-family: cursive;
@@ -97,30 +94,33 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
     background-color: antiquewhite;
 }
 
+.ui-dialog{/* Transparencia del panel*/
+    background: rgba(152,46,46,0.8) !important;
+}
+
 .ui-widget-content {
     background: antiquewhite;
 }
 
-.ui-dialog-titlebar{
+.ui-dialog-titlebar{/*Panel del Titulo*/
     color: brown;
     text-align: center;
-    font-family: cursive;
+    font-family: fantasy;
 }
 
-.ui-dialog-titlebar:hover{
+.ui-dialog-titlebar:hover{/*Titulo que cambia el color*/
     color: antiquewhite;
     text-align: center;
     font-family: cursive;
+}
+.ui-dialog .ui-dialog-content{/*Lo q contiene el desplegable*/
+    color: antiquewhite;
+    text-align: center;
+    padding-left: 20px;
 }
 
 .ui-icon{
     color: red;
-}
-
-.ui-dialog .ui-dialog-content{
-    color: antiquewhite;
-    text-align: center;
-    padding-left: 20px;
 }
 
 

@@ -9,7 +9,8 @@
                 background-repeat: no-repeat;
             }
             .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
-                background-image: url(Imagenes/fondo.jpg);
+                /*background-image: url(Imagenes/fondo.jpg);*/
+                background: rgba(152,46,46,0.5) !important;
             }
             .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
                 font-family: 'Bahnschrift SemiLight SemiConde';
