@@ -1,0 +1,21 @@
+ .ui-tabmenu{
+                border: none;
+            }
+            .ui-tabmenu .ui-tabmenu-nav {
+                margin: 0;
+                padding: .2em .2em 0;
+                background-image: url(Imagenes/Agenda.jpg);
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+                background-image: url(Imagenes/fondo.jpg);
+            }
+            .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+                font-family: 'Bahnschrift SemiLight SemiConde';
+                padding-right: 90px;
+                color: antiquewhite;
+            }
+            form{
+                flex-direction: column;
+            }

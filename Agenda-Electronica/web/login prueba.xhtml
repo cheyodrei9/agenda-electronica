@@ -5,7 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Inicio de Sesión</title>
+        <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/521/521415.png" />
+
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
@@ -15,7 +17,7 @@
                     $('#loginLink').fadeOut();
                 }
             }
-            
+
         </script>
         <style>
             .padre {
@@ -25,7 +27,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                
+                margin:auto;
+                padding-top: 150px;
             }
             body{
                 background-image: url(Imagenes/fondo12.jpg);
@@ -39,20 +42,19 @@
     <h:body>
         <h:form>
             <div class="padre">
-                <!--<p:commandButton value="          " onclick="PF('dlg').show();" style="background-image: url(Imagenes/BOTON_INICIARSESION.png); background-size: cover"/>-->
                 <img src="Imagenes/BOTON_INICIARSESION.png" alt="" style="width: 15%" onclick="PF('dlg').show();"/>
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
             </div>
-            <p:dialog header="Login" widgetVar="dlg" resizable="false" modal="true">
+            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true">
                 <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel for="username" value="Username:" />
+                    <h:outputLabel for="Username" value="Usuario o Correo:" />
                     <p:inputText id="username" value="#{beanLogin.user}" required="true" label="username" />
 
-                    <h:outputLabel for="password" value="Password:" />
+                    <h:outputLabel for="Password" value="Contraseña" />
                     <p:password id="password" value="#{beanLogin.password}" required="true" label="password" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Login" update="growl" action="#{beanLogin.loginAgenda()}"
+                        <p:commandButton value="Acceder" update="growl" action="#{beanLogin.loginAgenda()}"
                                          oncomplete="handleLoginRequest(xhr, status, args)" />
                     </f:facet>  
                 </h:panelGrid>

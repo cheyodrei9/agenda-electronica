@@ -81,7 +81,7 @@ public class BeanLogin {
             FacesContext.getCurrentInstance().addMessage(null, message);
             PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
         } catch (Exception e) {
-
+            System.out.println("Error");
         }
         return null;
     }

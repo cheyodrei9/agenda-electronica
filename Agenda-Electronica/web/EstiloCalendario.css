@@ -2,21 +2,23 @@
 /*Estilos para los contenedores*/
 
 body{
-    background-color: black;
+    background-image: url(Imagenes/Agenda.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 #container{
     display:flex;
 }
 
 #calendario{
-    background-color: brown;
+    background-image: url(Imagenes/fondo.jpg) ;
     padding: 30px; 
     width: 50%;
     display: inline-block;
 }
 
 #tabla{
-    background-color: brown;
+    background-image: url(Imagenes/fondo1.jpg) ;
     padding: 30px;
     width: 40%;
     display: inline-block;
@@ -24,7 +26,8 @@ body{
 
 #calendario, #tabla{
     float: left;
-    border: 1px solid;
+    border: 5px double;
+    border-color: beige;
 }
 .value {
     font-weight: bold;
@@ -91,8 +94,9 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
 
 .fc-basic-view .fc-body .fc-row {
     color: brown;
-    background: antiquewhite;
+    background-color: antiquewhite;
 }
+
 .ui-widget-content {
     background: antiquewhite;
 }
