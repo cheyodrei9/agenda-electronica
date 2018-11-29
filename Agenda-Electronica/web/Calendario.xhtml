@@ -43,13 +43,13 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-         <script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 // menu.html
                 $("#incluirPagina").load("Menu.xhtml");
             });
         </script>
-        
+
     </h:head>
     <h:body style="box-decoration-break: initial">
         <div id="incluirPagina"></div> 
@@ -101,6 +101,18 @@ and open the template in the editor.
                 </h:form>
             </div>
             <div id="tabla">
+                <h:form>     
+                    <p:growl id="message" showDetail="true" />
+
+                    <p:commandButton value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message">
+                        <p:confirm header="Confirmación" message="¿Cerrar sesion?" icon="Imagenes/Logout.ico" />
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </p:confirmDialog>      
+                </h:form>
                 <h:form id="form">
                     <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="4">
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
@@ -110,8 +122,8 @@ and open the template in the editor.
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
                         <p:column headerText="Nombre actividad" styleClass="columna" >
-                        <h:outputText value="#{lista.nombreactividad}"></h:outputText>
-                    </p:column>
+                            <h:outputText value="#{lista.nombreactividad}"></h:outputText>
+                        </p:column>
                         <p:column headerText="fecha" styleClass="columna">
                             <h:outputText value="#{lista.fechaactividad}"></h:outputText>
                         </p:column>
