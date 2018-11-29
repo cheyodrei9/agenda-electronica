@@ -7,7 +7,7 @@
     <h:head>
         <title>Inicio de Sesión</title>
         <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/521/521415.png" />
-
+        <link href="EstiloLogin.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
@@ -19,32 +19,19 @@
             }
 
         </script>
-        <style>
-            .padre {
-                height: 500px;
-                width: 1500px;
-                /*IMPORTANTE*/
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin:auto;
-                padding-top: 150px;
-            }
-            body{
-                background-image: url(Imagenes/fondo12.jpg);
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 100%;
-                height: auto;
-                
-            }
-        </style>
     </h:head>
     <h:body>
         <h:form>
             <div class="padre">
-                <img src="Imagenes/BOTON_INICIARSESION.png" alt="" style="width: 15%" onclick="PF('dlg').show();"/>
+                <img src="Imagenes/sesion.png" alt="" style="width: 15%" onclick="PF('dlg').show();"/>
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+            </div>
+            <div class="madre">
+                <img src="Imagenes/postit.png" alt="" style="width: 15%"/>
+            </div>
+            <div class="hijo">
+                <img src="Imagenes/registro.png" alt="" style="width: 15%" onclick="PF('dlg').show();"/>
+                <p:growl id="gruwl" sticky="true" showDetail="true" life="3000" />
             </div>
             <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true">
                 <h:panelGrid columns="2" cellpadding="5">

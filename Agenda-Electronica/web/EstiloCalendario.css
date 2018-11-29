@@ -11,7 +11,7 @@ body{
 
 #calendario{
     /*background-image: url(Imagenes/fondo.jpg) ;*/
-    background: rgba(152,46,46,0.5) !important;
+    background: rgba(152,46,46,0.7) !important;
     padding: 30px; 
     width: 50%;
     display: inline-block;
@@ -19,7 +19,7 @@ body{
 
 #tabla{
     /*background-image: url(Imagenes/fondo1.jpg) ;*/
-    background: rgba(152,46,46,0.5) !important;
+    background: rgba(152,46,46,0.7) !important;
     padding: 30px;
     width: 40%;
     display: inline-block;
