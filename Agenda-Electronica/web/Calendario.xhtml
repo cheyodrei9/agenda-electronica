@@ -103,13 +103,13 @@ and open the template in the editor.
             <div id="tabla">
                 <h:form id="form">
                     <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="4">
-                        <p:column  headerText="Cronograma" styleClass="columna">
+                        <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
-                        <p:column headerText="tipo de actividad" styleClass="columna">
+                        <p:column headerText="tipo de actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="Nombre actividad" filterBy="#{lista.nombreactividad}" filterMatchMode="contains">
+                        <p:column headerText="Nombre actividad" styleClass="columna" >
                         <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                     </p:column>
                         <p:column headerText="fecha" styleClass="columna">
