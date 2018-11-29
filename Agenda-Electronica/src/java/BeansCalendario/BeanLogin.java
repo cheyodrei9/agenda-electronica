@@ -7,6 +7,7 @@ package BeansCalendario;
 
 import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Usuarios;
+import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -61,10 +62,8 @@ public class BeanLogin {
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
         boolean loggedIn;
-        System.out.println("datos usuario: " + usuario.toString());
 
         try {
-
             if (usuario != null) {
                 idusuario = usuario.getIdusuario();
                 niveldemando = usuario.getNiveldemando();
@@ -80,9 +79,15 @@ public class BeanLogin {
 
             FacesContext.getCurrentInstance().addMessage(null, message);
             PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
-        } catch (Exception e) {
-            System.out.println("Error");
+        } catch (IOException e) {
+            System.out.println("Error: "+e);
         }
         return null;
+    }
+
+    public String logoutAgenda() {
+        BeanLogin.idusuario = 0;
+        BeanLogin.niveldemando = 0;
+        return "login prueba.xhtml";
     }
 }
