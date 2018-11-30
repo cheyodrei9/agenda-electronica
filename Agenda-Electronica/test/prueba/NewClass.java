@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  */
 public class NewClass {
     public static void main(String[] args) {
-        Actividades acti = new Actividades();
+       /* Actividades acti = new Actividades();
         Cronogramas cro = new Cronogramas();
         Tiposactividades tip = new Tiposactividades();
         Fases fa = new Fases();
@@ -65,10 +65,10 @@ public class NewClass {
             System.out.println("No se pudo guardar");
         }*/
         
-        /*MantenimientoTiposActividades act = new MantenimientoTiposActividades();
-        TiposActividades tipos = new TiposActividades();
-        tipos.setIdTipoActividad(0);
-        tipos.setTipoActividad("gerencial");*/
+        MantenimientoTiposActividades act = new MantenimientoTiposActividades();
+        Tiposactividades tipos = new Tiposactividades();
+        tipos.setIdtipoactividad(0);
+        tipos.setTipoactividad("gerencial");
         
         /*MantenimientoCalendarios cale = new MantenimientoCalendarios();
         Calendarios ca = new Calendarios();
@@ -116,7 +116,7 @@ public class NewClass {
         fa.setFecha(fecha);*/
         
         
-        System.out.println(act.guardar(acti));       
+        System.out.println(act.Guardar(tipos));       
         
     }
 }
