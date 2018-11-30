@@ -10,7 +10,9 @@ import Mantenimiento.MantenimientoCalendarios;
 import Mantenimiento.MantenimientoCronogramas;
 import Mantenimiento.MantenimientoDias;
 import Mantenimiento.MantenimientoFases;
+import Mantenimiento.MantenimientoTipoUsuario;
 import Mantenimiento.MantenimientoTiposActividades;
+import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Actividades;
 import Persistencia.Calendarios;
 import Persistencia.Cronogramas;
@@ -65,10 +67,10 @@ public class NewClass {
             System.out.println("No se pudo guardar");
         }*/
         
-        MantenimientoTiposActividades act = new MantenimientoTiposActividades();
+       /* MantenimientoTiposActividades act = new MantenimientoTiposActividades();
         Tiposactividades tipos = new Tiposactividades();
         tipos.setIdtipoactividad(0);
-        tipos.setTipoactividad("gerencial");
+        tipos.setTipoactividad("gerencial");*/
         
         /*MantenimientoCalendarios cale = new MantenimientoCalendarios();
         Calendarios ca = new Calendarios();
@@ -116,7 +118,11 @@ public class NewClass {
         fa.setFecha(fecha);*/
         
         
-        System.out.println(act.Guardar(tipos));       
+        /*System.out.println(act.Guardar(tipos));       */
+        
+  MantenimientoTipoUsuario man = new MantenimientoTipoUsuario();
+  
+        System.out.println(man.consultar());
         
     }
 }

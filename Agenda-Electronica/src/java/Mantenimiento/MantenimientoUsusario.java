@@ -47,7 +47,7 @@ public void insertar(Usuarios usuario){
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery("SELECT e FROM Usuarios e");
+            Query query = em.createQuery("SELECT t FROM Tiposusuarios t");
 
             em.getTransaction().commit();
             listaU = query.getResultList();

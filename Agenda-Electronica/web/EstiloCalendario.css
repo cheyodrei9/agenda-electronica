@@ -134,7 +134,7 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
 }
 
 .ui-column-filter, ui-inputfield, ui-inputtext, ui-widget, ui-state-default, ui-corner-all{
-    background-color: antiquewhite;
+    background-color: white;
 }
 
 .ui-paginator, ui-paginator-bottom, ui-widget-header, ui-corner-bottom{

@@ -205,9 +205,16 @@ public class Usuarios implements Serializable {
         return true;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Persistencia.Usuarios[ idusuario=" + idusuario + " ]";
+    }*/
+
+    @Override
+    public String toString() {
+        return "Usuarios{" + "idusuario=" + idusuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", telefono=" + telefono + ", correo=" + correo + ", contra=" + contra + ", niveldemando=" + niveldemando + '}';
     }
+    
+    
     
 }

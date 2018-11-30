@@ -44,3 +44,10 @@ body{
     color: antiquewhite;
 }
 
+.ancho{
+    width: 90%;
+}
+
+.altura{
+    height: 400px;
+}
