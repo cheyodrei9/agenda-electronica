@@ -57,36 +57,32 @@ public class BeanLogin {
     public BeanLogin() {
     }
 
-    public String loginAgenda() {
+    public void loginAgenda() throws IOException {
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
-        boolean loggedIn;
+        boolean loggedIn = false;
+        String page = null;
 
-       
-            if (usuario != null) {
-                idusuario = usuario.getIdusuario();
-                niveldemando = usuario.getNiveldemando();
-                loggedIn = true;
-
-                
-                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
-
-                return "Calendario.xhtml";
-            } else {
-                loggedIn = false;
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
-            }
-            
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
-            
-            return "Calendario.xhtml";
+        if (usuario != null) {
+            idusuario = usuario.getIdusuario();
+            niveldemando = usuario.getNiveldemando();
+            loggedIn = true;
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
+            page = "Calendario.xhtml";
+        } else {
+            loggedIn = false;
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
+            page = "Login.xhtml";
+        }
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(page);
     }
 
-    public String logoutAgenda() {
+    public void logoutAgenda() throws IOException {
         BeanLogin.idusuario = 0;
         BeanLogin.niveldemando = 0;
-        return "Login.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
     }
 }
