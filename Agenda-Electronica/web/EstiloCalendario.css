@@ -21,7 +21,7 @@ body{
     /*background-image: url(Imagenes/fondo1.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
     padding: 30px;
-    width: 40%;
+    width: 50%;
     display: inline-block;
 }
 
@@ -60,16 +60,6 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
     display: none; 
 }
 
-.fc button:hover {
-    background-color: brown;
-    color:antiquewhite;
-}
-
-.fc button:active {
-    background-color: burlywood;
-    color:brown;
-}
-
 
 /*Estilos para el contenido del calendario*/
 .titulo{
@@ -94,46 +84,63 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
     background-color: antiquewhite;
 }
 
-.ui-dialog{/* Transparencia del panel*/
-    background: rgba(152,46,46,0.8) !important;
-}
+/*.ui-dialog{*//* Transparencia del panel*/
+/* background: rgba(152,46,46,0.8) !important;
+}*/
 
 .ui-widget-content {
     background: antiquewhite;
 }
 
 .ui-dialog-titlebar{/*Panel del Titulo*/
-    color: brown;
-    text-align: center;
+    color: antiquewhite;
+    text-align: left;
     font-family: fantasy;
 }
 
-.ui-dialog-titlebar:hover{/*Titulo que cambia el color*/
-    color: antiquewhite;
-    text-align: center;
-    font-family: cursive;
-}
 .ui-dialog .ui-dialog-content{/*Lo q contiene el desplegable*/
-    color: antiquewhite;
-    text-align: center;
+    color: #720000;
+    text-align: left;
     padding-left: 20px;
-}
-
-.ui-icon{
-    color: red;
+    background-color: antiquewhite;
 }
 
 
 /*Estilos para el widget de insercion de actividades*/
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header { 
-    background-color: antiquewhite; 
+    background-color: #720000; 
 }
 
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header:hover { 
-    background-color: rgba(156,32,32,0.005); 
+/*.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header:hover { 
+    background-color: rgba(156,32,32,0.8); 
     color: antiquewhite;
-}
+}*/
 
 .ui-paginator-first .ui-icon , .ui-paginator-prev .ui-icon, .ui-paginator-next .ui-icon, ui-paginator-first .ui-icon, .ui-paginator-last .ui-icon{ 
-    display: none !important; border: none; background-color: rgba(0,1,0,0.6) }
+    display: none !important;
+    border: none; 
+    background-color: antiquewhite 
+}
+
+
+.ui-button, ui-widget, ui-state-default, ui-corner-all, ui-button-text-only, ui-state-hover{
+    background-color: burlywood;
+}
+
+.ui-state-default{
+    background-color: burlywood;
+    color: #720000;
+}
+
+.ui-column-filter, ui-inputfield, ui-inputtext, ui-widget, ui-state-default, ui-corner-all{
+    background-color: antiquewhite;
+}
+
+.ui-paginator, ui-paginator-bottom, ui-widget-header, ui-corner-bottom{
+    background-color: burlywood;
+}
+
+.ui-widget-content,ui-datatable-even,tabla{
+    color: #720000;
+}
