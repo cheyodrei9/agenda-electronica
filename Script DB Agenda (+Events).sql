@@ -123,7 +123,7 @@ BEGIN
     DECLARE id_activity INTEGER;
     DECLARE id_schedule INTEGER;
 	DECLARE make_notification CURSOR FOR SELECT idactividades, idcronograma FROM actividades WHERE DATEDIFF(fechaactividad, curdate()) = 10;
-    DECLARE CONTINUE handler FOR NOT FOUND SET done = TRUE;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN make_notification;
     make_notification_loop: LOOP
 		FETCH make_notification INTO id_activity, id_schedule;
@@ -136,7 +136,35 @@ BEGIN
         END IF;
 	END LOOP;
     CLOSE make_notification;
-    END \\
+END \\
+
+DELIMITER \\
+DROP PROCEDURE IF EXISTS actualizar_actividades \\
+CREATE PROCEDURE actualizar_actividades()
+BEGIN
+	DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE id_nottificacion INTEGER DEFAULT 0;
+    DECLARE id_actividad INTEGER DEFAULT 0;
+    DECLARE dias_restantes INTEGER DEFAULT 0;
+    DECLARE color VARCHAR(50) DEFAULT NULL;
+    DECLARE update_notify CURSOR FOR SELECT idnotificacion, idactividad FROM notificaciones WHERE notificaciones.idactividad = actividades.idactividad;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    OPEN update_notify;
+    update_notify_loop: LOOP
+		FETCH update_notify INTO id_nottificacion, id_actividad;
+		IF done THEN
+			leave update_notify_loop;
+        END IF;
+        SET dias_restantes = (SELECT DATEDIFF((SELECT fechaactividad FROM actividades WHERE notificaciones.idactividad = actividades.idactividad), curdate()));
+        IF dias_restantes < 3 THEN
+			UPDATE notificaciones SET rango = CONCAT('0', dias_restantes, '-#FF0000-', (SELECT actividades.nombreactividad FROM actividades WHERE idactividad=id_actividad)) WHERE idnottificacion = id_nottificacion;
+		elseif dias_restantes < 5 THEN
+			UPDATE notificaciones SET rango = CONCAT('0', dias_restantes, '-#FFFF00-', (SELECT actividades.nombreactividad FROM actividades WHERE idactividad=id_actividad)) WHERE idnottificacion = id_nottificacion;
+		elseif dias_restantes < 10 then
+			UPDATE notificaciones SET rango = CONCAT('0', dias_restantes, '-#00FF00-', (SELECT actividades.nombreactividad FROM actividades WHERE idactividad=id_actividad)) WHERE idnottificacion = id_nottificacion;
+		END IF;
+    END LOOP;
+END \\
 
 SET lc_time_names = 'es_ES';
 
