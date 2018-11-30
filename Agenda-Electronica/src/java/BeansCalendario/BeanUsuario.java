@@ -94,21 +94,6 @@ public class BeanUsuario {
         MantenimientoUsusario Us = new MantenimientoUsusario();
         Us.insertar(usuario);
         usuario= new Usuarios();
-        
     }
-      
-    public void save() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Data Saved"));
-    }
-     
-    public void reset() {
-        PrimeFaces.current().resetInputs("form:panel");
-    }
-     
-    public void resetFail() {
-        this.usuario = null;
-         
-        FacesMessage msg = new FacesMessage("Model reset, but it won't work properly.");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-}
+
 }
