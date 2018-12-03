@@ -43,12 +43,7 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-        <script type="text/javascript">
-            $(function () {
-                // menu.html
-                $("#incluirPagina").load("Menu.xhtml");
-            });
-        </script>
+       
 
     </h:head>
     <h:body style="box-decoration-break: initial">
@@ -97,7 +92,7 @@ and open the template in the editor.
                             </h:selectOneMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
-                            <p:commandButton id="addButton" value="Guardar" action="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Tabla" />
+                            <p:commandButton id="addButton" value="Guardar" actionListener="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Table" />
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
@@ -118,7 +113,7 @@ and open the template in the editor.
                 <div> </div>
                 <div> </div>
                 <h:form id="form">
-                    <p:dataTable  rowStyleClass="tabla" id="Tabla" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
+                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
