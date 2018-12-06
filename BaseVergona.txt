@@ -1,0 +1,113 @@
+create database agenda;
+
+use agenda;
+
+/*tablas simples*/
+create table tiposactividades(
+idtipoactividad int(11) NOT NULL AUTO_INCREMENT,
+tipoactividad varchar(150) NOT NULL,
+PRIMARY KEY (idtipoactividad)
+);
+
+create table tiposfases(
+idtipofase int(11) NOT NULL AUTO_INCREMENT,
+tipofase varchar(150) NOT NULL,
+PRIMARY KEY (idtipofase)
+);
+
+create table tiposusuarios(
+idtipousuario int(11) NOT NULL AUTO_INCREMENT,
+tipo varchar(50) NOT NULL,
+PRIMARY KEY (idtipousuario)
+);
+
+
+/*tablas con foranea*/
+
+create table usuarios(
+idusuario int(11) NOT NULL AUTO_INCREMENT,
+idtipousuario int(11) NOT NULL,
+nombres varchar(100) NOT NULL,
+apellidos varchar(100) NOT NULL,
+genero varchar(25) NOT NULL,
+telefono varchar(25) NOT NULL,
+correo varchar(50) NOT NULL,
+contra varchar(16) NOT NULL,
+niveldemando int(1) NOT NULL,
+PRIMARY KEY (idusuario),
+FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
+);
+
+create table notificaciones(
+idnotificacion int(11) NOT NULL AUTO_INCREMENT,
+idusuario int(11) NOT NULL,
+rango varchar(50) NOT NULL,
+PRIMARY KEY (idnotificacion),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
+);
+
+create table cronogramas(
+idcronograma int(11) NOT NULL AUTO_INCREMENT,
+nombre varchar(50) NOT NULL,
+descripcion varchar(150) NOT NULL,
+idusuario int(11) NOT NULL,
+PRIMARY KEY (idcronograma),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
+);
+
+create table calendarios(
+idcalendario int(11) NOT NULL AUTO_INCREMENT,
+idcronograma int(11) NOT NULL,
+año int(11) NOT NULL,
+PRIMARY KEY (idcalendario),
+FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma)
+);
+
+create table meses(
+idmes int(11) NOT NULL AUTO_INCREMENT,
+idcalendario int(11) NOT NULL,
+mes varchar(45) NOT NULL,
+PRIMARY KEY (idmes),
+FOREIGN KEY (idcalendario) REFERENCES calendarios (idcalendario)
+);
+
+create table dias(
+iddia int(11) NOT NULL AUTO_INCREMENT,
+idmes int(11) NOT NULL,
+nombredia varchar(15) NOT NULL,
+PRIMARY KEY (iddia),
+FOREIGN KEY (idmes) REFERENCES meses (idmes)
+);
+
+
+create table fases(
+idfase int(11) NOT NULL AUTO_INCREMENT,
+idtipofase int(11) NOT NULL,
+estado varchar(50) NOT NULL,
+fecha date NOT NULL,
+PRIMARY KEY (idfase),
+FOREIGN KEY (idtipofase) REFERENCES tiposfases (idtipofase)
+);
+
+create table actividades(
+idactividad int(11) NOT NULL AUTO_INCREMENT,
+idcronograma int(11) NOT NULL,
+idtipoactividad int(11) NOT NULL,
+nombreactividad varchar(150) NOT NULL,
+fechaactividad date not null,
+idfase int(11) NOT NULL,
+idusuario int(11) NOT NULL,
+PRIMARY KEY (idactividad),
+FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma),
+FOREIGN KEY (idtipoactividad) REFERENCES tiposactividades (idtipoactividad),
+FOREIGN KEY (idfase) REFERENCES fases (idfase),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
+);
+
+create table roles(
+idrol int(11) NOT NULL AUTO_INCREMENT,
+rol varchar(50) NOT NULL,
+idtipousuario int(11) NOT NULL,
+PRIMARY KEY (idrol),
+FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
+);
