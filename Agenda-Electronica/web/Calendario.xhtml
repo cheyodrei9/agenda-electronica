@@ -124,7 +124,9 @@ and open the template in the editor.
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
                         <p:column headerText="fecha" styleClass="columna">
-                            <h:outputText value="#{lista.fechaactividad}"></h:outputText>
+                            <h:outputText value="#{lista.fechaactividad}">
+                                <f:convertDateTime pattern="dd/MM/yyyy " timeZone="America/Mexico_City" />
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="fase" styleClass="columna">
                             <h:outputText value="#{lista.idfase.estado}"></h:outputText>
