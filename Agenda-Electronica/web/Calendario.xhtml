@@ -113,7 +113,7 @@ and open the template in the editor.
                 <div> </div>
                 <div> </div>
                 <h:form id="form">
-                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{beansActividades.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
+                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>

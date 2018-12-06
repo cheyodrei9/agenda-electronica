@@ -5,14 +5,21 @@
  */
 
 import Mantenimiento.MantenimientoActividades;
+import Mantenimiento.MantenimientoCronogramas;
+import Mantenimiento.MantenimientoFases;
+import Mantenimiento.MantenimientoTiposActividades;
+import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Actividades;
 import Persistencia.Cronogramas;
 import Persistencia.Fases;
 import Persistencia.Tiposactividades;
+import Persistencia.Usuarios;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
@@ -38,6 +45,11 @@ import org.primefaces.model.ScheduleModel;
 public class AgendaEjemplo implements Serializable {
 private ScheduleModel eventModel;
      private Actividades actividades;
+     private List<Actividades> lista = new ArrayList();
+    private List<Tiposactividades> listTA = new ArrayList();
+    private List<Cronogramas> listCr = new ArrayList();
+    private List<Fases> listF = new ArrayList();
+    private List<Usuarios> listU = new ArrayList();
 
     public Actividades getActividades() {
         return actividades;
@@ -46,6 +58,47 @@ private ScheduleModel eventModel;
     public void setActividades(Actividades actividades) {
         this.actividades = actividades;
     }
+
+    public List<Actividades> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Actividades> lista) {
+        this.lista = lista;
+    }
+
+    public List<Tiposactividades> getListTA() {
+        return listTA;
+    }
+
+    public void setListTA(List<Tiposactividades> listTA) {
+        this.listTA = listTA;
+    }
+
+    public List<Cronogramas> getListCr() {
+        return listCr;
+    }
+
+    public void setListCr(List<Cronogramas> listCr) {
+        this.listCr = listCr;
+    }
+
+    public List<Fases> getListF() {
+        return listF;
+    }
+
+    public void setListF(List<Fases> listF) {
+        this.listF = listF;
+    }
+
+    public List<Usuarios> getListU() {
+        return listU;
+    }
+
+    public void setListU(List<Usuarios> listU) {
+        this.listU = listU;
+    }
+    
     private ScheduleModel lazyEventModel;
  
     private ScheduleEvent event = new DefaultScheduleEvent();
@@ -54,6 +107,16 @@ private ScheduleModel eventModel;
     public void init() {
         
        
+        MantenimientoActividades mttoac = new MantenimientoActividades();
+        MantenimientoCronogramas mc = new MantenimientoCronogramas();
+        MantenimientoTiposActividades mta = new MantenimientoTiposActividades();
+        MantenimientoFases mf = new MantenimientoFases();
+        MantenimientoUsusario mu = new MantenimientoUsusario();
+        lista = mttoac.consultar();
+        listCr = mc.consultar();
+        listF = mf.consultar();
+        listTA = mta.consultar();
+        
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
@@ -194,6 +257,8 @@ private ScheduleModel eventModel;
           actividades.setIdcronograma(new Cronogramas());
         actividades.setIdtipoactividad(new Tiposactividades());
         actividades.setIdfase(new Fases());
+        
+        lista=mact.consultar();
         
         }else{
             eventModel.updateEvent(event);
