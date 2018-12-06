@@ -89,6 +89,7 @@ public class MantenimientoActividades {
             acti.setIdtipoactividad(actividades.getIdtipoactividad());
             acti.setFechaactividad(actividades.getFechaactividad());
             acti.setIdfase(actividades.getIdfase());
+            acti.setIdusuario(actividades.getIdusuario());
 
             em.getTransaction().commit();
             flag = 1;
