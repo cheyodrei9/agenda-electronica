@@ -73,6 +73,8 @@ public class Usuarios implements Serializable {
     private Collection<Notificaciones> notificacionesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Cronogramas> cronogramasCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private Collection<Actividades> actividadesCollection;
     @JoinColumn(name = "idtipousuario", referencedColumnName = "idtipousuario")
     @ManyToOne(optional = false)
     private Tiposusuarios idtipousuario;
@@ -177,6 +179,15 @@ public class Usuarios implements Serializable {
         this.cronogramasCollection = cronogramasCollection;
     }
 
+    @XmlTransient
+    public Collection<Actividades> getActividadesCollection() {
+        return actividadesCollection;
+    }
+
+    public void setActividadesCollection(Collection<Actividades> actividadesCollection) {
+        this.actividadesCollection = actividadesCollection;
+    }
+
     public Tiposusuarios getIdtipousuario() {
         return idtipousuario;
     }
@@ -205,16 +216,9 @@ public class Usuarios implements Serializable {
         return true;
     }
 
-   /* @Override
-    public String toString() {
-        return "Persistencia.Usuarios[ idusuario=" + idusuario + " ]";
-    }*/
-
     @Override
     public String toString() {
-        return "Usuarios{" + "idusuario=" + idusuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", telefono=" + telefono + ", correo=" + correo + ", contra=" + contra + ", niveldemando=" + niveldemando + '}';
+        return "Persistencia.Usuarios[ idusuario=" + idusuario + " ]";
     }
-    
-    
     
 }
