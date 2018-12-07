@@ -22,8 +22,9 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanCronograma {
-    private List<Cronogramas> ListaCrono=new ArrayList();
-    private List<Usuarios> ListaUsuario=new ArrayList();
+
+    private List<Cronogramas> ListaCrono = new ArrayList();
+    private List<Usuarios> ListaUsuario = new ArrayList();
     private MantenimientoCronogramas Mcrono;
     private Cronogramas Crono;
     private String accion;
@@ -67,49 +68,78 @@ public class BeanCronograma {
     public void setAccion(String accion) {
         this.accion = accion;
     }
-    
+
     @PostConstruct
-    private void intit(){
+    private void intit() {
         Crono = new Cronogramas();
         Crono.setIdusuario(new Usuarios());
         MantenimientoCronogramas MCrono = new MantenimientoCronogramas();
         MantenimientoUsusario MU = new MantenimientoUsusario();
         ListaCrono = MCrono.consultar();
-        ListaUsuario=MU.consultar();
+        ListaUsuario = MU.consultar();
     }
-    private void LimpiarFormulario(){
-        this.ListaCrono=Mcrono.consultar();
-        this.Crono=new Cronogramas();
+
+    private void LimpiarFormulario() {
+        this.ListaCrono = Mcrono.consultar();
+        this.Crono = new Cronogramas();
         Crono.setIdusuario(new Usuarios());
         this.Crono.setIdcronograma(0);
-        accion="Registrar";
+        accion = "Registrar";
     }
-    public void AccionFormulario(){
-        if(accion.equals("Registrar")){
+
+    public void AccionFormulario() {
+        if (accion.equals("Registrar")) {
             Mcrono.guardar(this.Crono);
-        }else if(accion.equals("Editar")){
+        } else if (accion.equals("Editar")) {
             Mcrono.Actualizar(this.Crono);
         }
         LimpiarFormulario();
     }
-    public void guardar(){
+
+    public void guardar() {
         MantenimientoCronogramas mcrono = new MantenimientoCronogramas();
         mcrono.guardar(Crono);
         Crono = new Cronogramas();
+        this.ListaCrono = Mcrono.consultar();
     }
-    public void borrar(Cronogramas crono){
-        Mcrono.eliminar(crono);
-        this.ListaCrono=Mcrono.consultar();
+
+    public void eliminar(Cronogramas crono) {
+        MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
+        mCrono.eliminar(crono);
+        ListaCrono = mCrono.consultar();
+        String advertencia = "";
+
+        if (mCrono.eliminar(crono) == 1) {
+            advertencia = "Se ha eliminado correctamente";
+        } else {
+            advertencia = "No se ha podido eliminar";
+
+        }
     }
-    public void Editar(Cronogramas crono){
-        this.Crono= crono;
-        accion="Editar";
-    }
-    private void Actualizar(){
-        Mcrono.Actualizar(this.Crono);
-    }
-            
     
-    
-    
+    public void modificar(Cronogramas crono) {
+        MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
+        crono=mCrono.consultarid(crono.getIdcronograma());
+
+        String advertencia = "";
+        if (crono != null) {
+            this.Crono = crono;
+            advertencia = "Datos Consultados correctamente";
+        } else {
+            advertencia = "Consulta no realizada";
+        }
+    }
+    public void actualizar() {
+        MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
+        mCrono.Actualizar(Crono);
+        ListaCrono = mCrono.consultar();
+        String advertencia = "";
+
+        if (mCrono.Actualizar(Crono) == 1) {
+            advertencia = "Actualizado correctamente";
+        } else {
+            advertencia = "No se ha actualizado";
+        }
+    }
+
 }

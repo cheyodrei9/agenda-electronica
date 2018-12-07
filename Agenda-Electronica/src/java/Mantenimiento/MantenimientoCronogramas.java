@@ -109,6 +109,7 @@ public class MantenimientoCronogramas {
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
+            System.out.println("error eliminar "+e);
         } finally {
             em.close();
         }

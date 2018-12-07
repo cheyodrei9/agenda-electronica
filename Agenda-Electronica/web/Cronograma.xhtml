@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cronograma</title>
+    </h:head>
+    <h:body>
+        <div id="incluirPagina"/>
+            <h:form id="form">
+                <p:panel header="#{beanCronograma.accion}Cronograma">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nombre:"/>
+                        <p:inputText value="#{beanCronograma.crono.nombre}"/>
+                        
+                        <p:outputLabel value="Descripcion"/>
+                        <p:inputText value="#{beanCronograma.crono.descripcion}"/>
+                        
+                        <p:outputLabel value="Usuario"/>
+                        <p:inputText value="#{beanCronograma.crono.idusuario.idusuario}"/>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanCronograma.guardar()}" update=":form"/>
+                    </f:facet>
+                </p:panel>
+                <p:panel header="Lista Cronograma">
+                    <p:dataTable value="#{beanCronograma.listaCrono}" var="C">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{C.idcronograma}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{C.nombre}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Descripcion">
+                            <p:outputLabel value="#{C.descripcion}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Usuario">
+                            <p:outputLabel value="#{C.idusuario.nombres}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanCronograma.modificar(C)}" update=":form"/>
+                        </p:column>
+                        
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanCronograma.eliminar(C)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+    </h:body>
+</html>
