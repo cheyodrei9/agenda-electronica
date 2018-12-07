@@ -90,6 +90,13 @@ and open the template in the editor.
                                 <f:selectItem itemValue="" itemLabel="Escoger Fase:" />
                                 <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
                             </h:selectOneMenu>
+                            
+                            <p:outputLabel for="usuario" value="Usuario:" />
+
+                            <h:selectOneMenu id="usuario"  value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 98%">
+                                <f:selectItem itemValue="" itemLabel="Escoger Usuario:" />
+                                <f:selectItems value="#{beansActividades.listU}" var="u" itemLabel="#{u.nombres}" itemValue="#{u.idusuario}" />
+                            </h:selectOneMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
                             <p:commandButton id="addButton" value="Guardar" actionListener="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Table" />

@@ -117,6 +117,7 @@ private ScheduleModel eventModel;
         listCr = mc.consultar();
         listF = mf.consultar();
         listTA = mta.consultar();
+        listU = mu.consultar();
         
         eventModel = new DefaultScheduleModel();
         List<Actividades> a = mttoac.consultar();

@@ -52,6 +52,7 @@ public class BeansActividades {
         listCr = mc.consultar();
         listF = mf.consultar();
         listTA = mta.consultar();
+        listU = mu.consultar();
     }
 
     public List<Actividades> getLista() {

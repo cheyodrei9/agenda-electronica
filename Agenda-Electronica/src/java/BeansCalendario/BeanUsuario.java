@@ -80,6 +80,7 @@ public class BeanUsuario {
         MantenimientoTipoUsuario Mtu = new MantenimientoTipoUsuario();
         listaU = mu.consultar();
         listaTu = Mtu.consultar();
+        System.out.println(listaU);
     }
     public void LimpiarFormulario(){
         this.listaU = Musuario.consultar();
