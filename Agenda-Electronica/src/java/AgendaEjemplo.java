@@ -137,6 +137,7 @@ private ScheduleModel eventModel;
         actividades.setIdcronograma(new Cronogramas());
         actividades.setIdtipoactividad(new Tiposactividades());
         actividades.setIdfase(new Fases());
+        actividades.setIdusuario(new Usuarios());
         lazyEventModel = new LazyScheduleModel() {
              
             @Override
@@ -268,6 +269,7 @@ private ScheduleModel eventModel;
           actividades.setIdcronograma(new Cronogramas());
         actividades.setIdtipoactividad(new Tiposactividades());
         actividades.setIdfase(new Fases());
+        actividades.setIdusuario(new Usuarios());
         
         lista=mact.consultar();
         
