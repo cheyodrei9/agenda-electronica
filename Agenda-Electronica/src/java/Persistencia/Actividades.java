@@ -6,8 +6,10 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,6 +53,8 @@ public class Actividades implements Serializable {
     @Column(name = "fechaactividad")
     @Temporal(TemporalType.DATE)
     private Date fechaactividad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idactividad")
+    private Collection<Notificaciones> notificacionesCollection;
     @JoinColumn(name = "idcronograma", referencedColumnName = "idcronograma")
     @ManyToOne(optional = false)
     private Cronogramas idcronograma;
@@ -97,6 +103,15 @@ public class Actividades implements Serializable {
 
     public void setFechaactividad(Date fechaactividad) {
         this.fechaactividad = fechaactividad;
+    }
+
+    @XmlTransient
+    public Collection<Notificaciones> getNotificacionesCollection() {
+        return notificacionesCollection;
+    }
+
+    public void setNotificacionesCollection(Collection<Notificaciones> notificacionesCollection) {
+        this.notificacionesCollection = notificacionesCollection;
     }
 
     public Cronogramas getIdcronograma() {
