@@ -116,6 +116,7 @@ private ScheduleModel eventModel;
         listCr = mc.consultar();
         listF = mf.consultar();
         listTA = mta.consultar();
+        listU = mu.consultar();
         
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
