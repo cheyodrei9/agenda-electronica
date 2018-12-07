@@ -102,18 +102,42 @@ public class BeanMeses {
          meses=new Meses();
      }
      
-     public void borrar(Meses meses){
+     public void eliminar(Meses meses){
          MantenimientoMeses mmes=new MantenimientoMeses();
          mmes.eliminar(meses);
-         this.ListaMeses=this.MMes.consultar();
+         ListaMeses=mmes.consultar();
+         String advertencia="";
+         
+         if(mmes.eliminar(meses)==1){
+             advertencia="se ha eliminado correctamente";
+         }else{
+             advertencia="no se ha podido eliminar";
+         }
      }
      
-     public void Editar(Meses meses){
-         this.meses=meses;
-         accion="Editar";
+     public void modificar(Meses meses){
+         MantenimientoMeses mmes = new MantenimientoMeses();
+         meses=mmes.consultarid(meses.getIdmes());
+         
+         String advertencia="";
+         if(meses !=null){
+             this.meses=meses;
+             advertencia="Datos consultados corectamente";
+         }else{
+             advertencia="consulta no realizada";
+         }
      }
      
      public void Actualizar(){
-         MMes.actualizar(this.meses);
+         MantenimientoMeses mmes = new MantenimientoMeses();
+         mmes.actualizar(meses);
+         ListaMeses=mmes.consultar();
+         String advertencia="";
+         
+         if(mmes.actualizar(meses)==1){
+             advertencia="actualizado correctamente";
+         }else{
+             advertencia="no se ha actualizado";
+         }
      }
 }

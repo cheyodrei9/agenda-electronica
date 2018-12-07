@@ -8,6 +8,7 @@ package BeansCalendario;
 import Mantenimiento.MantenimientoNotificaciones;
 import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Notificaciones;
+
 import Persistencia.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,18 +103,39 @@ public class BeanNotificaciones {
         notificaciones=new Notificaciones();
     }
     
-    public void borrar(Notificaciones notificaciones){
+    public void eliminar(Notificaciones notificaciones){
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
         MMMnot.eliminiar(notificaciones);
-        this.ListaNotificaciones=this.MNot.consultar();
+        String advertencia="";
+        
+        if(MMMnot.eliminiar(notificaciones)==1){
+            advertencia="se ha eliminado correctamente";
+        }else{
+            advertencia="no se ha podido eliminar";
+        }
     }
     
-    public void Editar(Notificaciones notificaciones){
-        this.notificaciones=notificaciones;
-        accion="Editar";
+    public void modificar(Notificaciones notificaciones){
+        MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
+        notificaciones=MMMnot.consultarId(notificaciones.getIdnotificacion());
+        String advertencia="";
+        if(notificaciones !=null){
+            advertencia="datos consultados corectamente";
+        }else{
+            advertencia="consulta no realizada";
+        }
     }
     
     public void Actualizat(){
-        MNot.actualizar(this.notificaciones);
+        MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
+        MMMnot.actualizar(notificaciones);
+        ListaNotificaciones=MMMnot.consultar();
+        String advertencia="";
+        
+        if(MMMnot.actualizar(notificaciones)==1){
+            advertencia="actualizando correctamente";
+        }else{
+            advertencia="no se ha actualizado";
+        }
     }
 }
