@@ -134,6 +134,8 @@ public class BeanCronograma {
         mCrono.Actualizar(Crono);
         ListaCrono = mCrono.consultar();
         String advertencia = "";
+        
+        ListaCrono=mCrono.consultar();
 
         if (mCrono.Actualizar(Crono) == 1) {
             advertencia = "Actualizado correctamente";

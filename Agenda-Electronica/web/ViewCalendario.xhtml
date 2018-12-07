@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Calendario</title>
+    </h:head>
+    <h:body>
+        <div id="incluirPagina"/>
+            <h:form id="form">
+                <p:panel header="#{beanCalendario.accion}Calendario">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Cronograma:"/>
+                        <p:inputText value="#{beanCalendario.calendario.idcronograma.idcronograma}"/>
+                        
+                        <p:outputLabel value="Año"/>
+                        <p:inputText value="#{beanCalendario.calendario.año}"/>
+                        
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanCalendario.guardar()}" update=":form"/>
+                    </f:facet>
+                </p:panel>
+                <p:panel header="Lista Calendario">
+                    <p:dataTable value="#{beanCalendario.listaCalendario}" var="C">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{C.idcalendario}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Cronograma">
+                            <p:outputLabel value="#{C.idcronograma.nombre}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Año">
+                            <p:outputLabel value="#{C.año}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanCalendario.modificar(C)}" update=":form"/>
+                        </p:column>
+                        
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanCalendario.eliminar(C)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+    </h:body>
+</html>
+

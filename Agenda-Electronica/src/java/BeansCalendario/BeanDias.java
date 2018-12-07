@@ -22,7 +22,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanDias {
-    
+
     private List<Dias> ListaDias = new ArrayList();
     private List<Meses> ListaMes = new ArrayList();
     private MantenimientoDias MDia;
@@ -68,46 +68,79 @@ public class BeanDias {
     public void setAccion(String accion) {
         this.accion = accion;
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         Dia = new Dias();
         Dia.setIdmes(new Meses());
         MantenimientoDias md = new MantenimientoDias();
         MantenimientoMeses MMes = new MantenimientoMeses();
-        ListaDias=md.consultar();
-        ListaMes=MMes.consultar();
-    } 
-    public void LimpiarFormulario(){
-        this.ListaDias=MDia.consultar();
-        this.Dia= new Dias();
+        ListaDias = md.consultar();
+        ListaMes = MMes.consultar();
+    }
+
+    public void LimpiarFormulario() {
+        this.ListaDias = MDia.consultar();
+        this.Dia = new Dias();
         Dia.setIdmes(new Meses());
         this.Dia.setIddia(0);
-        accion="Registrar";
+        accion = "Registrar";
     }
-    public void AccionFormulario(){
-        if(accion.equals("Registrar")){
+
+    public void AccionFormulario() {
+        if (accion.equals("Registrar")) {
             MDia.guardar(this.Dia);
-        }else if(accion.equals("Editar")){
+        } else if (accion.equals("Editar")) {
             MDia.Actualizar(this.Dia);
         }
         LimpiarFormulario();
     }
-    public void guardar(){
-        MantenimientoDias Mdias= new MantenimientoDias();
+
+    public void guardar() {
+        MantenimientoDias Mdias = new MantenimientoDias();
         Mdias.guardar(Dia);
-        Dia= new Dias();
+        Dia = new Dias();
     }
-    public void borrar(Dias dia){
-        MantenimientoDias MDia= new MantenimientoDias();
-        MDia.eliminar(dia);
-        this.ListaDias= this.MDia.consultar();
+
+    public void eliminar(Dias dia) {
+        MantenimientoDias mdia = new MantenimientoDias();
+        mdia.eliminar(dia);
+        ListaDias = mdia.consultar();
+        String advertencia = "";
+
+        if (mdia.eliminar(dia) == 1) {
+            advertencia = "Se ha eliminado correctamente";
+        } else {
+            advertencia = "No se ha podido eliminar";
+
+        }
     }
-    public void Editar(Dias dia){
-        this.Dia=dia;
-        accion="Editar";
+
+    public void modificar(Dias dia) {
+        MantenimientoDias mdia = new MantenimientoDias();
+        dia = mdia.consultarid(dia.getIddia());
+
+        String advertencia = "";
+        if (dia != null) {
+            this.Dia = dia;
+            advertencia = "Datos Consultados correctamente";
+        } else {
+            advertencia = "Consulta no realizada";
+        }
     }
-    private void Actualizar(){
-        MDia.Actualizar(this.Dia);
+
+    public void actualizar() {
+        MantenimientoDias mdia = new MantenimientoDias();
+        mdia.Actualizar(Dia);
+        ListaDias = mdia.consultar();
+        String advertencia = "";
+
+        ListaDias = mdia.consultar();
+
+        if (mdia.Actualizar(Dia) == 1) {
+            advertencia = "Actualizado correctamente";
+        } else {
+            advertencia = "No se ha actualizado";
+        }
     }
 }

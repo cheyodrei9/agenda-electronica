@@ -22,6 +22,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanCalendario {
+
     private List<Calendarios> listaCalendario = new ArrayList();
     private List<Cronogramas> listaCrono = new ArrayList();
     private MantenimientoCalendarios Mcalendario;
@@ -67,46 +68,80 @@ public class BeanCalendario {
     public void setAccion(String accion) {
         this.accion = accion;
     }
-    
-     @PostConstruct
+
+    @PostConstruct
     public void init() {
         calendario = new Calendarios();
         calendario.setIdcronograma(new Cronogramas());
         MantenimientoCalendarios mc = new MantenimientoCalendarios();
-         MantenimientoCronogramas MCrono = new MantenimientoCronogramas();
-         listaCalendario= mc.consultar();
-         listaCrono=MCrono.consultar();
+        MantenimientoCronogramas MCrono = new MantenimientoCronogramas();
+        listaCalendario = mc.consultar();
+        listaCrono = MCrono.consultar();
     }
-    private void LimpiarFormulario(){
-        this.listaCalendario=Mcalendario.consultar();
-        this.calendario=new Calendarios();
+
+    private void LimpiarFormulario() {
+        this.listaCalendario = Mcalendario.consultar();
+        this.calendario = new Calendarios();
         calendario.setIdcronograma(new Cronogramas());
         this.calendario.getIdcalendario();
-        accion="Registrar";
+        accion = "Registrar";
     }
-    public void AccionFormulario(){
-        if(accion.equals("Registrar")){
+
+    public void AccionFormulario() {
+        if (accion.equals("Registrar")) {
             Mcalendario.guardar(this.calendario);
-        }else if(accion.equals("Editar")){
+        } else if (accion.equals("Editar")) {
             Mcalendario.Actualizar(this.calendario);
         }
         LimpiarFormulario();
     }
-    public void guardar(){
+
+    public void guardar() {
         MantenimientoCalendarios mc = new MantenimientoCalendarios();
         mc.guardar(calendario);
-        calendario= new Calendarios();
+        calendario = new Calendarios();
     }
-    public void Borrar(Calendarios calendarios){
-        Mcalendario.eliminar(calendarios);
-        this.listaCalendario=Mcalendario.consultar();
+
+    public void eliminar(Calendarios calendarios) {
+        MantenimientoCalendarios mcalen = new MantenimientoCalendarios();
+        mcalen.eliminar(calendarios);
+        listaCalendario = mcalen.consultar();
+        String advertencia = "";
+
+        if (mcalen.eliminar(calendarios) == 1) {
+            advertencia = "Se ha eliminado correctamente";
+        } else {
+            advertencia = "No se ha podido eliminar";
+
+        }
     }
-    public void Editar(Calendarios calendario){
-        this.calendario=calendario;
-        accion="Editar";
+
+    public void modificar(Calendarios calendarios) {
+        MantenimientoCalendarios mcalen = new MantenimientoCalendarios();
+        calendarios = mcalen.consultarid(calendarios.getIdcalendario());
+
+        String advertencia = "";
+        if (calendarios != null) {
+            this.calendario = calendarios;
+            advertencia = "Datos Consultados correctamente";
+        } else {
+            advertencia = "Consulta no realizada";
+        }
     }
-    private void Actualizar(){
-        Mcalendario.Actualizar(this.calendario);
+
+    public void actualizar() {
+        MantenimientoCalendarios mcalen = new MantenimientoCalendarios();
+        mcalen.Actualizar(calendario);
+        listaCalendario = mcalen.consultar();
+        String advertencia = "";
+
+        listaCalendario = mcalen.consultar();
+
+        if (mcalen.Actualizar(calendario) == 1) {
+            advertencia = "Actualizado correctamente";
+        } else {
+            advertencia = "No se ha actualizado";
+        }
     }
-    
+
 }

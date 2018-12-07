@@ -99,20 +99,46 @@ public class BeanFases {
         Mfase.Guardar(fase);
         fase=new Fases();
     }
-    
-    public void borrar(Fases Fase){
-        MantenimientoFases Mfase= new MantenimientoFases();
+
+    public void eliminar(Fases fase) {
+        MantenimientoFases Mfase = new MantenimientoFases();
         Mfase.eliminar(fase);
-        this.ListaFase=MFases.consultar();
+        ListaFase = Mfase.consultar();
+        String advertencia = "";
+
+        if (Mfase.eliminar(fase) == 1) {
+            advertencia = "Se ha eliminado correctamente";
+        } else {
+            advertencia = "No se ha podido eliminar";
+
+        }
     }
-    private void Actualizar(){
-        MantenimientoFases Mfase= new MantenimientoFases();
-        Mfase.Actualizar(this.fase);
+    
+    public void modificar(Fases fase) {
+        MantenimientoFases Mfase = new MantenimientoFases();
+        fase=Mfase.consultarid(fase.getIdfase());
+
+        String advertencia = "";
+        if (fase != null) {
+            this.fase = fase;
+            advertencia = "Datos Consultados correctamente";
+        } else {
+            advertencia = "Consulta no realizada";
+        }
     }
-    public void Editar(Fases fase){
-        MantenimientoFases Mfase= new MantenimientoFases();
-        this.fase=fase;
-        accion="Editar";
+    public void actualizar() {
+        MantenimientoFases Mfase = new MantenimientoFases();
+        Mfase.Actualizar(fase);
+        ListaFase = Mfase.consultar();
+        String advertencia = "";
+        
+        ListaFase=Mfase.consultar();
+
+        if (Mfase.Actualizar(fase) == 1) {
+            advertencia = "Actualizado correctamente";
+        } else {
+            advertencia = "No se ha actualizado";
+        }
     }
     
 }

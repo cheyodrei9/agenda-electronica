@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Fase</title>
+    </h:head>
+    <h:body>
+        <div id="incluirPagina"/>
+            <h:form id="form">
+                <p:panel header="#{beanFases.accion}Cronograma">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Tipo De Fase:"/>
+                        <p:inputText value="#{beanFases.fase.idtipofase.idtipofase}"/>
+                        
+                        <p:outputLabel value="Estado"/>
+                        <p:inputText value="#{beanFases.fase.estado}"/>
+                        
+                        <p:outputLabel value="Fecha"/>
+                        <p:inputText value="#{beanFases.fase.fecha}"/>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanFases.guardar()}" update=":form"/>
+                    </f:facet>
+                </p:panel>
+                <p:panel header="Lista Fases">
+                    <p:dataTable value="#{beanFases.listaFase}" var="C">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{C.idfase}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Tipo De Fase">
+                            <p:outputLabel value="#{C.idtipofase.tipofase}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Estado">
+                            <p:outputLabel value="#{C.estado}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Fecha">
+                            <p:outputLabel value="#{C.fecha}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanFases.modificar(C)}" update=":form"/>
+                        </p:column>
+                        
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanFases.eliminar(C)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+    </h:body>
+</html>
