@@ -14,20 +14,15 @@ and open the template in the editor.
         <title>Menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="EstiloMenu.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .navbar-nav > li > .dropdown-menu {
-                background:rgba(152,46,46,0.7);
-            }
-        </style>
     </h:head>
     <h:body style="background:  url(Imagenes/Agenda.jpg);background-size: cover;">
-        <b:navBar style="border-radius:  7%;font-size: 18px;border: 0;background:rgba(152,46,46,0.7);background-size: cover" brandStyle="color:antiquewhite;" brand="Agenda" brandHref="#" fluid="true">
+        <b:navBar class="Menu" brandStyle="color:antiquewhite;" brand="Agenda" brandHref="#" fluid="true">
             <b:navbarLinks >
-                <b:navLink style="color: antiquewhite;" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml"></b:navLink>
+                <b:navLink class="letra" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml"></b:navLink>
             </b:navbarLinks>
-            <b:navbarLinks style="background:rgba(152,46,46,0.1)">
-                <b:dropMenu style="color: antiquewhite;background:rgba(152,46,46,0.0) " value="Mantenimientos" iconAwesome="paperclip">
-                    <b:navLink style="color: antiquewhite;background:rgba(152,46,46,0.0) " value="Tipos Actividades" href="TiposActividades.xhtml"></b:navLink>
+            <b:navbarLinks id="fondo">
+                <b:dropMenu  value="Mantenimientos" iconAwesome="paperclip">
+                    <b:navLink  value="Tipos Actividades" href="TiposActividades.xhtml"></b:navLink>
                 </b:dropMenu>
             </b:navbarLinks>
         </b:navBar>
