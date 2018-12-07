@@ -90,6 +90,12 @@
                 </h:panelGrid>     
             </p:dialog>
         </h:form>
+        <p:dialog header="Requiere permisos" widgetVar="Acceso negado" modal="true" visible="true">
+            <h:graphicImage>
+                <img src="Imagenes/accesodenegado-by-Stormtrooper.png" alt=""/><br/>
+                <h:outputText value="La accion requiere permiso de administracion"/>
+            </h:graphicImage>
+        </p:dialog>
     </h:body>
 </html>
 

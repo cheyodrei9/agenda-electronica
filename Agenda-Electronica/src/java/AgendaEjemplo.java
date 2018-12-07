@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import BeansCalendario.BeanLogin;
 import Mantenimiento.MantenimientoActividades;
 import Mantenimiento.MantenimientoCronogramas;
 import Mantenimiento.MantenimientoFases;
@@ -15,6 +16,7 @@ import Persistencia.Fases;
 import Persistencia.Tiposactividades;
 import Persistencia.Usuarios;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,11 +44,12 @@ import org.primefaces.model.ScheduleModel;
  * @author ruth.ramosusam
  */
 @ManagedBean
- @ViewScoped
+@ViewScoped
 public class AgendaEjemplo implements Serializable {
-private ScheduleModel eventModel;
-     private Actividades actividades;
-     private List<Actividades> lista = new ArrayList();
+
+    private ScheduleModel eventModel;
+    private Actividades actividades;
+    private List<Actividades> lista = new ArrayList();
     private List<Tiposactividades> listTA = new ArrayList();
     private List<Cronogramas> listCr = new ArrayList();
     private List<Fases> listF = new ArrayList();
@@ -99,16 +102,15 @@ private ScheduleModel eventModel;
     public void setListU(List<Usuarios> listU) {
         this.listU = listU;
     }
-    
+
     private ScheduleModel lazyEventModel;
- 
+
     private ScheduleEvent event = new DefaultScheduleEvent();
- private final  MantenimientoActividades mttoac = new MantenimientoActividades();
+    private final MantenimientoActividades mttoac = new MantenimientoActividades();
+
     @PostConstruct
     public void init() {
-        
-       
-      
+
         MantenimientoCronogramas mc = new MantenimientoCronogramas();
         MantenimientoTiposActividades mta = new MantenimientoTiposActividades();
         MantenimientoFases mf = new MantenimientoFases();
@@ -118,187 +120,192 @@ private ScheduleModel eventModel;
         listF = mf.consultar();
         listTA = mta.consultar();
         listU = mu.consultar();
-        
+
         eventModel = new DefaultScheduleModel();
         List<Actividades> a = mttoac.consultar();
         Iterator i = a.iterator();
-        while(i.hasNext()){
-           
-            Actividades  actividades= (Actividades) i.next();
-            eventModel.addEvent(new DefaultScheduleEvent(actividades.getNombreactividad(),actividades.getFechaactividad(),actividades.getFechaactividad()));
-            
+        while (i.hasNext()) {
+
+            Actividades actividades = (Actividades) i.next();
+            eventModel.addEvent(new DefaultScheduleEvent(actividades.getNombreactividad(), actividades.getFechaactividad(), actividades.getFechaactividad()));
+
         }
         eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
-      
+
         actividades = new Actividades();
         actividades.setIdcronograma(new Cronogramas());
         actividades.setIdtipoactividad(new Tiposactividades());
         actividades.setIdfase(new Fases());
         actividades.setIdusuario(new Usuarios());
         lazyEventModel = new LazyScheduleModel() {
-             
+
             @Override
             public void loadEvents(Date start, Date end) {
                 Date random = getRandomDate(start);
                 addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-                 
+
                 random = getRandomDate(start);
                 addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
-            }   
+            }
         };
     }
-     
+
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
         date.setTime(base);
-        date.add(Calendar.DATE, ((int) (Math.random()*30)) + 1);    //set random day of month
-         
+        date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1);    //set random day of month
+
         return date.getTime();
     }
-     
+
     public Date getInitialDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-         
+
         return calendar.getTime();
     }
-     
+
     public ScheduleModel getEventModel() {
         return eventModel;
     }
-     
+
     public ScheduleModel getLazyEventModel() {
         return lazyEventModel;
     }
- 
+
     private Calendar today() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
- 
+
         return calendar;
     }
-     
+
     private Date previousDay8Pm() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
         t.set(Calendar.HOUR, 8);
-         
+
         return t.getTime();
     }
-     
+
     private Date previousDay11Pm() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
         t.set(Calendar.HOUR, 11);
-         
+
         return t.getTime();
     }
-     
+
     private Date today1Pm() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.HOUR, 1);
-         
+
         return t.getTime();
     }
-     
+
     private Date theDayAfter3Pm() {
         Calendar t = (Calendar) today().clone();
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);     
+        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.HOUR, 3);
-         
+
         return t.getTime();
     }
- 
+
     private Date today6Pm() {
-        Calendar t = (Calendar) today().clone(); 
+        Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.HOUR, 6);
-         
+
         return t.getTime();
     }
-     
+
     private Date nextDay9Am() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.AM);
         t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
         t.set(Calendar.HOUR, 9);
-         
+
         return t.getTime();
     }
-     
+
     private Date nextDay11Am() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.AM);
         t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
         t.set(Calendar.HOUR, 11);
-         
+
         return t.getTime();
     }
-     
+
     private Date fourDaysLater3pm() {
-        Calendar t = (Calendar) today().clone(); 
+        Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
         t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
         t.set(Calendar.HOUR, 3);
-         
+
         return t.getTime();
     }
-     
+
     public ScheduleEvent getEvent() {
         return event;
     }
- 
+
     public void setEvent(ScheduleEvent event) {
         this.event = event;
     }
-     
-    public void addEvent() {
-        if(event.getId() == null){
-            eventModel.addEvent(event);
-          actividades.setNombreactividad(event.getTitle());
-          actividades.setFechaactividad(event.getStartDate());
-          MantenimientoActividades mact = new MantenimientoActividades();
-          mact.guardar(actividades);
-          actividades.setIdcronograma(new Cronogramas());
-        actividades.setIdtipoactividad(new Tiposactividades());
-        actividades.setIdfase(new Fases());
-        actividades.setIdusuario(new Usuarios());
-        
-        lista=mact.consultar();
-        
-        }else{
-            eventModel.updateEvent(event);
-         
-        event = new DefaultScheduleEvent();
+
+    public void addEvent() throws IOException {
+        if (BeanLogin.getNiveldemando() == 1 || BeanLogin.getNiveldemando() == 2) {
+            if (event.getId() == null) {
+                eventModel.addEvent(event);
+                actividades.setNombreactividad(event.getTitle());
+                actividades.setFechaactividad(event.getStartDate());
+                MantenimientoActividades mact = new MantenimientoActividades();
+                mact.guardar(actividades);
+                actividades.setIdcronograma(new Cronogramas());
+                actividades.setIdtipoactividad(new Tiposactividades());
+                actividades.setIdfase(new Fases());
+                actividades.setIdusuario(new Usuarios());
+
+                lista = mact.consultar();
+
+            } else {
+                eventModel.updateEvent(event);
+
+                event = new DefaultScheduleEvent();
+            }
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+        }
     }
-    } 
+
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
     }
-     
+
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }
-     
+
     public void onEventMove(ScheduleEntryMoveEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-         
+
         addMessage(message);
     }
-     
+
     public void onEventResize(ScheduleEntryResizeEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-         
+
         addMessage(message);
     }
-     
+
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
