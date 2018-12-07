@@ -1,7 +1,5 @@
-
-/*Creacion de la base de datos*/
 DROP DATABASE IF EXISTS agenda;
-CREATE DATABASE agenda;
+create DATABASE agenda;
 
 USE agenda;
 
@@ -12,7 +10,7 @@ tipoactividad VARCHAR(150) NOT NULL,
 PRIMARY KEY (idtipoactividad)
 );
 
-CREATE TABLE tiposfases(
+create table tiposfases(
 idtipofase INTEGER(11) NOT NULL AUTO_INCREMENT,
 tipofase VARCHAR(150) NOT NULL,
 PRIMARY KEY (idtipofase)
@@ -23,7 +21,6 @@ idtipousuario INTEGER(11) NOT NULL AUTO_INCREMENT,
 tipo VARCHAR(50) NOT NULL,
 PRIMARY KEY (idtipousuario)
 );
-
 
 /*tablas con foranea*/
 
@@ -74,7 +71,6 @@ PRIMARY KEY (iddia),
 FOREIGN KEY (idmes) REFERENCES meses (idmes)
 );
 
-
 CREATE TABLE fases(
 idfase INTEGER(11) NOT NULL AUTO_INCREMENT,
 idtipofase INTEGER(11) NOT NULL,
@@ -88,20 +84,22 @@ CREATE TABLE actividades(
 idactividad INTEGER(11) NOT NULL AUTO_INCREMENT,
 idcronograma INTEGER(11) NOT NULL,
 idtipoactividad INTEGER(11) NOT NULL,
+idusuario INTEGER(11) NOT NULL,
 nombreactividad VARCHAR(150) NOT NULL,
 fechaactividad DATE NOT NULL,
-idfase int(11) NOT NULL,
+idfase INTEGER(11) NOT NULL,
 PRIMARY KEY (idactividad),
 FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma),
 FOREIGN KEY (idtipoactividad) REFERENCES tiposactividades (idtipoactividad),
-FOREIGN KEY (idfase) REFERENCES fases (idfase)
+FOREIGN KEY (idfase) REFERENCES fases (idfase),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
 );
 
 CREATE TABLE notificaciones(
 idnotificacion INTEGER(11) NOT NULL AUTO_INCREMENT,
 idusuario INTEGER(11) NOT NULL,
 idactividad INTEGER(11) NOT NULL,
-rango VARCHAR(50) NOT NULL,
+rango VARCHAR(200) NOT NULL,
 PRIMARY KEY (idnotificacion),
 FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
 FOREIGN KEY (idactividad) REFERENCES actividades(idactividad)
