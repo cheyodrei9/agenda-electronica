@@ -16,6 +16,9 @@
     border: 0 !important;
     background:rgba(152,46,46,0.7) !important;
     background-size: cover !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    box-decoration-break: initial !important;
 }
 .letra{
     color: antiquewhite !important;

@@ -9,7 +9,8 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Agenda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -48,40 +49,7 @@ and open the template in the editor.
 
     </h:head>
     <h:body style="box-decoration-break: initial">
-        <div> </div>
-        <b:navBar style="border-radius: 15px;font-size: 18px;background:rgba(152,46,46,0.7);background-size: cover; margin-left: 10px; margin-right: 10px;" brandStyle="color:antiquewhite;" brand="Agenda" brandHref="#" fluid="true"> 
-            <b:navbarLinks > 
-                <b:navLink style="color: antiquewhite;" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml">
-
-                </b:navLink> 
-            </b:navbarLinks> 
-            <b:navbarLinks style="background:rgba(152,46,46,0.1)"> 
-                <b:dropMenu style="color: antiquewhite;background:rgba(152,46,46,0.0) " value="Mantenimientos" iconAwesome="paperclip"> 
-                    <b:navLink style="color: #720000;background:rgba(152,46,46,0.0) " value="Tipos Actividades" href="TiposActividades.xhtml">
-
-                    </b:navLink> 
-                </b:dropMenu> 
-            </b:navbarLinks> 
-            <b:navbarLinks style="position: absolute;left: 1220px;font-size: 15px; padding-top: 9px;"> 
-                <h:form>
-                    <p:growl id="message" showDetail="true" /> 
-                    <p:commandButton value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message"> 
-                        <p:confirm header="Confirmación" message="¿Cerrar sesion?"/> 
-                    </p:commandButton> 
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" closeOnEscape="true"> 
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" /> 
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" /> 
-                    </p:confirmDialog>
-                </h:form> 
-            </b:navbarLinks>
-            <b:navbarLinks style="position: absolute;left: 1270px;top: 6px;font-size: 15px;"> 
-                <h:form>
-
-                </h:form> 
-            </b:navbarLinks>
-        </b:navBar>
-        <div> </div>
-        <div id="incluirPagina"></div> 
+        <ui:include src="menu.xhtml"/>
         <div id="container">
             <div id="calendario">
                 <h:form>
