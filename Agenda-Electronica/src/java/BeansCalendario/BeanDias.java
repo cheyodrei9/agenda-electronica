@@ -85,6 +85,14 @@ public class BeanDias {
         this.Dia.setIddia(0);
         accion="Registrar";
     }
+    public void AccionFormulario(){
+        if(accion.equals("Registrar")){
+            MDia.guardar(this.Dia);
+        }else if(accion.equals("Editar")){
+            MDia.Actualizar(this.Dia);
+        }
+        LimpiarFormulario();
+    }
     public void guardar(){
         MantenimientoDias Mdias= new MantenimientoDias();
         Mdias.guardar(Dia);

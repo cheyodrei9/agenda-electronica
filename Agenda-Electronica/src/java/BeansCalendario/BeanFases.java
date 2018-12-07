@@ -86,6 +86,14 @@ public class BeanFases {
         this.fase.setIdfase(0);
         accion = "Registrar";
     }
+    public void AccionFormulario(){
+        if(accion.equals("Registrar")){
+            MFases.Guardar(this.fase);
+        }else if(accion.equals("Editar")){
+            MFases.Actualizar(this.fase);
+        }
+        LimpiarFormulario();
+    }
     public void guardar(){
         MantenimientoFases Mfase= new MantenimientoFases();
         Mfase.Guardar(fase);

@@ -84,6 +84,14 @@ public class BeanCalendario {
         this.calendario.getIdcalendario();
         accion="Registrar";
     }
+    public void AccionFormulario(){
+        if(accion.equals("Registrar")){
+            Mcalendario.guardar(this.calendario);
+        }else if(accion.equals("Editar")){
+            Mcalendario.Actualizar(this.calendario);
+        }
+        LimpiarFormulario();
+    }
     public void guardar(){
         MantenimientoCalendarios mc = new MantenimientoCalendarios();
         mc.guardar(calendario);
