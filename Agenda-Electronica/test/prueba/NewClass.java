@@ -120,9 +120,12 @@ public class NewClass {
         
         /*System.out.println(act.Guardar(tipos));       */
         
-  MantenimientoTipoUsuario man = new MantenimientoTipoUsuario();
+  /*MantenimientoTipoUsuario man = new MantenimientoTipoUsuario();
   
-        System.out.println(man.consultar());
+        System.out.println(man.consultar());*/
+        
+        MantenimientoTiposActividades TA = new MantenimientoTiposActividades();
+        System.out.println(TA.consultar());
         
     }
 }
