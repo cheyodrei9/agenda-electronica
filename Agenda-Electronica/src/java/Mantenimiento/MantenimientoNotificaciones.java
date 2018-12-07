@@ -80,6 +80,7 @@ public class MantenimientoNotificaciones {
             not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
             not.setIdusuario(notificacion.getIdusuario());
             not.setRango(notificacion.getRango());
+            not.setIdactividad(notificacion.getIdactividad());
             
             
             em.getTransaction().commit();

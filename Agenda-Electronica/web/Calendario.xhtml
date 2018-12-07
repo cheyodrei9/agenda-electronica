@@ -124,16 +124,16 @@ and open the template in the editor.
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
-                        <p:column headerText="tipo de actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
+                        <p:column headerText="tipo de actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" >
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
                         <p:column headerText="Nombre actividad" styleClass="columna" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="fecha" styleClass="columna">
-                            <h:outputText value="#{lista.fechaactividad}">
-                                <f:convertDateTime pattern="dd/MM/yyyy " timeZone="America/Mexico_City" />
-                            </h:outputText>
+                        <p:column headerText="fecha" styleClass="columna" filterBy="#{lista.fechaactividad}"  sortBy="#{lista.fechaactividad}" width="70" resizable="true" filterMatchMode="contains">
+                            <h:outputLabel value="#{lista.fechaactividad}">
+                           
+                            </h:outputLabel>
                         </p:column>
                         <p:column headerText="fase" styleClass="columna">
                             <h:outputText value="#{lista.idfase.estado}"></h:outputText>
