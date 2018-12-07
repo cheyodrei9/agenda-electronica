@@ -6,30 +6,38 @@ body{
     background-repeat: no-repeat;
 }
 #container{
-    display:flex;
+    display: flex; 
 }
 
 #calendario{
     /*background-image: url(Imagenes/fondo.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
     padding: 30px; 
-    width: 50%;
-    display: inline-block;
+    width: 40%;
+    height: 550px;
+    border-right: 1px double;
+    border-top: 5px double;
+    border-bottom: 5px double;
+    border-left: 5px double;
+    border-color: beige;
+    float: left;
+    margin-left: 10px;
 }
 
 #tabla{
     /*background-image: url(Imagenes/fondo1.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
     padding: 30px;
-    width: 50%;
-    display: inline-block;
+    width: 100%;
+    height: 550px;
+    border-right: 5px double;
+    border-top: 5px double;
+    border-bottom: 5px double;
+    border-color: beige;
+    float: left;
+    margin-right: 10px;
 }
 
-#calendario, #tabla{
-    float: left;
-    border: 5px double;
-    border-color: beige;
-}
 .value {
     font-weight: bold;
 }
@@ -143,4 +151,16 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
 
 .ui-widget-content,ui-datatable-even,tabla{
     color: #720000;
+}
+
+.ui-state-default.ui-datatable-data ui-widget-content{
+    width: 20px;
+}
+
+.ui-widget-content ui-datatable-even {
+    width: 20px;
+}
+ 
+.ui-widget-content ui-datatable-even tabla{
+    width: 20px;
 }

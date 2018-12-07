@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Agenda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -43,11 +44,42 @@ and open the template in the editor.
                 allDayText: 'Todo el día'
             };
         </script>
-       
+
 
     </h:head>
     <h:body style="box-decoration-break: initial">
         <div> </div>
+        <b:navBar style="border-radius: 15px;font-size: 18px;background:rgba(152,46,46,0.7);background-size: cover; margin-left: 10px; margin-right: 10px;" brandStyle="color:antiquewhite;" brand="Agenda" brandHref="#" fluid="true"> 
+            <b:navbarLinks > 
+                <b:navLink style="color: antiquewhite;" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml">
+
+                </b:navLink> 
+            </b:navbarLinks> 
+            <b:navbarLinks style="background:rgba(152,46,46,0.1)"> 
+                <b:dropMenu style="color: antiquewhite;background:rgba(152,46,46,0.0) " value="Mantenimientos" iconAwesome="paperclip"> 
+                    <b:navLink style="color: #720000;background:rgba(152,46,46,0.0) " value="Tipos Actividades" href="TiposActividades.xhtml">
+
+                    </b:navLink> 
+                </b:dropMenu> 
+            </b:navbarLinks> 
+            <b:navbarLinks style="position: absolute;left: 1220px;font-size: 15px; padding-top: 9px;"> 
+                <h:form>
+                    <p:growl id="message" showDetail="true" /> 
+                    <p:commandButton value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message"> 
+                        <p:confirm header="Confirmación" message="¿Cerrar sesion?"/> 
+                    </p:commandButton> 
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" closeOnEscape="true"> 
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" /> 
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" /> 
+                    </p:confirmDialog>
+                </h:form> 
+            </b:navbarLinks>
+            <b:navbarLinks style="position: absolute;left: 1270px;top: 6px;font-size: 15px;"> 
+                <h:form>
+
+                </h:form> 
+            </b:navbarLinks>
+        </b:navBar>
         <div> </div>
         <div id="incluirPagina"></div> 
         <div id="container">
@@ -90,7 +122,7 @@ and open the template in the editor.
                                 <f:selectItem itemValue="" itemLabel="Escoger Fase:" />
                                 <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
                             </h:selectOneMenu>
-                            
+
                             <p:outputLabel for="usuario" value="Usuario:" />
 
                             <h:selectOneMenu id="usuario"  value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 98%">
@@ -105,37 +137,26 @@ and open the template in the editor.
                 </h:form>
             </div>
             <div id="tabla">
-                <h:form>     
-                    <p:growl id="message" showDetail="true" />
-
-                    <p:commandButton value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message">
-                        <p:confirm header="Confirmación" message="¿Cerrar sesion?"/>
-                    </p:commandButton>
-
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                    </p:confirmDialog>      
-                </h:form>
-                <div> </div>
                 <div> </div>
                 <h:form id="form">
                     <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
-                        <p:column headerText="tipo de actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" >
+                        <p:column headerText="Tipo Actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="Nombre actividad" styleClass="columna" >
+                        <p:column headerText="Nombre Actividad" styleClass="columna" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="fecha" styleClass="columna" filterBy="#{lista.fechaactividad}"  sortBy="#{lista.fechaactividad}" width="70" resizable="true" filterMatchMode="contains">
+                        <p:column headerText="Fecha" styleClass="columna" filterBy="#{lista.fechaactividad}"  sortBy="#{lista.fechaactividad}" resizable="true" filterMatchMode="contains">
                             <h:outputLabel value="#{lista.fechaactividad}">
-                           
                             </h:outputLabel>
                         </p:column>
-                        <p:column headerText="fase" styleClass="columna">
+                        <p:column headerText="Fase" styleClass="columna">
+                            <h:outputText value="#{lista.idfase.estado}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario Asignado" styleClass="columna">
                             <h:outputText value="#{lista.idfase.estado}"></h:outputText>
                         </p:column>
 
