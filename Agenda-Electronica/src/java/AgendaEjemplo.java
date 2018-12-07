@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -102,12 +103,12 @@ private ScheduleModel eventModel;
     private ScheduleModel lazyEventModel;
  
     private ScheduleEvent event = new DefaultScheduleEvent();
- 
+ private final  MantenimientoActividades mttoac = new MantenimientoActividades();
     @PostConstruct
     public void init() {
         
        
-        MantenimientoActividades mttoac = new MantenimientoActividades();
+      
         MantenimientoCronogramas mc = new MantenimientoCronogramas();
         MantenimientoTiposActividades mta = new MantenimientoTiposActividades();
         MantenimientoFases mf = new MantenimientoFases();
@@ -118,10 +119,19 @@ private ScheduleModel eventModel;
         listTA = mta.consultar();
         
         eventModel = new DefaultScheduleModel();
+        List<Actividades> a = mttoac.consultar();
+        Iterator i = a.iterator();
+        while(i.hasNext()){
+           
+            Actividades  actividades= (Actividades) i.next();
+            eventModel.addEvent(new DefaultScheduleEvent(actividades.getNombreactividad(),actividades.getFechaactividad(),actividades.getFechaactividad()));
+            
+        }
         eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+      
         actividades = new Actividades();
         actividades.setIdcronograma(new Cronogramas());
         actividades.setIdtipoactividad(new Tiposactividades());
