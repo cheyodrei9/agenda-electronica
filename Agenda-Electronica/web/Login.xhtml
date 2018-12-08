@@ -90,7 +90,18 @@
                 </h:panelGrid>     
             </p:dialog>
         </h:form>
-        <p:dialog header="Requiere permisos" widgetVar="Acceso negado" modal="true" visible="true">
+        <button id="show" value="#{beanLogin.show}" style="display: none"/>
+        <script>
+            function logged() {
+                var show = $("#show").val();                
+                if (show) {
+                    document.getElementById('advertencia').style.display='block';
+                }else{
+                    document.getElementById('advertencia').style.display='none'
+                }
+            }
+        </script>
+        <p:dialog id="advertencia" header="Requiere permisos" widgetVar="negado" modal="true" >
             <h:graphicImage>
                 <img src="Imagenes/accesodenegado-by-Stormtrooper.png" alt=""/><br/>
                 <h:outputText value="La accion requiere permiso de administracion"/>

@@ -30,6 +30,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -282,6 +283,7 @@ public class AgendaEjemplo implements Serializable {
                 event = new DefaultScheduleEvent();
             }
         } else {
+            BeanLogin beanLogin = new BeanLogin(true);
             FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
         }
     }

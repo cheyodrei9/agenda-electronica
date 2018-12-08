@@ -24,9 +24,14 @@ public class BeanLogin {
 
     private String user;
     private String password;
+    private boolean show = false;
     private static int idusuario;
     private static int niveldemando;
 
+    public BeanLogin(boolean show) {
+        this.show = show;
+    }
+    
     public String getUser() {
         return user;
     }
@@ -35,6 +40,14 @@ public class BeanLogin {
         this.user = user;
     }
 
+    public boolean isShow() {
+        return show;
+    }
+
+    public void setShow(boolean show) {
+        this.show = show;
+    }
+    
     public String getPassword() {
         return password;
     }
@@ -50,7 +63,7 @@ public class BeanLogin {
     public static int getNiveldemando() {
         return niveldemando;
     }
-
+    
     /**
      * Creates a new instance of BeanLogin
      */
@@ -67,6 +80,7 @@ public class BeanLogin {
         if (usuario != null) {
             idusuario = usuario.getIdusuario();
             niveldemando = usuario.getNiveldemando();
+            show = false;
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
             page = "Calendario.xhtml";
