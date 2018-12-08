@@ -283,8 +283,15 @@ public class AgendaEjemplo implements Serializable {
                 event = new DefaultScheduleEvent();
             }
         } else {
-            BeanLogin beanLogin = new BeanLogin(true);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+            if (BeanLogin.getNiveldemando() == 3) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            } else {
+                BeanLogin beanLogin = new BeanLogin(true);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            }
         }
     }
 
