@@ -1,5 +1,9 @@
 .navbar-nav > li > .dropdown-menu {
     background:rgba(152,46,46,0.9);
+    color: antiquewhite;
+}
+.dropdown-menu > li > a {
+    color: antiquewhite;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -8,6 +12,10 @@
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     background-color: rgba(152,46,46,0.3);
     color: antiquewhite;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+     background-color: rgba(152,46,46,0.3);
+     color: antiquewhite;
 }
 
 .opcion{
