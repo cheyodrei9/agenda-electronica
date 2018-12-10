@@ -104,8 +104,8 @@ public class BeanLogin {
         switch (redir) {
             case "TiposActividades":
                 if (niveldemando == 1 || niveldemando == 2 || niveldemando == 3) {
-                    if (niveldemando == 3) {
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
+                    if (niveldemando == 2 || niveldemando == 3) {
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No permitido", "La accion requiere permisos de administración superior");
                         PrimeFaces.current().dialog().showMessageDynamic(message);
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().redirect("TiposActividades.xhtml");
