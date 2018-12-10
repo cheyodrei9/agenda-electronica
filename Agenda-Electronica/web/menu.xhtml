@@ -25,8 +25,7 @@ and open the template in the editor.
                 <b:dropMenu  value="Mantenimientos" iconAwesome="paperclip">
                     <b:navLink  value="Agregar Datos" href="TiposActividades.xhtml"></b:navLink>
                     <h:form>
-                        <p:commandButton value="Agregar Datos" actionListener="#{beanLogin.redirect(TiposActividades)}"></p:commandButton><br/>
-                        <p:commandLink actionListener="#{beanLogin.redirect(TiposActividades)}" style="">Agregar Datos</p:commandLink>
+                        <p:commandLink actionListener="#{beanLogin.redirect('TiposActividades')}" style="">Agregar Datos</p:commandLink>
                     </h:form>
                 </b:dropMenu>
             </b:navbarLinks>

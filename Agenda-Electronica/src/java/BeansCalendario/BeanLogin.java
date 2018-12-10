@@ -102,7 +102,7 @@ public class BeanLogin {
 
     public void redirect(String redir) throws IOException {
         switch (redir) {
-            case "":
+            case "TiposActividades":
                 if (niveldemando == 1 || niveldemando == 2 || niveldemando == 3) {
                     if (niveldemando == 3) {
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
