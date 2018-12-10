@@ -31,7 +31,7 @@ public class BeanLogin {
     public BeanLogin(boolean show) {
         this.show = show;
     }
-    
+
     public String getUser() {
         return user;
     }
@@ -47,7 +47,7 @@ public class BeanLogin {
     public void setShow(boolean show) {
         this.show = show;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -63,7 +63,7 @@ public class BeanLogin {
     public static int getNiveldemando() {
         return niveldemando;
     }
-    
+
     /**
      * Creates a new instance of BeanLogin
      */
@@ -98,5 +98,22 @@ public class BeanLogin {
         BeanLogin.idusuario = 0;
         BeanLogin.niveldemando = 0;
         FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+    }
+
+    public void redirect(String redir) throws IOException {
+        switch (redir) {
+            case "":
+                if (niveldemando == 1 || niveldemando == 2 || niveldemando == 3) {
+                    if (niveldemando == 3) {
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
+                        PrimeFaces.current().dialog().showMessageDynamic(message);
+                    } else {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("TiposActividades.xhtml");
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+                }
+                break;
+        }
     }
 }
