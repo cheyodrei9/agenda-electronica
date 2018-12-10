@@ -9,6 +9,9 @@
     background-color: rgba(152,46,46,0.3);
     color: antiquewhite;
 }
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+     background-color: rgba(152,46,46,0.3);
+}
 
 .opcion{
     background-color: beige;

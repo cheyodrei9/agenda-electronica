@@ -41,7 +41,10 @@ and open the template in the editor.
                         <p:inputText value="#{beanDias.dia.nombredia}"/>
 
                         <p:outputLabel value="Mes"/>
-                        <p:inputText value="#{beanDias.dia.idmes.idmes}"/>
+                        <p:selectOneMenu value="#{beanDias.dia.idmes.idmes}">
+                            <f:selectItem itemValue="" itemLabel="Escoger Mes"/>
+                            <f:selectItems value="#{beanDias.listaMes}" var="lm" itemValue="#{lm.idmes}" itemLabel="#{lm.mes}"/>
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanDias.guardar()}" update=":form"/>
@@ -79,7 +82,10 @@ and open the template in the editor.
                 <p:dialog id="dialog" widgetVar="wdialog2" closeOnEscape="true" resizable="false" header="#{beanMeses.accion}Meses" hideEffect="Fold" showEffect="Fold">
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Calendario:"/>
-                        <p:inputText value="#{beanMeses.meses.idcalendario.idcalendario}"/>
+                        <p:selectOneMenu value="#{beanMeses.meses.idcalendario.idcalendario}">
+                       <f:selectItem itemValue="" itemLabel="Escoger Calendario"/>
+                       <f:selectItems value="#{beanMeses.listaCalendario}" var="lm" itemValue="#{lm.idcalendario}" itemLabel="#{lm.año}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="Mes"/>
                         <p:inputText value="#{beanMeses.meses.mes}"/>
