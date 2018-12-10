@@ -75,23 +75,20 @@ public class BeanLogin {
         Usuarios usuario = manUsuario.iniciarSesion(user, password);
         FacesMessage message = null;
         boolean loggedIn = false;
-        String page = null;
-
+        
         if (usuario != null) {
             idusuario = usuario.getIdusuario();
             niveldemando = usuario.getNiveldemando();
             show = false;
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
-            page = "Calendario.xhtml";
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Calendario.xhtml");
         } else {
             loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña incorrecta");
-            page = "Login.xhtml";
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Credenciales invalidos");
         }
         FacesContext.getCurrentInstance().addMessage(null, message);
-        PrimeFaces.current().ajax().addCallbackParam("loggedin", loggedIn);
-        FacesContext.getCurrentInstance().getExternalContext().redirect(page);
+        PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
     }
 
     public void logoutAgenda() throws IOException {
