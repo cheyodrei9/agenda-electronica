@@ -1,5 +1,9 @@
 .navbar-nav > li > .dropdown-menu {
     background:rgba(152,46,46,0.9);
+    color: antiquewhite;
+}
+.dropdown-menu > li > a {
+    color: antiquewhite;
 }
 
 .navbar-default .navbar-nav > li > a {
