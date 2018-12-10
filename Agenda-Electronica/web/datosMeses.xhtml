@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Meses</title>
+        <link href="EstilosDrop.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <h:form id="form">
+            <p:panel header="Lista Meses">
+                <p:dataTable value="#{beanMeses.listaMeses}" var="M">
+                <p:column headerText="ID">
+                    <p:outputLabel value="#{M.idmes}"/>
+                </p:column>
+
+                <p:column headerText="CALENDARIO">
+                    <p:outputLabel value="#{M.idcalendario.año}"/>
+                </p:column>
+
+                <p:column headerText="MES">
+                    <p:outputLabel value="#{M.mes}"/>
+                </p:column>
+
+
+                <p:column headerText="Acciones">
+                    <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanMeses.modificar(M)}" update=":form"/>
+                    <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanMeses.eliminar(M)}" update=":form"/>
+                </p:column>
+
+          <!--  <p:column headerText="Borrar">
+                   
+                </p:column> -->
+            </p:dataTable>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
