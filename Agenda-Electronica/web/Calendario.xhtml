@@ -61,7 +61,7 @@ and open the template in the editor.
                             <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         </p:schedule>
                     </h:panelGrid>
-                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip" modal="true"><font></font>
+                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="fold" hideEffect="fold" modal="true" closeOnEscape="true"><font></font>
                         <h:panelGrid id="eventDetails" columns="2">
                             <p:outputLabel for="nombreact" value="Nombre Actividad:" />
                             <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true"/>

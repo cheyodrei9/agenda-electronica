@@ -19,7 +19,7 @@ body{
     border-top: 5px double;
     border-bottom: 5px double;
     border-left: 5px double;
-    border-color: beige;
+    border-color: black;
     float: left;
     margin-left: 10px;
 }
@@ -33,7 +33,7 @@ body{
     border-right: 5px double;
     border-top: 5px double;
     border-bottom: 5px double;
-    border-color: beige;
+    border-color: black;
     float: left;
     margin-right: 10px;
 }
@@ -159,7 +159,7 @@ button.fc-agendaWeek-button.ui-button.ui-state-default{
 .ui-widget-content ui-datatable-even {
     width: 20px;
 }
- 
+
 .ui-widget-content ui-datatable-even tabla{
     width: 20px;
 }

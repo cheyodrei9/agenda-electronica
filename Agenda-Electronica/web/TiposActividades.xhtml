@@ -8,28 +8,111 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Tipos Actividades</title>
+        <link href="EstilosDrop.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
+        <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
-        <h:form style="margin: 20px" id="form">
-            <p:panel header="#{beanTiposActividades.accion} Tipos">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel value="ID TIPO ACTIVIDAD:" />
-                    <p:inputText value="#{beanTiposActividades.tip.idtipoactividad}" placeholder="ID"/>
+        <h:form id="form">
+            <p:commandButton value="Agregar tipo de actividad" onclick="PF('wdialog').show();">
+                <p:dialog id="dialog" widgetVar="wdialog" closeOnEscape="true" resizable="false" header="#{beanTiposActividades.accion} Tipos Actividades" hideEffect="Fold" showEffect="Fold">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="TIPOS ACTIVIDADES:" />
+                        <p:inputText value="#{beanTiposActividades.tip.tipoactividad}" placeholder="Tipo Actividad"/>
+                        <f:facet name="footer">
+                            <p:commandButton value="Guardar" actionListener="#{beanTiposActividades.guardar()}" update=":form"/>
+                        </f:facet>
+                    </h:panelGrid>           
+                </p:dialog> 
+            </p:commandButton>   
+        </h:form>
 
-                    <p:outputLabel value="TIPOS ACTIVIDADES:" />
-                    <p:inputText value="#{beanTiposActividades.tip.tipoactividad}" placeholder="Tipo Actividad"/>
+        <div>  </div>
 
+        <h:form id="farm">
+            <p:commandButton value="Agregar Dia" onclick="PF('wdialog1').show();">
+                <p:dialog id="dialog" widgetVar="wdialog1" closeOnEscape="true" resizable="false" header="#{beanDias.accion}Dia" hideEffect="Fold" showEffect="Fold">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nombre De Dia:"/>
+                        <p:inputText value="#{beanDias.dia.nombredia}"/>
 
-
+                        <p:outputLabel value="Mes"/>
+                        <p:inputText value="#{beanDias.dia.idmes.idmes}"/>
+                    </h:panelGrid>
                     <f:facet name="footer">
-                        <p:commandButton value="Guardar" actionListener="#{beanTiposActividades.guardar()}" update=":form"/>
+                        <p:commandButton value="Guardar" actionListener="#{beanDias.guardar()}" update=":form"/>
                     </f:facet>
-                </h:panelGrid>           
-            </p:panel>    
+                    <div> </div>
+                    <p:dataTable value="#{beanDias.listaDias}" var="C">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{C.iddia}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{C.nombredia}"/>
+                        </p:column>
+
+                        <p:column headerText="Mes">
+                            <p:outputLabel value="#{C.idmes.mes}"/>
+                        </p:column>
+
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanDias.modificar(C)}" update=":form"/>
+                        </p:column>
+
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanDias.eliminar(C)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog> 
+            </p:commandButton>
+        </h:form>
+
+        <div>  </div>
+
+        <h:form id="ferm">
+            <p:commandButton value="Agregar Mes" onclick="PF('wdialog2').show();">
+                <p:dialog id="dialog" widgetVar="wdialog2" closeOnEscape="true" resizable="false" header="#{beanMeses.accion}Meses" hideEffect="Fold" showEffect="Fold">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Calendario:"/>
+                        <p:inputText value="#{beanMeses.meses.idcalendario.idcalendario}"/>
+
+                        <p:outputLabel value="Mes"/>
+                        <p:inputText value="#{beanMeses.meses.mes}"/>
+
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanMeses.guardar()}" update=":form"/>
+                    </f:facet>
+                    <div> </div>
+                    <p:dataTable value="#{beanMeses.listaMeses}" var="M">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{M.idmes}"/>
+                        </p:column>
+
+                        <p:column headerText="CALENDARIO">
+                            <p:outputLabel value="#{M.idcalendario.año}"/>
+                        </p:column>
+
+                        <p:column headerText="MES">
+                            <p:outputLabel value="#{M.mes}"/>
+                        </p:column>
+
+
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanMeses.modificar(M)}" update=":form"/>
+                        </p:column>
+
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanMeses.eliminar(M)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog>
+            </p:commandButton>
         </h:form>
     </h:body>
 </html>
