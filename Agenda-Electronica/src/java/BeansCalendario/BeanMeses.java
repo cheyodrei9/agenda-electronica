@@ -99,7 +99,6 @@ public class BeanMeses {
      public void guardar(){
          MantenimientoMeses mmeses= new MantenimientoMeses();
          mmeses.Guardar(meses);
-         meses=new Meses();
      }
      
      public void eliminar(Meses meses){

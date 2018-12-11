@@ -99,7 +99,6 @@ public class BeanDias {
     public void guardar() {
         MantenimientoDias Mdias = new MantenimientoDias();
         Mdias.guardar(Dia);
-        Dia = new Dias();
     }
 
     public void eliminar(Dias dia) {
