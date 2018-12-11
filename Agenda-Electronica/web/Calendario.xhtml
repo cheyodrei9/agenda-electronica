@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -61,42 +56,40 @@ and open the template in the editor.
                             <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         </p:schedule>
                     </h:panelGrid>
-                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="fold" hideEffect="fold" modal="true" closeOnEscape="true"><font></font>
+                    <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="fold" hideEffect="fold" modal="true" closeOnEscape="true" resizable="false"><font></font>
                         <h:panelGrid id="eventDetails" columns="2">
                             <p:outputLabel for="nombreact" value="Nombre Actividad:" />
                             <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true"/>
 
+                            <p:outputLabel for="from" value="Fecha Actividad:" />
+                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="UTC-6" pattern="yyyy/MM/dd "/>
+
                             <p:outputLabel for="tipoa" value="Tipo Actividad:" />
 
-                            <h:selectOneMenu id="tipoa"  value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" style="width: 98%">
+                            <p:selectOneMenu id="tipoa"  value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" style="width: 97%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Tipo Actividad:" />
                                 <f:selectItems value="#{beansActividades.listTA}" var="ta" itemLabel="#{ta.tipoactividad}" itemValue="#{ta.idtipoactividad}" />
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
 
                             <p:outputLabel for="cronograma" value="Cronograma:" />
 
-                            <h:selectOneMenu id="cronograma"  value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" style="width: 98%">
+                            <p:selectOneMenu id="cronograma"  value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" style="width: 97%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Cronograma:" />
                                 <f:selectItems value="#{beansActividades.listCr}" var="cr" itemLabel="#{cr.nombre}" itemValue="#{cr.idcronograma}" />
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="fase" value="Fase:" />
 
-
-                            <p:outputLabel for="from" value="fecha de actividad:" />
-                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="UTC-6" pattern="yyyy/MM/dd "/>
-
-                            <p:outputLabel for="fase" value="fase:" />
-
-                            <h:selectOneMenu id="fase"  value="#{agendaEjemplo.actividades.idfase.idfase}" style="width: 98%">
+                            <p:selectOneMenu id="fase"  value="#{agendaEjemplo.actividades.idfase.idfase}" style="width: 97%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Fase:" />
                                 <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
 
                             <p:outputLabel for="usuario" value="Usuario:" />
 
-                            <h:selectOneMenu id="usuario"  value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 98%">
+                            <p:selectOneMenu id="usuario"  value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 97%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Usuario:" />
                                 <f:selectItems value="#{beansActividades.listU}" var="u" itemLabel="#{u.nombres}" itemValue="#{u.idusuario}" />
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
                             <p:commandButton id="addButton" value="Guardar" actionListener="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Table" />

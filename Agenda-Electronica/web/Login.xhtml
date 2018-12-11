@@ -30,10 +30,10 @@
                 <img src="Imagenes/registro.png" alt="" style="width: 15%" onclick="PF('dlg2').show();"/>
                 <p:growl id="gruwl" sticky="true" showDetail="true" life="3000" />
             </div>
-            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true">
+            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true" width="400px">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="Username" value="Usuario o Correo:" />
-                    <p:inputText id="username" value="#{beanLogin.user}" required="true" label="username" />
+                    <p:inputText id="username" value="#{beanLogin.user}" required="true" label="username"/>
 
                     <h:outputLabel for="Password" value="Contraseña" />
                     <p:password id="password" value="#{beanLogin.password}" required="true" label="password" />
