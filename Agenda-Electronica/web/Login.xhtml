@@ -52,7 +52,7 @@
                     <p:outputLabel value="Tipo de usuario:" />
                     <p:selectOneMenu value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" class="ancho">
                         <f:selectItem itemValue="" itemLabel="Escoger Tipo de Usuario:" />
-                        <f:selectItems value="#{beanTiposUsuarios.listaTu}" var="listaTu" itemLabel="#{listaTu.tipo}" itemValue="#{listaTu.idtipousuario}" />
+                        <f:selectItems value="#{beanTiposUsuarios.listaTu}" var="listaTu" itemLabel="#{listaTu.tipo}" itemValue="#{listaTu.idtipousuario}" rendered="#{listaTu.idtipousuario == 3}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Nombre:" />
@@ -90,18 +90,7 @@
                 </h:panelGrid>     
             </p:dialog>
         </h:form>
-        <button id="show" value="#{beanLogin.show}" style="display: none"/>
-        <script>
-            function logged() {
-                var show = $("#show").val();                
-                if (show) {
-                    document.getElementById('advertencia').style.display='block';
-                }else{
-                    document.getElementById('advertencia').style.display='none'
-                }
-            }
-        </script>
-        <p:dialog id="advertencia" header="Requiere permisos" widgetVar="negado" modal="true" >
+        <p:dialog id="advertencia" header="Requiere permisos" widgetVar="negado" modal="true" visible="true" rendered="#{beanLogin.show}">
             <h:graphicImage>
                 <img src="Imagenes/accesodenegado-by-Stormtrooper.png" alt=""/><br/>
                 <h:outputText value="La accion requiere permiso de administracion"/>

@@ -27,6 +27,7 @@ public class BeanLogin {
     private boolean show = false;
     private static int idusuario;
     private static int niveldemando;
+    private int acceso;
 
     public BeanLogin(boolean show) {
         this.show = show;
@@ -62,6 +63,15 @@ public class BeanLogin {
 
     public static int getNiveldemando() {
         return niveldemando;
+    }
+
+    public int getAcceso() {
+        acceso = niveldemando;
+        return acceso;
+    }
+
+    public void setAcceso(int acceso) {
+        this.acceso = acceso;
     }
 
     /**
