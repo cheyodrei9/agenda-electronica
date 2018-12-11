@@ -12,36 +12,38 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Tabla Fases</title>
-        <link href="EstilosDrop.css" rel="stylesheet" type="text/css"/>
+        <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
-        <h:form id="form">
-            <p:panel header="Lista Fases">
+        <div class="fases">
+            <h:form id="form">
+                <p:panel header="Lista Fases">
                     <p:dataTable value="#{beanFases.listaFase}" var="C">
                         <p:column headerText="ID">
                             <p:outputLabel value="#{C.idfase}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Tipo De Fase">
                             <p:outputLabel value="#{C.idtipofase.tipofase}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Estado">
                             <p:outputLabel value="#{C.estado}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Fecha">
                             <p:outputLabel value="#{C.fecha}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Acciones">
                             <p:commandButton value="Editar" actionListener="#{beanFases.modificar(C)}" update=":form"/>
                             <p:commandButton value="Borrar" actionListener="#{beanFases.eliminar(C)}" update=":form"/>
                         </p:column>
                     </p:dataTable>
                 </p:panel>
-        </h:form>
+            </h:form>
+        </div>
     </h:body>
 </html>
