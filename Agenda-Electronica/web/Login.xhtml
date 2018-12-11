@@ -30,7 +30,7 @@
                 <img src="Imagenes/registro.png" alt="" style="width: 15%" onclick="PF('dlg2').show();"/>
                 <p:growl id="gruwl" sticky="true" showDetail="true" life="3000" />
             </div>
-            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true" width="400px">
+            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true" width="400px" showEffect="fold" hideEffect="fold" closeOnEscape="true">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="Username" value="Usuario o Correo:" />
                     <p:inputText id="username" value="#{beanLogin.user}" required="true" label="username"/>
@@ -47,12 +47,11 @@
         </h:form>
         <div id="incluirPagina"/>
         <h:form style="margin: 20px" id="form">
-            <p:dialog header="#{beanUsuario.accion} Usuario" widgetVar="dlg2" modal="true" class="altura">
+            <p:dialog header="#{beanUsuario.accion} Usuario" widgetVar="dlg2" modal="true" class="altura" hideEffect="fold" showEffect="fold" closeOnEscape="true" resizable="false">
                 <h:panelGrid columns="2" cellpadding="5">
                     <p:outputLabel value="Tipo de usuario:" />
                     <p:selectOneMenu value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" class="ancho">
-                        <f:selectItem itemValue="" itemLabel="Escoger Tipo de Usuario:" />
-                        <f:selectItems value="#{beanTiposUsuarios.listaTu}" var="listaTu" itemLabel="#{listaTu.tipo}" itemValue="#{listaTu.idtipousuario}" rendered="#{listaTu.idtipousuario == 3}"/>
+                        <f:selectItem itemValue="3" itemLabel="Usuario" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Nombre:" />
@@ -79,7 +78,9 @@
                     <p:password  value="#{beanUsuario.usuario.contra}" placeholder="se colocará en incógnito" class="ancho"/>
 
                     <p:outputLabel value="Nivel de Mando:" />
-                    <p:inputText  value="#{beanUsuario.usuario.niveldemando}" placeholder="Escriba el nivel de mando" class="ancho"/>
+                    <p:selectOneMenu value="#{beanUsuario.usuario.niveldemando}" class="ancho">
+                        <f:selectItem itemValue="3" itemLabel="3" />
+                    </p:selectOneMenu>
 
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" action="#{beanUsuario.guardar()}" update=":form" >

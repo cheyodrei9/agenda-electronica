@@ -33,7 +33,7 @@ and open the template in the editor.
                         </p:column>
 
 
-                        <p:column headerText="Acciones">
+                        <p:column headerText="Acciones" rendered="#{beanLogin.acceso == 1}">
                             <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanMeses.modificar(M)}" update=":form"/>
                             <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanMeses.eliminar(M)}" update=":form"/>
                         </p:column>

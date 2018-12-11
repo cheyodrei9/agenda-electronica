@@ -94,7 +94,6 @@ public class BeanUsuario {
         System.out.println("este es el objeto lleno" + usuario);
         MantenimientoUsusario Us = new MantenimientoUsusario();
         Us.insertar(usuario);
-        usuario= new Usuarios();
     }
 
 }

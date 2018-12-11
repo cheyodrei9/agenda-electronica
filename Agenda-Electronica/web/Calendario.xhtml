@@ -101,12 +101,6 @@
                 <div> </div>
                 <h:form id="form">
                     <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
-                        <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
-                            <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
-                        </p:column>
-                        <p:column headerText="Tipo Actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
-                            <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
-                        </p:column>
                         <p:column headerText="Nombre Actividad" styleClass="columna" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
@@ -114,11 +108,17 @@
                             <h:outputLabel value="#{lista.fechaactividad}">
                             </h:outputLabel>
                         </p:column>
+                        <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
+                            <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Tipo Actividad"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
+                            <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario Asignado" styleClass="columna" filterBy="#{lista.idusuario.nombres}" filterMatchMode="contains">
+                            <h:outputText value="#{lista.idusuario.nombres}"></h:outputText>
+                        </p:column>
                         <p:column headerText="Fase" styleClass="columna">
                             <h:outputText value="#{lista.idfase.estado}"></h:outputText>
-                        </p:column>
-                        <p:column headerText="Usuario Asignado" styleClass="columna">
-                            <h:outputText value="#{lista.idusuario.nombres}"></h:outputText>
                         </p:column>
 
 
