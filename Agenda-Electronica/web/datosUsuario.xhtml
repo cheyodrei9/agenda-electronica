@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tabla Usuario</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <link href="EstilosDrop.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <h:form id="form">
+            <p:panel header="Lista Usuarios">
+                <p:dataTable value="#{beanUsuario.listaU}" var="U">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{U.idusuario}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Tipo Usuario">
+                        <p:outputLabel value="#{U.idtipousuario.tipo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Nombre">
+                        <p:outputLabel value="#{U.nombres}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Apellido">
+                        <p:outputLabel value="#{U.apellidos}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Genero">
+                        <p:outputLabel value="#{U.genero}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Telefono">
+                        <p:outputLabel value="#{U.telefono}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Correo">
+                        <p:outputLabel value="#{U.correo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Contraseña">
+                        <p:outputLabel value="#{U.contra}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Nivel de Mando">
+                        <p:outputLabel value="#{U.niveldemando}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Acciones">
+                        <p:commandButton value="No esta la accion definida" actionListener="#{beanUsuario.guardar()}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
