@@ -29,7 +29,14 @@ and open the template in the editor.
                     </p:column>
                     <p:column>
                         <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanTiposActividades.modificar(T)}" update=":form"/>
-                        <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanTiposActividades.eliminar(T)}" update=":form"/>
+                        <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanTiposActividades.eliminar(T)}" update=":form">
+                                <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>
                     </p:column>
                 </p:dataTable>
             </h:form>
