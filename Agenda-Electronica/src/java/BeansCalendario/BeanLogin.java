@@ -23,6 +23,7 @@ import org.primefaces.PrimeFaces;
 public class BeanLogin {
 
     private String user;
+    private String username;
     private String password;
     private boolean show = false;
     private static int idusuario;
@@ -39,6 +40,14 @@ public class BeanLogin {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean isShow() {
@@ -88,6 +97,7 @@ public class BeanLogin {
         
         if (usuario != null) {
             idusuario = usuario.getIdusuario();
+            username = usuario.getNombres();
             niveldemando = usuario.getNiveldemando();
             show = false;
             loggedIn = true;
