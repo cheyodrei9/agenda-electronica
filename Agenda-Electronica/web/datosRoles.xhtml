@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Roles</title>
+        <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <div class="rol">
+            <h:form id="form">
+                <p:panel header="Lista de Roles">
+                    <p:dataTable value="#{beanRoles.listaRoles}" var="R">
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{R.idrol}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Tipo de Usuario">
+                            <p:outputLabel value="#{R.idtipousuario.tipo}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Rol">
+                            <p:outputLabel value="#{R.rol}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Acciones" rendered="#{beanLogin.acceso == 1 or beanLogin.acceso == 2}">
+                            <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanRoles.buscarId(R)}" update=":form"/>
+                            <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanRoles.eliminar(R)}" update=":form"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>

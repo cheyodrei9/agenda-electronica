@@ -71,4 +71,24 @@ public class BeanTiposActividades {
         MantenimientoTiposActividades tipos = new MantenimientoTiposActividades();
         tipos.Guardar(tip);
     }
+    
+    public void eliminar(Tiposactividades tip){
+        MantenimientoTiposActividades tipos = new MantenimientoTiposActividades();
+        tipos.eliminar(tip);
+        listTA = tipos.consultar();
+    }
+    
+    public void modificar(Tiposactividades tip){
+        MantenimientoTiposActividades tipos = new MantenimientoTiposActividades();
+        tip = tipos.consultarid(tip.getIdtipoactividad());
+        
+        String mensaje = "";
+        if(tip!=null){
+            this.tip = tip;
+            mensaje= "exito en la busqueda";
+        } else {
+            mensaje = "error en la busqueda por id";
+        }
+        System.out.println(mensaje);
+    }
 }
