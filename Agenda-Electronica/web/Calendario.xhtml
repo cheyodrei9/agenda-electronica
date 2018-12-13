@@ -66,30 +66,29 @@
 
                             <p:outputLabel for="tipoa" value="Tipo Actividad:" />
 
-                            <p:selectOneMenu id="tipoa"  value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" style="width: 97%" effect="fold">
+                            <p:selectOneMenu id="tipoa"  value="#{agendaEjemplo.actividades.idtipoactividad.idtipoactividad}" style="width: 105%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Tipo Actividad:" />
                                 <f:selectItems value="#{beansActividades.listTA}" var="ta" itemLabel="#{ta.tipoactividad}" itemValue="#{ta.idtipoactividad}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel for="cronograma" value="Cronograma:" />
 
-                            <p:selectOneMenu id="cronograma"  value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" style="width: 97%" effect="fold">
+                            <p:selectOneMenu id="cronograma"  value="#{agendaEjemplo.actividades.idcronograma.idcronograma}" style="width: 105%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Cronograma:" />
                                 <f:selectItems value="#{beansActividades.listCr}" var="cr" itemLabel="#{cr.nombre}" itemValue="#{cr.idcronograma}" />
                             </p:selectOneMenu>
                             <p:outputLabel for="fase" value="Fase:" />
 
-                            <p:selectOneMenu id="fase"  value="#{agendaEjemplo.actividades.idfase.idfase}" style="width: 97%" effect="fold">
+                            <p:selectOneMenu id="fase" value="#{agendaEjemplo.actividades.idfase.idfase}" style="width: 105%" effect="fold">
                                 <f:selectItem itemValue="" itemLabel="Escoger Fase:" />
                                 <f:selectItems value="#{beansActividades.listF}" var="f" itemLabel="#{f.estado}" itemValue="#{f.idfase}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel for="usuario" value="Usuario:" />
 
-                            <p:selectOneMenu id="usuario"  value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 97%" effect="fold">
-                                <f:selectItem itemValue="" itemLabel="Escoger Usuario:" />
+                            <p:selectCheckboxMenu filter="true" id="usuario" value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 105%;" multiple="true">
                                 <f:selectItems value="#{beansActividades.listU}" var="u" itemLabel="#{u.nombres}" itemValue="#{u.idusuario}" />
-                            </p:selectOneMenu>
+                            </p:selectCheckboxMenu>
 
                             <p:commandButton type="reset" value="Limpiar Campos" />
                             <p:commandButton id="addButton" value="Guardar" actionListener="#{agendaEjemplo.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update=":form:Table" />

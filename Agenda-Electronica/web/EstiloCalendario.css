@@ -8,7 +8,10 @@ body{
 #container{
     display: flex; 
 }
-
+.ui-outputlabel .ui-outputlabel-rfi {/*asterisco*/
+    margin-left: .4em;
+    display: none;
+}
 #calendario{
     /*background-image: url(Imagenes/fondo.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
