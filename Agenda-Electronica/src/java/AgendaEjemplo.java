@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -55,6 +56,7 @@ public class AgendaEjemplo implements Serializable {
     private List<Cronogramas> listCr = new ArrayList();
     private List<Fases> listF = new ArrayList();
     private List<Usuarios> listU = new ArrayList();
+    private Integer[] listaUser;
 
     public Actividades getActividades() {
         return actividades;
@@ -103,6 +105,16 @@ public class AgendaEjemplo implements Serializable {
     public void setListU(List<Usuarios> listU) {
         this.listU = listU;
     }
+
+    public Integer[] getListaUser() {
+        return listaUser;
+    }
+
+    public void setListaUser(Integer[] listaUser) {
+        this.listaUser = listaUser;
+    }
+
+    
 
     private ScheduleModel lazyEventModel;
 
@@ -264,6 +276,13 @@ public class AgendaEjemplo implements Serializable {
 
     public void addEvent() throws IOException {
         if (BeanLogin.getNiveldemando() == 1 || BeanLogin.getNiveldemando() == 2) {
+                for (int i = 0; i < listaUser.length; i++) {
+                    for (Integer in : listaUser) {
+                        
+                actividades.setIdusuario(new Usuarios(in));
+                        System.out.println(in);
+                    }
+                }
             if (event.getId() == null) {
                 eventModel.addEvent(event);
                 actividades.setNombreactividad(event.getTitle());
@@ -276,6 +295,8 @@ public class AgendaEjemplo implements Serializable {
                 actividades.setIdusuario(new Usuarios());
 
                 lista = mact.consultar();
+                
+                
 
             } else {
                 eventModel.updateEvent(event);

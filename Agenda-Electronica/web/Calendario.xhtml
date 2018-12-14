@@ -86,7 +86,7 @@
 
                             <p:outputLabel for="usuario" value="Usuario:" />
 
-                            <p:selectCheckboxMenu filter="true" id="usuario" value="#{agendaEjemplo.actividades.idusuario.idusuario}" style="width: 105%;" multiple="true">
+                            <p:selectCheckboxMenu filter="true" id="usuario" value="#{agendaEjemplo.listaUser}" style="width: 105%;" multiple="true">
                                 <f:selectItems value="#{beansActividades.listU}" var="u" itemLabel="#{u.nombres}" itemValue="#{u.idusuario}" />
                             </p:selectCheckboxMenu>
 
