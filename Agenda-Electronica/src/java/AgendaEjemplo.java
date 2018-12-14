@@ -114,8 +114,6 @@ public class AgendaEjemplo implements Serializable {
         this.listaUser = listaUser;
     }
 
-    
-
     private ScheduleModel lazyEventModel;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
@@ -276,27 +274,27 @@ public class AgendaEjemplo implements Serializable {
 
     public void addEvent() throws IOException {
         if (BeanLogin.getNiveldemando() == 1 || BeanLogin.getNiveldemando() == 2) {
-                for (int i = 0; i < listaUser.length; i++) {
+            if (event.getId() == null) {
+                for (int i = 0; i < 1; i++) {
                     for (Integer in : listaUser) {
-                        
-                actividades.setIdusuario(new Usuarios(in));
+
+                        eventModel.addEvent(event);
+                        actividades.setNombreactividad(event.getTitle());
+                        actividades.setFechaactividad(event.getStartDate());
+                        actividades.setIdusuario(new Usuarios(in));
+                        MantenimientoActividades mact = new MantenimientoActividades();
+                        mact.guardar(actividades);
                         System.out.println(in);
                     }
                 }
-            if (event.getId() == null) {
-                eventModel.addEvent(event);
-                actividades.setNombreactividad(event.getTitle());
-                actividades.setFechaactividad(event.getStartDate());
-                MantenimientoActividades mact = new MantenimientoActividades();
-                mact.guardar(actividades);
                 actividades.setIdcronograma(new Cronogramas());
                 actividades.setIdtipoactividad(new Tiposactividades());
                 actividades.setIdfase(new Fases());
                 actividades.setIdusuario(new Usuarios());
 
+                MantenimientoActividades mact = new MantenimientoActividades();
+
                 lista = mact.consultar();
-                
-                
 
             } else {
                 eventModel.updateEvent(event);
