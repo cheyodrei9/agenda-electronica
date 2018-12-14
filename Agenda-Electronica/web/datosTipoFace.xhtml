@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Tipos de Faces</title>
+        <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <div class="tipoFac">
+            <h:form id="form">
+                <p:panel header="Lista de Tipos de Faces">
+                    <p:dataTable value="#{beanTipoFases.listaTipoFases}" var="tf">
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{tf.idtipofase}"/>
+                        </p:column>
+                        
+                        <p:column headerText="tipo de Face">
+                            <p:outputLabel value="#{tf.tipofase}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Acciones" >
+                            <p:commandButton value="botones invaidos"/>
+                            <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanTipoFases.Editar(tf)}" update=":form"/>
+                            <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanTipoFases.borrar(tf)}" update=":form"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>

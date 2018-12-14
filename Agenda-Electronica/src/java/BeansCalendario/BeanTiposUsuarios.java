@@ -50,4 +50,15 @@ public class BeanTiposUsuarios {
         this.Accion = Accion;
     }
     
+    public void guardar(){
+        MantenimientoTipoUsuario tuser = new MantenimientoTipoUsuario();
+        tuser.Guardar(TU);
+    }
+    
+    public void eliminar (Tiposusuarios TU){
+        MantenimientoTipoUsuario tuser = new MantenimientoTipoUsuario();
+        tuser.eliminar(TU);
+        listaTu = tuser.consultar();
+    }
+    
 }

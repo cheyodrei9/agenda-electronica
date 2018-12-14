@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>tipos de Usuario</title>
+        <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <div class="tipoUser">
+            <h:form id="form">
+                <p:panel header="lista de Tipos de Usuarios">
+                    <p:dataTable value="#{beanTiposUsuarios.listaTu}" var="user">
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{user.idtipousuario}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Tipo de usuario">
+                            <p:outputLabel value="#{user.tipo}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Acciones" >
+                            <p:commandButton value="Botones invalidos"/>
+                            <p:commandButton value="Editar" actionListener="#{beanTiposUsuarios.guardar()}" update=":form"/>
+                            <p:commandButton value="Borrar" actionListener="#{beanTiposUsuarios.eliminar(user)}" update=":form"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>
