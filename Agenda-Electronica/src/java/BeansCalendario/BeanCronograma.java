@@ -28,6 +28,7 @@ public class BeanCronograma {
     private MantenimientoCronogramas Mcrono;
     private Cronogramas Crono;
     private String accion;
+    private int idchrono;
 
     public List<Cronogramas> getListaCrono() {
         return ListaCrono;
@@ -116,11 +117,11 @@ public class BeanCronograma {
 
         }
     }
-    
+
     public void modificar(Cronogramas crono) {
         MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
-        crono=mCrono.consultarid(crono.getIdcronograma());
-
+        crono = mCrono.consultarid(crono.getIdcronograma());
+        System.out.println("act" + Crono.getIdcronograma());
         String advertencia = "";
         if (crono != null) {
             this.Crono = crono;
@@ -129,19 +130,14 @@ public class BeanCronograma {
             advertencia = "Consulta no realizada";
         }
     }
+
     public void actualizar() {
         MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
+        System.out.println("act" + Crono.getIdcronograma());
         mCrono.Actualizar(Crono);
-        ListaCrono = mCrono.consultar();
-        String advertencia = "";
         
-        ListaCrono=mCrono.consultar();
-
-        if (mCrono.Actualizar(Crono) == 1) {
-            advertencia = "Actualizado correctamente";
-        } else {
-            advertencia = "No se ha actualizado";
-        }
+//private void Actualizar(){
+//    Mcrono.Actualizar(this.Crono);
+//}    
     }
-
 }

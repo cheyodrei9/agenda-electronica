@@ -17,6 +17,8 @@ and open the template in the editor.
             <h:form id="form">
                 <p:panel header="#{beanCronograma.accion}Cronograma">
                     <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="ID Chronogrma:"/>
+                        <p:inputText value="#{beanCronograma.crono.idcronograma}"/>
                         <p:outputLabel value="Nombre:"/>
                         <p:inputText value="#{beanCronograma.crono.nombre}"/>
                         
@@ -28,6 +30,7 @@ and open the template in the editor.
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanCronograma.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanCronograma.actualizar()}"  ajax="false" update=":form"/>
                     </f:facet>
                 </p:panel>
                 <p:panel header="Lista Cronograma">

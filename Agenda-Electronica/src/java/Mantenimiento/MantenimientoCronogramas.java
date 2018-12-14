@@ -71,24 +71,25 @@ public class MantenimientoCronogramas {
     }
 
     public int Actualizar(Cronogramas cronogramas) {
+        System.out.println("Entro en mantenimiento ");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Cronogramas crono = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
+            System.out.println("id" + cronogramas.getIdcronograma());
             crono = em.find(Cronogramas.class, cronogramas.getIdcronograma());
             crono.setIdcronograma(cronogramas.getIdcronograma());
             crono.setNombre(cronogramas.getNombre());
             crono.setDescripcion(cronogramas.getDescripcion());
             crono.setIdusuario(cronogramas.getIdusuario());
-
             em.getTransaction().commit();
             flag = 1;
             System.out.println("exitoso");
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("error" + e);
+            System.out.println("Error en mantenimiento cronogrma, Actualizar: " + e);
         } finally {
             em.close();
         }
@@ -109,7 +110,7 @@ public class MantenimientoCronogramas {
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("error eliminar "+e);
+            System.out.println("error eliminar " + e);
         } finally {
             em.close();
         }

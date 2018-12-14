@@ -144,5 +144,5 @@ public class Cronogramas implements Serializable {
     public String toString() {
         return "Persistencia.Cronogramas[ idcronograma=" + idcronograma + " ]";
     }
-    
+
 }
