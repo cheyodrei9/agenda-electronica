@@ -5,6 +5,7 @@
  */
 package Mantenimiento;
 
+import BeansCalendario.BeanLogin;
 import Persistencia.Actividades;
 import Persistencia.Cronogramas;
 import Persistencia.Fases;
@@ -62,8 +63,13 @@ public class MantenimientoActividades {
         List<Actividades> listaA = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
+        Query query;
         try {
-            Query query = em.createQuery("SELECT a FROM Actividades a");
+            if (BeanLogin.getNiveldemando() == 3) {
+                query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario ="+BeanLogin.getIdusuario());
+            } else {
+                query = em.createQuery("SELECT a FROM Actividades a");
+            }
             em.getTransaction().commit();
             listaA = query.getResultList();
             System.out.println(listaA + "si");
