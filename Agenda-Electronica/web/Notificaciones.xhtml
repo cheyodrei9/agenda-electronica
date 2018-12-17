@@ -17,6 +17,10 @@ and open the template in the editor.
             <h:form id="form">
                 <p:panel header="#{beanNotificaciones.accion}Notificaciones">
                     <h:panelGrid columns="2" cellpadding="5">
+                        
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{beanNotificaciones.notificaciones.idnotificacion}"/>
+                        
                         <p:outputLabel value="Usuario:"/>
                         <p:inputText value="#{beanNotificaciones.notificaciones.idusuario.idusuario}"/>
                         
@@ -25,9 +29,11 @@ and open the template in the editor.
                         
                         <p:outputLabel value="Rango"/>
                         <p:inputText value="#{beanNotificaciones.notificaciones.rango}"/>
+                        
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanNotificaciones.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanNotificaciones.Actualizar}" update=":form"/>
                     </f:facet>
                 </p:panel>
                 <p:panel header="Lista Notificaciones">

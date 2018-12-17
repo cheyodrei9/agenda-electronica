@@ -22,6 +22,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanMeses {
+
     private List<Meses> ListaMeses = new ArrayList();
     private List<Calendarios> ListaCalendario = new ArrayList();
     private MantenimientoMeses MMes;
@@ -67,76 +68,68 @@ public class BeanMeses {
     public void setMeses(Meses meses) {
         this.meses = meses;
     }
-    
-    
+
     @PostConstruct
-    public void init(){
-        meses= new Meses();
+    public void init() {
+        meses = new Meses();
         meses.setIdcalendario(new Calendarios());
         MantenimientoMeses mes = new MantenimientoMeses();
         MantenimientoCalendarios cal = new MantenimientoCalendarios();
-        ListaMeses=mes.consultar();
-        ListaCalendario=cal.consultar();
-            
-        }
-     public void LimpiarFormulario(){
-         this.ListaMeses=MMes.consultar();
-         this.meses=new Meses();
-         meses.setIdcalendario(new Calendarios());
-         this.meses.setIdmes(0);
-         accion="Registrar";
+        ListaMeses = mes.consultar();
+        ListaCalendario = cal.consultar();
+
     }
-     
-     public void AccionFormulario(){
-         if(accion.equals("Registrar")){
-             MMes.Guardar(this.meses);
-         }else if(accion.equals("Editar")){
-             MMes.actualizar(this.meses);
-         }
-         LimpiarFormulario();
-     }
-     
-     public void guardar(){
-         MantenimientoMeses mmeses= new MantenimientoMeses();
-         mmeses.Guardar(meses);
-     }
-     
-     public void eliminar(Meses meses){
-         MantenimientoMeses mmes=new MantenimientoMeses();
-         mmes.eliminar(meses);
-         ListaMeses=mmes.consultar();
-         String advertencia="";
-         
-         if(mmes.eliminar(meses)==1){
-             advertencia="se ha eliminado correctamente";
-         }else{
-             advertencia="no se ha podido eliminar";
-         }
-     }
-     
-     public void modificar(Meses meses){
-         MantenimientoMeses mmes = new MantenimientoMeses();
-         meses=mmes.consultarid(meses.getIdmes());
-         
-         String advertencia="";
-         if(meses !=null){
-             this.meses=meses;
-             advertencia="Datos consultados corectamente";
-         }else{
-             advertencia="consulta no realizada";
-         }
-     }
-     
-     public void Actualizar(){
-         MantenimientoMeses mmes = new MantenimientoMeses();
-         mmes.actualizar(meses);
-         ListaMeses=mmes.consultar();
-         String advertencia="";
-         
-         if(mmes.actualizar(meses)==1){
-             advertencia="actualizado correctamente";
-         }else{
-             advertencia="no se ha actualizado";
-         }
-     }
+
+    public void LimpiarFormulario() {
+        this.ListaMeses = MMes.consultar();
+        this.meses = new Meses();
+        meses.setIdcalendario(new Calendarios());
+        this.meses.setIdmes(0);
+        accion = "Registrar";
+    }
+
+    public void AccionFormulario() {
+        if (accion.equals("Registrar")) {
+            MMes.Guardar(this.meses);
+        } else if (accion.equals("Editar")) {
+            MMes.Actualizar(this.meses);
+        }
+        LimpiarFormulario();
+    }
+
+    public void guardar() {
+        MantenimientoMeses mmeses = new MantenimientoMeses();
+        mmeses.Guardar(meses);
+    }
+
+    public void eliminar(Meses meses) {
+        MantenimientoMeses mmes = new MantenimientoMeses();
+        mmes.eliminar(meses);
+        ListaMeses = mmes.consultar();
+        String advertencia = "";
+
+        if (mmes.eliminar(meses) == 1) {
+            advertencia = "se ha eliminado correctamente";
+        } else {
+            advertencia = "no se ha podido eliminar";
+        }
+    }
+
+    public void modificar(Meses meses) {
+        MantenimientoMeses mmes = new MantenimientoMeses();
+        meses = mmes.consultarid(meses.getIdmes());
+
+        String advertencia = "";
+        if (meses != null) {
+            this.meses = meses;
+            advertencia = "Datos consultados corectamente";
+        } else {
+            advertencia = "consulta no realizada";
+        }
+    }
+
+    public void Actualizar() {
+        MantenimientoMeses mmes = new MantenimientoMeses();
+        mmes.Actualizar(meses);
+    }
 }

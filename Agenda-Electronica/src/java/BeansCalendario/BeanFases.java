@@ -129,16 +129,6 @@ public class BeanFases {
     public void actualizar() {
         MantenimientoFases Mfase = new MantenimientoFases();
         Mfase.Actualizar(fase);
-        ListaFase = Mfase.consultar();
-        String advertencia = "";
-        
-        ListaFase=Mfase.consultar();
-
-        if (Mfase.Actualizar(fase) == 1) {
-            advertencia = "Actualizado correctamente";
-        } else {
-            advertencia = "No se ha actualizado";
-        }
     }
     
 }

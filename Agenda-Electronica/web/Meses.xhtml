@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Meses</title>
+    </h:head>
+    <h:body>
+        <div id="incluirPagina"/>
+            <h:form id="form">
+                <p:panel header="#{beanCronograma.accion}Meses">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{beanMeses.meses.idmes}"/>
+                        
+                        <p:outputLabel value="Calendario:"/>
+                        <p:selectOneMenu value="#{beanMeses.meses.idcalendario.idcalendario}" style="width: 87%" effect="fold">
+                            <f:selectItem itemValue="" itemLabel="Escoger calendario:" />
+                            <f:selectItems value="#{beanMeses.listaCalendario}" var="Su" itemLabel="#{Su.idcalendario}" itemValue="#{Su.idcalendario}" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Mes:"/>
+                        <p:inputText value="#{beanMeses.meses.mes}"/>
+                        
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" actionListener="#{beanMeses.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanMeses.Actualizar()}"  ajax="false" update=":form"/>
+                    </f:facet>
+                </p:panel>
+                <p:panel header="Lista Meses">
+                    <p:dataTable value="#{beanMeses.listaMeses}" var="C">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{C.idmes}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Calendario">
+                            <p:outputLabel value="#{C.idcalendario.idcalendario}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Mes">
+                            <p:outputLabel value="#{C.mes}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanMeses.modificar(C)}" update=":form"/>
+                        </p:column>
+                        
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanMeses.eliminar(C)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+    </h:body>
+</html>
+

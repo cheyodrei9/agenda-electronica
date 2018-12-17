@@ -36,12 +36,16 @@ public class MantenimientoNotificaciones {
         return flag;
     }
     
-    public Notificaciones consultarId(Integer idNotificacion){
+    public Notificaciones consultarId(int idnotificacion){
+        System.out.println("Algo no se");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Notificaciones notificacion = null;
         em.getTransaction().begin();
+        
+        System.out.println("Algo no se3");
         try {
-            notificacion = em.find(Notificaciones.class, idNotificacion);
+        System.out.println("Algo no se22");
+            notificacion = em.find(Notificaciones.class, idnotificacion);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID fue exitosa");
         } catch (Exception e) {
@@ -50,6 +54,7 @@ public class MantenimientoNotificaciones {
         }finally{
             em.close();
         }
+        System.out.println("act24");
         return notificacion;
     }
     
@@ -71,25 +76,25 @@ public class MantenimientoNotificaciones {
         }
     }
     
-    public int actualizar(Notificaciones notificacion){
+    public int Actualizar(Notificaciones notificacion){
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Notificaciones not = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
             not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
-            not.setIdusuario(notificacion.getIdusuario());
-            not.setRango(notificacion.getRango());
+            not.setIdnotificacion(notificacion.getIdnotificacion());
+            not.setIdusuario(notificacion.getIdusuario()); 
             not.setIdactividad(notificacion.getIdactividad());
-            
-            
+            not.setRango(notificacion.getRango());
+
             em.getTransaction().commit();
             flag = 1;
             System.out.println("Actualizacion exitosa");
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("Error al acualizar"+e);
+            System.out.println("Error al acualizar Mantenimiento Notificaciones"+e);
         }finally{
             em.close();
         }

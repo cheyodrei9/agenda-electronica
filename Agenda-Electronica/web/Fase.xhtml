@@ -15,8 +15,12 @@ and open the template in the editor.
     <h:body>
         <div id="incluirPagina"/>
             <h:form id="form">
-                <p:panel header="#{beanFases.accion}Cronograma">
+                <p:panel header="#{beanFases.accion}Fases">
                     <h:panelGrid columns="2" cellpadding="5">
+                        
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}"  value="#{beanFases.fase.idfase}"/>                   
+                        
                         <p:outputLabel value="Tipo De Fase:"/>
                         <p:inputText value="#{beanFases.fase.idtipofase.idtipofase}"/>
                         
@@ -24,14 +28,18 @@ and open the template in the editor.
                         <p:inputText value="#{beanFases.fase.estado}"/>
                         
                         <p:outputLabel value="Fecha"/>
-                        <p:inputText value="#{beanFases.fase.fecha}"/>
+                        <p:calendar value="#{beanFases.fase.fecha}" placeholder="dd-mm-yy"/>
+                        
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanFases.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanFases.actualizar()}" update=":form"/>
                     </f:facet>
                 </p:panel>
+                
                 <p:panel header="Lista Fases">
                     <p:dataTable value="#{beanFases.listaFase}" var="C">
+                        
                         <p:column headerText="ID">
                             <p:outputLabel value="#{C.idfase}"/>
                         </p:column>
@@ -55,6 +63,7 @@ and open the template in the editor.
                         <p:column headerText="Borrar">
                             <p:commandButton value="Borrar" actionListener="#{beanFases.eliminar(C)}" update=":form"/>
                         </p:column>
+                        
                     </p:dataTable>
                 </p:panel>
             </h:form>

@@ -131,15 +131,6 @@ public class BeanDias {
     public void actualizar() {
         MantenimientoDias mdia = new MantenimientoDias();
         mdia.Actualizar(Dia);
-        ListaDias = mdia.consultar();
-        String advertencia = "";
 
-        ListaDias = mdia.consultar();
-
-        if (mdia.Actualizar(Dia) == 1) {
-            advertencia = "Actualizado correctamente";
-        } else {
-            advertencia = "No se ha actualizado";
-        }
     }
 }

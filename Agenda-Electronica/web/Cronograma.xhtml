@@ -17,8 +17,10 @@ and open the template in the editor.
             <h:form id="form">
                 <p:panel header="#{beanCronograma.accion}Cronograma">
                     <h:panelGrid columns="2" cellpadding="5">
-                        <p:outputLabel value="ID Chronogrma:"/>
-                        <p:inputText value="#{beanCronograma.crono.idcronograma}"/>
+                        
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{beanCronograma.crono.idcronograma}"/>
+                        
                         <p:outputLabel value="Nombre:"/>
                         <p:inputText value="#{beanCronograma.crono.nombre}"/>
                         

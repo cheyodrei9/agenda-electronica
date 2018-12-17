@@ -17,6 +17,10 @@ and open the template in the editor.
             <h:form id="form">
                 <p:panel header="#{beanDias.accion}Dia">
                     <h:panelGrid columns="2" cellpadding="5">
+                        
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{beanDias.dia.iddia}"/>
+                        
                         <p:outputLabel value="Nombre De Dia:"/>
                         <p:inputText value="#{beanDias.dia.nombredia}"/>
                         
@@ -25,6 +29,7 @@ and open the template in the editor.
                     </h:panelGrid>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanDias.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanDias.actualizar()}" update=":form"/>
                     </f:facet>
                 </p:panel>
                 <p:panel header="Lista Dia">

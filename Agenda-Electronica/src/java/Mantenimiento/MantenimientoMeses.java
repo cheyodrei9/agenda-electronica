@@ -72,13 +72,14 @@ public class MantenimientoMeses {
         }
     }
     
-    public int actualizar(Meses mes){
+    public int Actualizar(Meses mes){
         EntityManager em  = JpaUtil.getEntityManagerFactory().createEntityManager();
         Meses mess = null;
         em.getTransaction().begin();
         int flag = 0;
         try {
             mess = em.find(Meses.class, mes.getIdmes());
+            mess.setIdmes(mes.getIdmes());
             mess.setIdcalendario(mes.getIdcalendario());
             mess.setMes(mes.getMes());
             
@@ -88,7 +89,7 @@ public class MantenimientoMeses {
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("Error al reaclizar la actualizacion" + e);
+            System.out.println("Error al reaclizar la actualizacion de mantenimiento Mes" + e);
         }finally{
             em.close();
         }

@@ -75,19 +75,21 @@ public class MantenimientoDias {
         Dias di = null;
         em.getTransaction().begin();
         int flag = 0;
+        System.out.println("Algo nose");
+        em.merge(em.merge(dias));
         try {
+            System.out.println("Id" + dias.getIddia());
             di = em.find(Dias.class, dias.getIddia());
             di.setIddia(dias.getIddia());
             di.setIdmes(dias.getIdmes());
             di.setNombredia(dias.getNombredia());
-
             em.getTransaction().commit();
             flag = 1;
             System.out.println("exitoso");
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("error" + e);
+            System.out.println("error En Mantenimiento Dias,Actualizar" + e);
         } finally {
             em.close();
         }

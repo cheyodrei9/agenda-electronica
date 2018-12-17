@@ -5,8 +5,10 @@
  */
 package BeansCalendario;
 
+import Mantenimiento.MantenimientoActividades;
 import Mantenimiento.MantenimientoNotificaciones;
 import Mantenimiento.MantenimientoUsusario;
+import Persistencia.Actividades;
 import Persistencia.Notificaciones;
 
 import Persistencia.Usuarios;
@@ -23,8 +25,10 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanNotificaciones {
+
     private List<Notificaciones> ListaNotificaciones = new ArrayList();
     private List<Usuarios> ListaUsuarios = new ArrayList();
+    private List<Actividades> ListaAct = new ArrayList();
     private MantenimientoNotificaciones MNot;
     private Notificaciones notificaciones;
     private String accion;
@@ -68,74 +72,75 @@ public class BeanNotificaciones {
     public void setMNot(MantenimientoNotificaciones MNot) {
         this.MNot = MNot;
     }
-    
-    
-     @PostConstruct
-    public void init(){
-        notificaciones=new Notificaciones();
+
+    @PostConstruct
+    public void init() {
+        notificaciones = new Notificaciones();
         notificaciones.setIdusuario(new Usuarios());
-        MantenimientoNotificaciones not=new MantenimientoNotificaciones();
+        notificaciones.setIdactividad(new Actividades());
+        MantenimientoNotificaciones not = new MantenimientoNotificaciones();
         MantenimientoUsusario usr = new MantenimientoUsusario();
-        ListaNotificaciones=not.consultar();
-        ListaUsuarios=usr.consultar();
+        MantenimientoActividades Mact = new MantenimientoActividades();
+        ListaNotificaciones = not.consultar();
+        ListaUsuarios = usr.consultar();
+        ListaAct = Mact.consultar();
     }
-    
-    public void LimpiarFormulario(){
-        this.ListaNotificaciones=MNot.consultar();
-        this.notificaciones=new Notificaciones();
+
+    public void LimpiarFormulario() {
+        this.ListaNotificaciones = MNot.consultar();
+        this.notificaciones = new Notificaciones();
         notificaciones.setIdusuario(new Usuarios());
+        notificaciones.setIdactividad(new Actividades());
         this.notificaciones.setIdnotificacion(0);
-        accion="Registrar";
+        accion = "Registrar";
     }
-    
-    public void AccionFormulario(){
-        if(accion.equals("Registrar")){
+
+    public void AccionFormulario() {
+        if (accion.equals("Registrar")) {
             MNot.guardar(this.notificaciones);
-        }else if(accion.equals("Editar")){
-            MNot.actualizar(this.notificaciones);
+        } else if (accion.equals("Editar")) {
+            MNot.Actualizar(this.notificaciones);
         }
         LimpiarFormulario();
     }
-    
-    public void guardar(){
+
+    public void guardar() {
         MantenimientoNotificaciones Mnot = new MantenimientoNotificaciones();
         Mnot.guardar(notificaciones);
-        notificaciones=new Notificaciones();
+        notificaciones = new Notificaciones();
+        this.ListaNotificaciones = MNot.consultar();
     }
-    
-    public void eliminar(Notificaciones notificaciones){
+
+    public void eliminar(Notificaciones notificaciones) {
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
         MMMnot.eliminiar(notificaciones);
-        String advertencia="";
-        
-        if(MMMnot.eliminiar(notificaciones)==1){
-            advertencia="se ha eliminado correctamente";
-        }else{
-            advertencia="no se ha podido eliminar";
+        ListaNotificaciones = MMMnot.consultar();
+        String advertencia = "";
+
+        if (MMMnot.eliminiar(notificaciones) == 1) {
+            advertencia = "se ha eliminado correctamente";
+        } else {
+            advertencia = "no se ha podido eliminar";
         }
     }
-    
-    public void modificar(Notificaciones notificaciones){
+
+    public void modificar(Notificaciones notificaciones) {
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
-        notificaciones=MMMnot.consultarId(notificaciones.getIdnotificacion());
-        String advertencia="";
-        if(notificaciones !=null){
-            advertencia="datos consultados corectamente";
-        }else{
-            advertencia="consulta no realizada";
+        notificaciones = MMMnot.consultarId(notificaciones.getIdnotificacion());
+        String advertencia = "";
+        if (notificaciones != null) {
+            this.notificaciones= notificaciones;
+            advertencia = "datos consultados corectamente";
+        } else {
+            advertencia = "consulta no realizada";
         }
     }
-    
-    public void Actualizat(){
+
+    public void Actualizar() { 
+        System.out.println("act" + notificaciones.getIdnotificacion());
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
-        MMMnot.actualizar(notificaciones);
-        ListaNotificaciones=MMMnot.consultar();
-        String advertencia="";
-        
-        if(MMMnot.actualizar(notificaciones)==1){
-            advertencia="actualizando correctamente";
-        }else{
-            advertencia="no se ha actualizado";
-        }
+        System.out.println("act" + notificaciones.getIdnotificacion());
+        MMMnot.Actualizar(notificaciones);
+
     }
 }

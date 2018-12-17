@@ -79,6 +79,7 @@ public class MantenimientoFases {
         try {
             
             Fa = em.find(Fases.class,fases.getIdfase());
+            Fa.setIdfase(fases.getIdfase());
             Fa.setEstado(fases.getEstado());
             Fa.setFecha(fases.getFecha());
             Fa.setIdtipofase(fases.getIdtipofase());
