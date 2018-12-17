@@ -22,25 +22,12 @@ import org.primefaces.PrimeFaces;
 @RequestScoped
 public class BeanLogin {
 
-    private String user;
     private String username;
+    private String user_id;
     private String password;
-    private boolean show = false;
     private static int idusuario;
     private static int niveldemando;
-    private int acceso;
-
-    public BeanLogin(boolean show) {
-        this.show = show;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
+    private int user_lvl;
 
     public String getUsername() {
         return username;
@@ -50,12 +37,12 @@ public class BeanLogin {
         this.username = username;
     }
 
-    public boolean isShow() {
-        return show;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setShow(boolean show) {
-        this.show = show;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getPassword() {
@@ -74,13 +61,13 @@ public class BeanLogin {
         return niveldemando;
     }
 
-    public int getAcceso() {
-        acceso = niveldemando;
-        return acceso;
+    public int getUser_lvl() {
+        user_lvl = niveldemando;
+        return user_lvl;
     }
 
-    public void setAcceso(int acceso) {
-        this.acceso = acceso;
+    public void setUser_lvl(int user_lvl) {
+        this.user_lvl = user_lvl;
     }
 
     /**
@@ -91,15 +78,14 @@ public class BeanLogin {
 
     public void loginAgenda() throws IOException {
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
-        Usuarios usuario = manUsuario.iniciarSesion(user, password);
+        Usuarios usuario = manUsuario.iniciarSesion(username, password);
         FacesMessage message = null;
         boolean loggedIn = false;
         
         if (usuario != null) {
             idusuario = usuario.getIdusuario();
-            username = usuario.getNombres();
+            user_id = usuario.getNombres();
             niveldemando = usuario.getNiveldemando();
-            show = false;
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
             FacesContext.getCurrentInstance().getExternalContext().redirect("Calendario.xhtml");

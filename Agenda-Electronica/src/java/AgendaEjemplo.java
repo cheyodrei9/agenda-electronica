@@ -306,7 +306,6 @@ public class AgendaEjemplo implements Serializable {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No permitido", "La accion requiere permisos de administración");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             } else {
-                BeanLogin beanLogin = new BeanLogin(true);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No permitido", "La accion requiere permisos de administración");
                 PrimeFaces.current().dialog().showMessageDynamic(message);

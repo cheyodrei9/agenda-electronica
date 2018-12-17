@@ -46,7 +46,7 @@ and open the template in the editor.
                     
                 </b:dropMenu>
             </b:navbarLinks>
-            <b:navbarLinks style="position: absolute;left: 1030px;font-size: 15px; padding-top: 9px;" rendered="#{beanLogin.acceso == 1}">
+            <b:navbarLinks style="position: absolute;left: 1030px;font-size: 15px; padding-top: 9px;" rendered="#{beanLogin.user_lvl == 1}">
                 <h:form>
                     <p:commandButton value="Registrar Usuario" onclick="PF('dlg2').show();"/>
                 </h:form>

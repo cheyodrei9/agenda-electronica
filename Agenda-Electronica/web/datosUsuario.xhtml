@@ -52,7 +52,7 @@ and open the template in the editor.
 
                       
 
-                        <p:column headerText="Acciones" rendered="#{beanLogin.acceso == 1}">
+                        <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1}">
                             <p:commandButton value="No esta la accion definida" actionListener="#{beanUsuario.guardar()}"/>
                         </p:column>
 

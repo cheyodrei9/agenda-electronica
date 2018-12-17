@@ -32,7 +32,7 @@ and open the template in the editor.
                             <p:outputLabel value="#{R.rol}"/>
                         </p:column>
                         
-                        <p:column headerText="Acciones" rendered="#{beanLogin.acceso == 1 or beanLogin.acceso == 2}">
+                        <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                             <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanRoles.buscarId(R)}" update=":form"/>
                             <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanRoles.eliminar(R)}" update=":form">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
