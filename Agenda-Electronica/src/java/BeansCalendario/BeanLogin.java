@@ -23,10 +23,10 @@ import org.primefaces.PrimeFaces;
 public class BeanLogin {
 
     private String username;
-    private String user_id;
     private String password;
     private static int idusuario;
     private static int niveldemando;
+    private String user_id;
     private int user_lvl;
 
     public String getUsername() {
@@ -35,14 +35,6 @@ public class BeanLogin {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
     }
 
     public String getPassword() {
@@ -59,6 +51,14 @@ public class BeanLogin {
 
     public static int getNiveldemando() {
         return niveldemando;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public int getUser_lvl() {
