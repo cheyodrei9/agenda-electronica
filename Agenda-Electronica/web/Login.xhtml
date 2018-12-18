@@ -49,8 +49,8 @@
         <h:form style="margin: 20px" id="form">
             <p:dialog header="#{beanUsuario.accion} Usuario" widgetVar="dlg2" modal="true" class="altura" hideEffect="fold" showEffect="fold" closeOnEscape="true" resizable="false">
                 <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel value="Tipo de usuario:" />
-                    <p:selectOneMenu value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" class="ancho">
+                    <p:outputLabel value="Tipo de usuario:" style="display: none"/>
+                    <p:selectOneMenu value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" class="ancho" style="display: none">
                         <f:selectItem itemValue="3" itemLabel="Usuario" />
                     </p:selectOneMenu>
 
@@ -77,8 +77,8 @@
                     <p:outputLabel value="Contraseña" />
                     <p:password  value="#{beanUsuario.usuario.contra}" placeholder="se colocará en incógnito" class="ancho"/>
 
-                    <p:outputLabel value="Nivel de Mando:" />
-                    <p:selectOneMenu value="#{beanUsuario.usuario.niveldemando}" class="ancho">
+                    <p:outputLabel value="Nivel de Mando:" style="display: none"/>
+                    <p:selectOneMenu value="#{beanUsuario.usuario.niveldemando}" class="ancho" style="display: none">
                         <f:selectItem itemValue="3" itemLabel="3" />
                     </p:selectOneMenu>
 
