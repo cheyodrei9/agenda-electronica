@@ -17,6 +17,10 @@ and open the template in the editor.
         <h:form style="margin: 20px" id="form">
             <p:panel header="#{beanUsuario.accion} Usuario">
                 <h:panelGrid columns="2" cellpadding="5">
+                    
+                    <p:outputLabel value="ID" />
+                    <p:inputText value="#{beanUsuario.usuario.idusuario}"/>
+                    
                     <p:outputLabel value="Tipo De usuario:" />
                     <p:inputText value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" placeholder="ID Tipo Usuario"/>
                     
@@ -48,9 +52,48 @@ and open the template in the editor.
 
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" actionListener="#{beanUsuario.guardar()}" update=":form"/>
+                        <p:commandButton value="Actualizar" actionListener="#{beanUsuario.actualizar()}"  ajax="false" update=":form"/>
                     </f:facet>
                 </h:panelGrid>           
-            </p:panel>    
+            </p:panel>
+            
+            <p:panel header="Lista Usuarios">
+                    <p:dataTable value="#{beanUsuario.listaU}" var="U">
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{U.idusuario}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo Usuario">
+                            <p:outputLabel value="#{U.idtipousuario.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{U.nombres}"/>
+                        </p:column>
+
+                        <p:column headerText="Apellido">
+                            <p:outputLabel value="#{U.apellidos}"/>
+                        </p:column>
+
+                        <p:column headerText="Genero">
+                            <p:outputLabel value="#{U.genero}"/>
+                        </p:column>
+
+                        <p:column headerText="Telefono">
+                            <p:outputLabel value="#{U.telefono}"/>
+                        </p:column>
+
+                        <p:column headerText="Correo">
+                            <p:outputLabel value="#{U.correo}"/>
+                        </p:column>
+
+                        <p:column headerText="Acciones" >
+                            <p:commandButton value="Editar" actionListener="#{beanUsuario.modificar(U)}" update=":form"/>
+                            <p:commandButton value="Eliminar" actionListener="#{beanUsuario.eliminar(U)}" update=":form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            
         </h:form>
     </h:body>
 </html>

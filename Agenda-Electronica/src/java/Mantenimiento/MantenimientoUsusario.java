@@ -62,6 +62,7 @@ public void insertar(Usuarios usuario){
     }
 
     public int Actualizar(Usuarios usuarios) {
+        System.out.println("entre al mantenimiento");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Usuarios us = null;
         em.getTransaction().begin();
@@ -81,7 +82,6 @@ public void insertar(Usuarios usuario){
             flag = 1;
             System.out.println("EXITOSO");
         } catch (Exception e) {
-
             em.getTransaction().rollback();
             flag = 0;
             System.out.println("ERROR. " + e);
