@@ -31,7 +31,8 @@ public class BeanUsuario {
     private MantenimientoUsusario Musuario;
     private Usuarios usuario;
     private String accion;
-
+    String adver = "";
+    
     public List<Usuarios> getListaU() {
         return listaU;
     }
@@ -90,10 +91,50 @@ public class BeanUsuario {
         accion ="Registrar";
     }
 
+    public void AccionFormulario(){
+        if(accion.equals("Registrar")){
+            Musuario.insertar(this.usuario);
+        } else if(accion.equals("Editar")){
+            Musuario.Actualizar(this.usuario);
+        }
+        LimpiarFormulario();
+    }
+    
+    
     public void guardar() {
         System.out.println("este es el objeto lleno" + usuario);
         MantenimientoUsusario Us = new MantenimientoUsusario();
         Us.insertar(usuario);
     }
 
+    public void eliminar (Usuarios usuario){
+        Musuario.eliminar(usuario);
+        listaU = Musuario.consultar();
+        
+        if(Musuario.eliminar(usuario)==1){
+            adver = "se elimino con exito";
+        } else {
+            adver = "ocurrio un error";
+        }
+        System.out.println(adver);
+    }
+    
+    public void modificar (Usuarios user){
+        MantenimientoUsusario Musuario = new MantenimientoUsusario();
+        user = Musuario.consultarid(user.getIdusuario());
+        if(user != null){
+            this.usuario = user;
+            adver = "consulta exitosa";
+        } else {
+            adver = "error consulta";
+        }
+        System.out.println(adver);
+    }
+    
+    public void actualizar (){
+        MantenimientoUsusario Musuario = new MantenimientoUsusario();
+        System.out.println("usuario" +usuario.getIdusuario());
+        Musuario.Actualizar(usuario);
+    }
+    
 }
