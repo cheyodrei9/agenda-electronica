@@ -36,12 +36,12 @@ public class MantenimientoTipoUsuario {
         return flag;
     }
 
-    public Tiposusuarios consultarid(Integer idTipoUsuario) {
+    public Tiposusuarios consultarid(int idtipousuario) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Tiposusuarios tiposUsuarios = null;
         em.getTransaction().begin();
         try {
-            tiposUsuarios = em.find(Tiposusuarios.class, idTipoUsuario);
+            tiposUsuarios = em.find(Tiposusuarios.class, idtipousuario);
             em.getTransaction().commit();
             System.out.println("Su consulta por ID Fue exitosa");
         } catch (Exception e) {
@@ -79,6 +79,7 @@ public class MantenimientoTipoUsuario {
         int flag = 0;
         try {
             tu = em.find(Tiposusuarios.class, tiposUsuarios.getIdtipousuario());
+            tu.setIdtipousuario(tiposUsuarios.getIdtipousuario());
             tu.setTipo(tiposUsuarios.getTipo());
 
             em.getTransaction().commit();

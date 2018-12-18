@@ -84,20 +84,29 @@ public class BeanTipoFases {
         MantenimientoTiposFases mtp = new MantenimientoTiposFases();
         mtp.Guardar(tiposf);
         tiposf= new Tiposfases();
+        this.ListaTipoFases = mtp.consultar();
     }
     
-    public void borrar(Tiposfases tiposfases){
+    public void eliminar(Tiposfases tiposfases){
         MantenimientoTiposFases mtpf = new MantenimientoTiposFases();
         mtpf.eliminar(tiposfases);
         this.ListaTipoFases=this.MTiposfa.consultar();
     }
     
-    public void Editar(Tiposfases tiposfases){
-        this.tiposf=tiposfases;
-        accion="Editar";
+    public void modificar(Tiposfases tiposfases){
+        MantenimientoTiposFases Mtf = new MantenimientoTiposFases();
+        tiposfases = Mtf.consultarid(tiposfases.getIdtipofase());
+        String advertencia="";
+        if(tiposfases != null){
+            this.tiposf = tiposfases;
+            advertencia ="Datos Consultados Correctamente"; 
+        }else{
+            advertencia="Consulta No Realizada Fallo";
+        }
     }
     
     public void Actualizar(){
-        MTiposfa.Actualizar(this.tiposf);
+        MantenimientoTiposFases Mtf = new MantenimientoTiposFases();
+        Mtf.Actualizar(tiposf);
     }
 }

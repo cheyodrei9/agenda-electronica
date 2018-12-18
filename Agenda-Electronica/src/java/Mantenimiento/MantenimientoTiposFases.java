@@ -58,7 +58,7 @@ public class MantenimientoTiposFases {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery("SELECT e FROM TiposFases e");
+            Query query = em.createQuery("SELECT e FROM Tiposfases e");
 
             em.getTransaction().commit();
             listaTF = query.getResultList();
@@ -79,6 +79,7 @@ public class MantenimientoTiposFases {
         int flag = 0;
         try {
             tf = em.find(Tiposfases.class, tiposFases.getIdtipofase());
+            tf.setIdtipofase(tiposFases.getIdtipofase());
             tf.setTipofase(tiposFases.getTipofase());
 
             em.getTransaction().commit();
