@@ -128,15 +128,10 @@ public class BeanRoles {
         System.out.println("bean" +adver);
     }
     
-    public void Modificar(){
+    public void modificar(){
         MantenimientoRoles rol = new MantenimientoRoles ();
+        System.out.println("rol "+roles.getIdrol());
         rol.actualizar(roles);
-        listaRoles = rol.consultar();
-        if(rol.actualizar(roles)==1){
-            adver = "exito al modificar";
-        } else {
-            adver = "error al modificar el dato";
-        }
     }
     
 }

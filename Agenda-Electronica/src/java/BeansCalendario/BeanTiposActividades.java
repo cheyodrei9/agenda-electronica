@@ -81,9 +81,9 @@ public class BeanTiposActividades {
     public void modificar(Tiposactividades tip){
         MantenimientoTiposActividades tipos = new MantenimientoTiposActividades();
         tip = tipos.consultarid(tip.getIdtipoactividad());
-        
+        System.out.println("TipAct "+tip.getIdtipoactividad());
         String mensaje = "";
-        if(tip!=null){
+        if(tip != null){
             this.tip = tip;
             mensaje= "exito en la busqueda";
         } else {
@@ -91,4 +91,10 @@ public class BeanTiposActividades {
         }
         System.out.println(mensaje);
     }
+    
+    public void actualizar(){
+        MantenimientoTiposActividades tipo = new MantenimientoTiposActividades();
+        tipo.Actualizar(tip);
+    }
+    
 }

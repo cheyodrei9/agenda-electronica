@@ -73,6 +73,7 @@ public class MantenimientoTiposActividades {
     }
 
     public int Actualizar(Tiposactividades tiposA) {
+        System.out.println("entro al mantenimiento de TipAct.");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Tiposactividades ta = null;
         em.getTransaction().begin();
@@ -80,12 +81,11 @@ public class MantenimientoTiposActividades {
         try {
             ta = em.find(Tiposactividades.class, tiposA.getIdtipoactividad());
             ta.setTipoactividad(tiposA.getTipoactividad());
-
+            ta.setTipoactividad(tiposA.getTipoactividad()); 
             em.getTransaction().commit();
             flag = 1;
             System.out.println("Actualizacion Exitosa");
         } catch (Exception e) {
-
             em.getTransaction().rollback();
             flag = 0;
             System.out.println("Error al actualizar. " + e);

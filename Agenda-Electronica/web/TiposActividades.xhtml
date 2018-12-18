@@ -23,9 +23,10 @@ and open the template in the editor.
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Tipo Actividad:" /><br/>
                         <p:inputText value="#{beanTiposActividades.tip.tipoactividad}" placeholder="Escriba el nombre"/>
-                        <div> </div>
+                        <div> <br/></div>
                         <f:facet name="footer">
                             <p:commandButton value="Guardar" actionListener="#{beanTiposActividades.guardar()}" update=":form"/>
+                            <p:commandButton value="Actualizar" actionListener="#{beanTiposActividades.actualizar()}"  ajax="false" update=":form"/>
                         </f:facet>
                     </h:panelGrid>  
                     <div>  </div>
@@ -37,6 +38,15 @@ and open the template in the editor.
                         <p:column headerText="Tipo Actividad">
                             <p:outputLabel value="#{T.tipoactividad}"/>
                         </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton value="Editar" actionListener="#{beanTiposActividades.modificar(T)}" update=":form"/>
+                        </p:column>
+                        
+                        <p:column headerText="Borrar">
+                            <p:commandButton value="Borrar" actionListener="#{beanTiposActividades.eliminar(T)}" update=":form"/>
+                        </p:column>
+                        
                     </p:dataTable>
                 </p:dialog>
             </p:commandButton>   

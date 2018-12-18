@@ -73,6 +73,7 @@ public class MantenimientoRoles {
     }
     
     public int actualizar(Roles rol){
+        System.out.println("estoy en el mantenimiento");
         EntityManager em  = JpaUtil.getEntityManagerFactory().createEntityManager();
         Roles rols = null;
         em.getTransaction().begin();
@@ -81,7 +82,6 @@ public class MantenimientoRoles {
             rols = em.find(Roles.class, rol.getIdrol());
             rols.setRol(rol.getRol());
             rols.setIdtipousuario(rol.getIdtipousuario());
-            
             em.getTransaction().commit();
             flag = 1;
             System.out.println("La actualizacion fue exitosa");
