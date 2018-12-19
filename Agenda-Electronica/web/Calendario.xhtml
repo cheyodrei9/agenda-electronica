@@ -99,12 +99,14 @@
             <div id="tabla">
                 <div> </div>
                 <h:form id="form">
-                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
+                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista2}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
                         <p:column headerText="Nombre Actividad" styleClass="columna" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
-                        <p:column headerText="Fecha" styleClass="columna" filterBy="#{lista.fechaactividad}"  sortBy="#{lista.fechaactividad}" filterMatchMode="contains">
-                            <h:outputLabel value="#{lista.fechaactividad}">
+                        <p:column headerText="Fecha" styleClass="columna" filterBy="#{lista.fecha}"  sortBy="#{lista.fecha}" filterMatchMode="contains">
+                            <h:outputLabel value="#{lista.fecha}">
+                           
+
                             </h:outputLabel>
                         </p:column>
                         <p:column  headerText="Cronograma" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.Locale;
 import BeansCalendario.BeanLogin;
 import Mantenimiento.MantenimientoActividades;
 import Mantenimiento.MantenimientoCronogramas;
@@ -11,13 +11,15 @@ import Mantenimiento.MantenimientoFases;
 import Mantenimiento.MantenimientoTiposActividades;
 import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Actividades;
+import Persistencia.Actividadesf;
 import Persistencia.Cronogramas;
 import Persistencia.Fases;
 import Persistencia.Tiposactividades;
 import Persistencia.Usuarios;
-import java.awt.event.ActionEvent;
+
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -28,7 +30,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import java.text.SimpleDateFormat;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
@@ -51,6 +53,16 @@ public class AgendaEjemplo implements Serializable {
 
     private ScheduleModel eventModel;
     private Actividades actividades;
+     private Actividadesf actividadesf;
+    private List<Actividadesf> lista2 = new ArrayList();
+
+    public List<Actividadesf> getLista2() {
+        return lista2;
+    }
+
+    public void setLista2(List<Actividadesf> lista2) {
+        this.lista2 = lista2;
+    }
     private List<Actividades> lista = new ArrayList();
     private List<Tiposactividades> listTA = new ArrayList();
     private List<Cronogramas> listCr = new ArrayList();
@@ -120,13 +132,25 @@ public class AgendaEjemplo implements Serializable {
     private final MantenimientoActividades mttoac = new MantenimientoActividades();
 
     @PostConstruct
-    public void init() {
+    public void init()  {
 
         MantenimientoCronogramas mc = new MantenimientoCronogramas();
         MantenimientoTiposActividades mta = new MantenimientoTiposActividades();
         MantenimientoFases mf = new MantenimientoFases();
         MantenimientoUsusario mu = new MantenimientoUsusario();
         lista = mttoac.consultar();
+        
+        lista2=fecha(lista);
+        System.out.println("AQUIIIIIIIIIIIIIIIII"+lista2.toString());
+        
+        
+         
+        
+        
+        
+        
+        
+        
         listCr = mc.consultar();
         listF = mf.consultar();
         listTA = mta.consultar();
@@ -295,6 +319,8 @@ public class AgendaEjemplo implements Serializable {
                 MantenimientoActividades mact = new MantenimientoActividades();
 
                 lista = mact.consultar();
+               lista2= fecha(lista);
+                
 
             } else {
                 eventModel.updateEvent(event);
@@ -336,4 +362,46 @@ public class AgendaEjemplo implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    private List fecha (List<Actividades> lista){
+        
+        for ( int i = 0 ; i<lista.size();i++){
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", new Locale("es","VE"));
+        String fecha = format.format(lista.get(i).getFechaactividad());
+            System.out.println(fecha);
+        try{
+         
+        actividadesf = new Actividadesf();  
+        actividadesf.setIdactividad( lista.get(i).getIdactividad());
+        actividadesf.setIdcronograma(lista.get(i).getIdcronograma());
+        actividadesf.setIdtipoactividad(lista.get(i).getIdtipoactividad());
+        actividadesf.setIdusuario(lista.get(i).getIdusuario());
+         actividadesf.setNombreactividad(lista.get(i).getNombreactividad());  
+          actividadesf.setFechaactividad(lista.get(i).getFechaactividad());
+          actividadesf.setIdfase(lista.get(i).getIdfase());
+          actividadesf.setFecha(fecha);
+         
+         
+           lista2.add(actividadesf);
+          
+     
+          
+        
+        }catch(Exception e){
+         
+            System.out.println(e.getMessage()+"este es el error");
+    }
+          
+       
+       
+    }
+        
+      
+       
+       
+       
+       
+    
+         return lista2;
+}
 }
