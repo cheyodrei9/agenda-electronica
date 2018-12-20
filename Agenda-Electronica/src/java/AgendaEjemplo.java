@@ -411,4 +411,35 @@ public class AgendaEjemplo implements Serializable {
     
          return lista2;
 }
+    
+    public void eliminar(Actividades actividades) {
+        MantenimientoActividades mact = new MantenimientoActividades(); 
+        mact.eliminar(actividades);
+        lista = mact.consultar();
+        String advertencia = "";
+
+        if (mact.eliminar(actividades) == 1) {
+            advertencia = "Se ha eliminado correctamente";
+        } else {
+            advertencia = "No se ha podido eliminar";
+
+        }
+    }
+    
+    public void modificar(Actividades actividades) {
+        MantenimientoActividades mact = new MantenimientoActividades(); 
+        actividades=mact.consultarid(actividades.getIdactividad());
+
+        String advertencia = "";
+        if (actividades != null) {
+            this.actividades = actividades;
+            advertencia = "Datos Consultados correctamente";
+        } else {
+            advertencia = "Consulta no realizada";
+        }
+    }
+    public void actualizar() {
+        MantenimientoActividades mact = new MantenimientoActividades(); 
+        mact.Actualizar(actividades);
+    }
 }

@@ -20,7 +20,7 @@ and open the template in the editor.
         <div id="incluirPagina"/>
         <div class="usuario">
             <h:form id="form">
-                <p:panel header="Lista Usuarios">
+                <p:panel header="Lista Usuarios" style="text-align: center;">
                     <p:dataTable value="#{beanUsuario.listaU}" var="U">
                         <p:column headerText="ID">
                             <p:outputLabel value="#{U.idusuario}"/>
@@ -46,7 +46,7 @@ and open the template in the editor.
                             <p:outputLabel value="#{U.telefono}"/>
                         </p:column>
 
-                        <p:column headerText="Correo">
+                        <p:column headerText="Correo" style="width:200px;">
                             <p:outputLabel value="#{U.correo}"/>
                         </p:column>
 

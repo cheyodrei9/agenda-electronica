@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Tabla Fases</title>
+        <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div id="incluirPagina"/>
+        <div class="fases">
+            <h:form id="form">
+                <p:panel header="Lista Fases">
+                    <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista2}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
+                        <p:column headerText="Nombre Actividad" styleClass="columna" >
+                            <h:outputText value="#{lista.nombreactividad}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Fecha" styleClass="columna" >
+                            <h:outputLabel value="#{lista.fecha}">
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column  headerText="Cronograma" >
+                            <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Tipo Actividad" rendered="#{beanLogin.user_lvl == 1}">
+                            <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario Asignado" styleClass="columna" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
+                            <h:outputText value="#{lista.idusuario.nombres}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario Asignado" styleClass="columna" rendered="#{beanLogin.user_lvl == 3}">
+                            <h:outputText value="#{lista.idusuario.nombres}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Fase" styleClass="columna">
+                            <h:outputText value="#{lista.idfase.estado}"></h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
+                            <p:commandButton value="Editar" actionListener="#{agendaEjemplo.modificar(lista)}" update=":form"/>
+                            <p:commandButton value="Borrar" actionListener="#{agendaEjemplo.eliminar(lista)}" update=":form">
+                                <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>
