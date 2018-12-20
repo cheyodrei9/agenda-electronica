@@ -23,6 +23,7 @@ import javax.persistence.Query;
  */
 public class MantenimientoActividades {
 
+    /*metodo para guardar*/
     public int guardar(Actividades actividades) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -42,6 +43,7 @@ public class MantenimientoActividades {
         return flag;
     }
 
+    /*metodo para consultar por id*/
     public Actividades consultarid(int idActividad) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Actividades actividades = null;
@@ -59,6 +61,7 @@ public class MantenimientoActividades {
         return actividades;
     }
 
+    /*metodo para consultar con lista*/
     public List<Actividades> consultar() {
         List<Actividades> listaA = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -82,6 +85,7 @@ public class MantenimientoActividades {
         }
     }
 
+     /*metodo para actualizar*/
     public int Actualizar(Actividades actividades) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Actividades acti = null;
@@ -110,6 +114,7 @@ public class MantenimientoActividades {
         return flag;
     }
 
+    /*metodo para elimnar*/
     public int eliminar(Actividades actividades) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Actividades act = null;

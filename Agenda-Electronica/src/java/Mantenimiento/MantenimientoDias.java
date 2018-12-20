@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 public class MantenimientoDias {
 
+    /*metodo para guardar*/
     public int guardar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -35,6 +36,7 @@ public class MantenimientoDias {
         return flag;
     }
 
+    /*metodo para consultar por id*/
     public Dias consultarid(int idDia) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Dias dias = null;
@@ -52,6 +54,7 @@ public class MantenimientoDias {
         return dias;
     }
 
+    /*metodo para consultar con lista*/
     public List<Dias> consultar() {
         List<Dias> listaD = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -69,6 +72,8 @@ public class MantenimientoDias {
             em.close();
         }
     }
+
+    /*metodo para actualizar*/
 
     public int Actualizar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -96,6 +101,7 @@ public class MantenimientoDias {
         return flag;
     }
 
+    /*metodo para elimnar*/
     public int eliminar(Dias dias) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Dias dia = null;

@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 public class MantenimientoCronogramas {
 
+    /*metodo para guardar*/
     public int guardar(Cronogramas cronogramas) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -35,6 +36,7 @@ public class MantenimientoCronogramas {
         return flag;
     }
 
+    /*metodo para consultar por id*/
     public Cronogramas consultarid(int idCronograma) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Cronogramas cronogramas = null;
@@ -52,6 +54,7 @@ public class MantenimientoCronogramas {
         return cronogramas;
     }
 
+    /*metodo para consultar con lista*/
     public List<Cronogramas> consultar() {
         List<Cronogramas> listaCR = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -70,6 +73,7 @@ public class MantenimientoCronogramas {
         }
     }
 
+    /*metodo para actualizar*/
     public int Actualizar(Cronogramas cronogramas) {
         System.out.println("Entro en mantenimiento ");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -97,6 +101,7 @@ public class MantenimientoCronogramas {
         return flag;
     }
 
+    /*metodo para elimnar*/
     public int eliminar(Cronogramas cronogramas) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Cronogramas cro = null;

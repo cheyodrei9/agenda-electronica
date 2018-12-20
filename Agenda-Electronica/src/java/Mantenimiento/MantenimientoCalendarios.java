@@ -16,6 +16,7 @@ import javax.persistence.Query;
  */
 public class MantenimientoCalendarios {
 
+    /*metodo para guardar*/
     public int guardar(Calendarios calendarios) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         int flag = 0;
@@ -35,6 +36,7 @@ public class MantenimientoCalendarios {
         return flag;
     }
 
+    /*metodo para consultar por id*/
      public Calendarios consultarid(int idCalendario) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Calendarios calendarios = null;
@@ -52,6 +54,7 @@ public class MantenimientoCalendarios {
         return calendarios;
      }
      
+     /*metodo para consultar*/
       public List<Calendarios> consultar() {
         List<Calendarios> listaC = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -70,6 +73,7 @@ public class MantenimientoCalendarios {
         }
     }
       
+      /*metodo para actualizar*/
       public int Actualizar(Calendarios calendarios){
         EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
         Calendarios cale=null;
@@ -94,6 +98,7 @@ public class MantenimientoCalendarios {
         return flag;
       }
       
+      /*metodo para elimnar*/
        public int eliminar(Calendarios calendarios){
       EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
       Calendarios cal=null;
