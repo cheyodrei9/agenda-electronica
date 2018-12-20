@@ -22,7 +22,7 @@ and open the template in the editor.
                 <b:navLink class="letra" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml"></b:navLink>
             </b:navbarLinks>
             <b:navbarLinks id="fondo">
-                <b:dropMenu  value="Mantenimientos" iconAwesome="paperclip">
+                <b:dropMenu  value="Mantenimientos" iconAwesome="paperclip" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                     <h:form>
                         <p:commandLink actionListener="#{beanLogin.redirect('TiposActividades')}" style="padding-left: 20px;">Agregar Datos</p:commandLink>
                     </h:form>
