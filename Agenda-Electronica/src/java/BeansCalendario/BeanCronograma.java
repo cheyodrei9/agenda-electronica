@@ -28,7 +28,6 @@ public class BeanCronograma {
     private MantenimientoCronogramas Mcrono;
     private Cronogramas Crono;
     private String accion;
-    private int idchrono;
 
     public List<Cronogramas> getListaCrono() {
         return ListaCrono;

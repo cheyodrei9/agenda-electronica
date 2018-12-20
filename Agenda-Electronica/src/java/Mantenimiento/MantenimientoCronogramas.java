@@ -73,6 +73,7 @@ public class MantenimientoCronogramas {
     public int Actualizar(Cronogramas cronogramas) {
         System.out.println("Entro en mantenimiento ");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        List<Cronogramas> listaCR = null;
         Cronogramas crono = null;
         em.getTransaction().begin();
         int flag = 0;
@@ -89,7 +90,7 @@ public class MantenimientoCronogramas {
         } catch (Exception e) {
             em.getTransaction().rollback();
             flag = 0;
-            System.out.println("Error en mantenimiento cronogrma, Actualizar: " + e);
+            System.out.println("Error en mantenimiento cronograma, Actualizar: " + e);
         } finally {
             em.close();
         }

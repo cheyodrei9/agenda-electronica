@@ -14,14 +14,14 @@ and open the template in the editor.
         <title>Tabla Cronograma</title>
         <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    <h:body>
+    <h:body id="cuerpo">
         <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
         <div class="cronograma">
             <h:form id="form">
                 <p:panel header="Lista Cronograma">
                     <p:dataTable value="#{beanCronograma.listaCrono}" var="C">
-                        <p:column headerText="ID">
+                        <p:column headerText="Id">
                             <p:outputLabel value="#{C.idcronograma}"/>
                         </p:column>
 
@@ -36,14 +36,15 @@ and open the template in the editor.
                         <p:column headerText="Usuario">
                             <p:outputLabel value="#{C.idusuario.nombres}"/>
                         </p:column>
-
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
-                            <p:commandButton value="Editar" actionListener="#{beanCronograma.modificar(C)}" update=":form"/>
+                            <!--<p:commandButton value="Editar" update=":form"/>-->
+                            <p:commandButton value="Editar" actionListener="#{beanCronograma.modificar(C)}" oncomplete="PF('dialog1').show();" update=":dialog">
+                            </p:commandButton>
                             <p:commandButton value="Borrar" actionListener="#{beanCronograma.eliminar(C)}" update=":form">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
 
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:confirmDialog global="true" showEffect="fold" hideEffect="fold" closeOnEscape="true" >
                                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                             </p:confirmDialog>
@@ -51,6 +52,24 @@ and open the template in the editor.
                     </p:dataTable>
                 </p:panel>
             </h:form>
+            <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" resizable="false" header="#{beanCronograma.accion}Cronograma" hideEffect="Fold" showEffect="Fold" width="500px">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="ID:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{beanCronograma.crono.idcronograma}"/>
+
+                        <p:outputLabel value="Nombre:"/>
+                        <p:inputText value="#{beanCronograma.crono.nombre}"/>
+
+                        <p:outputLabel value="Descripcion"/>
+                        <p:inputText value="#{beanCronograma.crono.descripcion}"/>
+
+                        <p:outputLabel value="Usuario"/>
+                        <p:inputText value="#{beanCronograma.crono.idusuario.idusuario}"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Actualizar" actionListener="#{beanCronograma.actualizar()}" ajax="true" update=":form"/>
+                </h:form>
+            </p:dialog>
         </div>    
     </h:body>
 </html>

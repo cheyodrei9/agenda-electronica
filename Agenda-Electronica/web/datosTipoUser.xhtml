@@ -28,7 +28,7 @@ and open the template in the editor.
                             <p:outputLabel value="#{user.tipo}"/>
                         </p:column>
                         
-                        <p:column headerText="Acciones" >
+                        <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                             <p:commandButton value="Botones invalidos"/>
                             <p:commandButton value="Editar" actionListener="#{beanTiposUsuarios.guardar()}" update=":form"/>
                             <p:commandButton value="Borrar" actionListener="#{beanTiposUsuarios.eliminar(user)}" update=":form"/>

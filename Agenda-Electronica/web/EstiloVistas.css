@@ -18,6 +18,7 @@
     width: 80%;
     margin-top: 30px;
     margin-left: 150px;
+    margin-right: 150px;
 }
 
 .cronograma{
@@ -27,6 +28,24 @@
 }
 
 .fases{
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+.roles{
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+.tiposface{
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+.tipoUser{
     width: 80%;
     margin-top: 30px;
     margin-left: 150px;

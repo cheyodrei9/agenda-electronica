@@ -16,7 +16,7 @@ and open the template in the editor.
     <h:body>
         <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
-        <div class="tipoFac">
+        <div class="tiposface">
             <h:form id="form">
                 <p:panel header="Lista de Tipos de Faces">
                     <p:dataTable value="#{beanTipoFases.listaTipoFases}" var="tf">
@@ -28,7 +28,7 @@ and open the template in the editor.
                             <p:outputLabel value="#{tf.tipofase}"/>
                         </p:column>
                         
-                        <p:column headerText="Acciones" >
+                        <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                             <p:commandButton value="botones invaidos"/>
                             <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanTipoFases.Editar(tf)}" update=":form"/>
                             <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanTipoFases.borrar(tf)}" update=":form"/>

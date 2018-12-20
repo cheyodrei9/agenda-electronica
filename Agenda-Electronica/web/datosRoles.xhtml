@@ -16,22 +16,22 @@ and open the template in the editor.
     <h:body>
         <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
-        <div class="rol">
+        <div class="roles">
             <h:form id="form">
                 <p:panel header="Lista de Roles">
                     <p:dataTable value="#{beanRoles.listaRoles}" var="R">
                         <p:column headerText="Id">
                             <p:outputLabel value="#{R.idrol}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Tipo de Usuario">
                             <p:outputLabel value="#{R.idtipousuario.tipo}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Rol">
                             <p:outputLabel value="#{R.rol}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                             <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanRoles.buscarId(R)}" update=":form"/>
                             <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanRoles.eliminar(R)}" update=":form">
@@ -43,7 +43,7 @@ and open the template in the editor.
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                             </p:confirmDialog>
                         </p:column>
-                        
+
                     </p:dataTable>
                 </p:panel>
             </h:form>
