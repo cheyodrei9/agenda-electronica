@@ -69,7 +69,8 @@ public class MantenimientoActividades {
         Query query;
         try {
             if (BeanLogin.getNiveldemando() == 3) {
-                query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario ="+BeanLogin.getIdusuario());
+                query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario =?1");
+                query.setParameter(1, BeanLogin.getIdusuario());
             } else {
                 query = em.createQuery("SELECT a FROM Actividades a");
             }
@@ -133,5 +134,41 @@ public class MantenimientoActividades {
             em.close();
         }
         return flag;
+    }
+    
+    public int pendingTask (){
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Query query = null;
+        int pendingTasks=0;
+        
+        try {
+            em.getTransaction().begin();
+            query = em.createQuery("SELECT COUNT(A) FROM Actividades a WHERE A.idusuario.idusuario =?1 ORDER BY A.idactividad DESC");
+            query.setParameter(1, BeanLogin.getIdusuario());
+            pendingTasks = Integer.parseInt(query.getSingleResult().toString());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: "+e.getMessage());
+            return -1;
+        }finally{
+            em.close();
+        }
+        return pendingTasks;
+    }
+    
+    public List<Actividades> newTasks(int newTasks){
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        List<Actividades> listNewTasks = null;
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario =?1 ORDER BY A.idactividad DESC");
+            query.setParameter(1, BeanLogin.getIdusuario());
+            listNewTasks = query.setMaxResults(newTasks).getResultList();
+            return listNewTasks;
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());            
+            return null;
+        }finally{
+            em.close();
+        }
     }
 }

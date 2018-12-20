@@ -5,6 +5,7 @@
  */
 package BeansCalendario;
 
+import Mantenimiento.MantenimientoActividades;
 import Mantenimiento.MantenimientoUsusario;
 import Persistencia.Usuarios;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class BeanLogin {
     private String password;
     private static int idusuario;
     private static int niveldemando;
+    private static int numberOFtasks;
     private String user_id;
     private int user_lvl;
 
@@ -53,6 +55,15 @@ public class BeanLogin {
         return niveldemando;
     }
 
+    public static int getNumberOFtasks() {
+        return numberOFtasks;
+    }
+
+    public static void setNumberOFtasks() {
+        MantenimientoActividades ma = new MantenimientoActividades();
+        BeanLogin.numberOFtasks = ma.pendingTask();
+    }
+
     public String getUser_id() {
         return user_id;
     }
@@ -76,6 +87,7 @@ public class BeanLogin {
     public BeanLogin() {
     }
 
+    //Metodo de inicio de sesion
     public void loginAgenda() throws IOException {
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
         Usuarios usuario = manUsuario.iniciarSesion(username, password);
@@ -83,6 +95,7 @@ public class BeanLogin {
         boolean loggedIn = false;
         
         if (usuario != null) {
+            //asignacion de datos del usuario a variables para su uso en restricciones u otros metodos
             idusuario = usuario.getIdusuario();
             user_id = usuario.getNombres();
             niveldemando = usuario.getNiveldemando();
@@ -97,12 +110,14 @@ public class BeanLogin {
         PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
     }
 
+    //metodo de cierre de session
     public void logoutAgenda() throws IOException {
         BeanLogin.idusuario = 0;
         BeanLogin.niveldemando = 0;
         FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
     }
 
+    
     public void redirect(String redir) throws IOException {
         switch (redir) {
             case "TiposActividades":
