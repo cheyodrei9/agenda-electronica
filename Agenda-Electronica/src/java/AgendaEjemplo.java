@@ -316,10 +316,9 @@ public class AgendaEjemplo implements Serializable {
                 actividades.setIdfase(new Fases());
                 actividades.setIdusuario(new Usuarios());
 
-                MantenimientoActividades mact = new MantenimientoActividades();
+            
 
-                lista = mact.consultar();
-               lista2= fecha(lista);
+             
                 
 
             } else {
@@ -327,7 +326,15 @@ public class AgendaEjemplo implements Serializable {
 
                 event = new DefaultScheduleEvent();
             }
-        } else {
+                MantenimientoActividades mact = new MantenimientoActividades();  
+            lista = mact.consultar();
+         lista2 = new ArrayList();
+            lista2= fecha(lista);
+         
+                  
+        }
+        
+        else {
             if (BeanLogin.getNiveldemando() == 3) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No permitido", "La accion requiere permisos de administración");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
