@@ -7,54 +7,36 @@ body{
 }
 #container{
     display: flex; 
-    width: 100%;
-    max-width: 1450px;
-    min-width: 700px;
 }
 .ui-outputlabel .ui-outputlabel-rfi {/*asterisco*/
     margin-left: .4em;
     display: none;
 }
 #calendario{
+    /*background-image: url(Imagenes/fondo.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
-    padding-top: 1.5%;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
+    padding: 30px; 
     width: 40%;
     height: 550px;
-    border-top: 5px;
-    border-bottom: 5px;
-    border-left: 5px;
+    border-right: 1px double;
+    border-top: 5px double;
+    border-bottom: 5px double;
+    border-left: 5px double;
     border-color: black;
-    border-style: double;
-    border-right-style: none;
-    border-right-style: dashed;
-    border-radius: 30px 50px 50px 30px;
-    -moz-border-radius: 30px 50px 50px 30px;
-    -webkit-border-radius: 30px 50px 50px 30px;
     float: left;
     margin-left: 10px;
 }
 
 #tabla{
+    /*background-image: url(Imagenes/fondo1.jpg) ;*/
     background: rgba(152,46,46,0.7) !important;
-    padding-top: 3%;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-bottom: 1.31%;
+    padding: 30px;
     width: 100%;
     height: 550px;
-    border-right: 5px;
-    border-top: 5px;
-    border-bottom: 5px;
+    border-right: 5px double;
+    border-top: 5px double;
+    border-bottom: 5px double;
     border-color: black;
-    border-top-style: double;
-    border-right-style: double;
-    border-bottom-style: double;
-    border-left-style: dashed;
-    border-radius: 50px 30px 30px 50px;
-    -moz-border-radius: 50px 30px 30px 50px;
-    -webkit-border-radius: 50px 30px 30px 50px;
     float: left;
     margin-right: 10px;
 }
@@ -63,7 +45,7 @@ body{
     font-weight: bold;
 }
 
-/*Estilo para tabla de consulta
+/*Estilo para tabla de consulta*/
 .ui-datalist {
     width:500px; 
     margin-bottom: 5px;
@@ -76,57 +58,34 @@ body{
 
 .paginated .ui-datalist-data {
     padding-left: 20px;
-}*/
+}
 
 
-/*ESTILOS PARA EL APARTADO DEL CALEDARIO*/
-
-/*Estilos para los botones dentro del calendario*/
+/*Estilos para los botones*/
 .fc button {
     background-color: antiquewhite;
     color:brown;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.fc-left{
-    margin-left: 15%;
-}
-
-.fc button:hover {
-    background-color: burlywood;
-    color:#720000;
-    box-shadow: 1px 1px antiquewhite;
 }
 
 button.fc-agendaWeek-button.ui-button.ui-state-default{ 
     display: none; 
 }
-button.fc-month-button.ui-button.ui-state-default{ 
-    display: none; 
-}
-button.fc-agendaDay-button.ui-button.ui-state-default{ 
-    display: none; 
-}
-/*fin de estilos de botones*/
 
-/*Estilos para el texto del calendario y tabla del mismo*/
+
+/*Estilos para el contenido del calendario*/
 .titulo{
     font-family: cursive;
     color:antiquewhite;
-    margin-bottom: 7%;
-    text-decoration: underline overline blink;
 }
 
 .fc-center{
-    margin-top: 7%;
+    color: brown;
     font-family: cursive;
     color:antiquewhite;
 }
 
 .fc th{
     color: brown !important;
-    font-family: cursive;
     background: antiquewhite !important;
 }
 
@@ -135,9 +94,11 @@ button.fc-agendaDay-button.ui-button.ui-state-default{
     background-color: antiquewhite;
 }
 
-/*Fin de los estilos de calendario y texto*/
 
-/*Estilo para el cuadro de dialogo de agregar eventos*/
+/*.ui-dialog{*//* Transparencia del panel*/
+/* background: rgba(152,46,46,0.8) !important;
+}*/
+
 .ui-widget-content {
     background: antiquewhite;
 }
@@ -150,19 +111,36 @@ button.fc-agendaDay-button.ui-button.ui-state-default{
 
 .ui-dialog .ui-dialog-content{/*Lo q contiene el desplegable*/
     color: #720000;
+    text-align: left;
+    padding-left: 20px;
     background-color: antiquewhite;
 }
-/*fin del estilo para el cuadro de dialogo*/
-/*FIN DE LOS ESTILOS DEL CALENDARIO*/
 
-/*ESTILOS PARA LA TABLA DONDE SE INSERTAN LAS ACTIVIDADES*/
+
+/*Estilos para el widget de insercion de actividades*/
+
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header { 
     background-color: #720000; 
 }
 
+/*.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header:hover { 
+    background-color: rgba(156,32,32,0.8); 
+    color: antiquewhite;
+}*/
+
+.ui-paginator-first .ui-icon , .ui-paginator-prev .ui-icon, .ui-paginator-next .ui-icon, ui-paginator-first .ui-icon, .ui-paginator-last .ui-icon{ 
+    display: none !important;
+    border: none; 
+    background-color: antiquewhite 
+}
+
+
+.ui-button, ui-widget, ui-state-default, ui-corner-all, ui-button-text-only, ui-state-hover{
+    background-color: burlywood;
+}
+
 .ui-state-default{
     background-color: burlywood;
-    font-family: cursive;
     color: #720000;
 }
 
@@ -176,6 +154,16 @@ button.fc-agendaDay-button.ui-button.ui-state-default{
 
 .ui-widget-content,ui-datatable-even,tabla{
     color: #720000;
-    font-family: cursive;
 }
-/*FIN DE LOS ESTILOS DE LA TABLA DONDE INSERTAN ACTIVIDADES*/
+
+.ui-state-default.ui-datatable-data ui-widget-content{
+    width: 20px;
+}
+
+.ui-widget-content ui-datatable-even {
+    width: 20px;
+}
+
+.ui-widget-content ui-datatable-even tabla{
+    width: 20px;
+}
