@@ -63,14 +63,15 @@ public class MantenimientoActividades {
 
     /*metodo para consultar con lista*/
     public List<Actividades> consultar() {
-        List<Actividades> listaA = null;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        BeanLogin beanLogin = new BeanLogin();
+        List<Actividades> listaA = null;        
         em.getTransaction().begin();
         Query query;
         try {
-            if (BeanLogin.getNiveldemando() == 3) {
+            if (beanLogin.getUser_lvl() == 3) {
                 query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario =?1");
-                query.setParameter(1, BeanLogin.getIdusuario());
+                query.setParameter(1, beanLogin.getUser_id());
             } else {
                 query = em.createQuery("SELECT a FROM Actividades a");
             }
@@ -138,13 +139,14 @@ public class MantenimientoActividades {
     
     public int pendingTask (){
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        BeanLogin beanLogin = new BeanLogin();
         Query query = null;
         int pendingTasks=0;
         
         try {
             em.getTransaction().begin();
             query = em.createQuery("SELECT COUNT(A) FROM Actividades a WHERE A.idusuario.idusuario =?1 ORDER BY A.idactividad DESC");
-            query.setParameter(1, BeanLogin.getIdusuario());
+            query.setParameter(1, beanLogin.getUser_lvl());
             pendingTasks = Integer.parseInt(query.getSingleResult().toString());
         } catch (NumberFormatException e) {
             System.out.println("Error: "+e.getMessage());
@@ -157,11 +159,12 @@ public class MantenimientoActividades {
     
     public List<Actividades> newTasks(int newTasks){
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        BeanLogin beanLogin = new BeanLogin();
         List<Actividades> listNewTasks = null;
         try {
             em.getTransaction().begin();
             Query query = em.createQuery("SELECT a FROM Actividades a WHERE A.idusuario.idusuario =?1 ORDER BY A.idactividad DESC");
-            query.setParameter(1, BeanLogin.getIdusuario());
+            query.setParameter(1, beanLogin.getUser_id());
             listNewTasks = query.setMaxResults(newTasks).getResultList();
             return listNewTasks;
         } catch (Exception e) {

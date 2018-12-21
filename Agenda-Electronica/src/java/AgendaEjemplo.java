@@ -53,7 +53,7 @@ public class AgendaEjemplo implements Serializable {
 
     private ScheduleModel eventModel;
     private Actividades actividades;
-     private Actividadesf actividadesf;
+    private Actividadesf actividadesf;
     private List<Actividadesf> lista2 = new ArrayList();
 
     public List<Actividadesf> getLista2() {
@@ -132,25 +132,17 @@ public class AgendaEjemplo implements Serializable {
     private final MantenimientoActividades mttoac = new MantenimientoActividades();
 
     @PostConstruct
-    public void init()  {
+    public void init() {
 
         MantenimientoCronogramas mc = new MantenimientoCronogramas();
         MantenimientoTiposActividades mta = new MantenimientoTiposActividades();
         MantenimientoFases mf = new MantenimientoFases();
         MantenimientoUsusario mu = new MantenimientoUsusario();
         lista = mttoac.consultar();
-        
-        lista2=fecha(lista);
-        System.out.println("AQUIIIIIIIIIIIIIIIII"+lista2.toString());
-        
-        
-         
-        
-        
-        
-        
-        
-        
+
+        lista2 = fecha(lista);
+        System.out.println("AQUIIIIIIIIIIIIIIIII" + lista2.toString());
+
         listCr = mc.consultar();
         listF = mf.consultar();
         listTA = mta.consultar();
@@ -297,7 +289,8 @@ public class AgendaEjemplo implements Serializable {
     }
 
     public void addEvent() throws IOException {
-        if (BeanLogin.getNiveldemando() == 1 || BeanLogin.getNiveldemando() == 2) {
+        BeanLogin beanLogin = new BeanLogin();
+        if (beanLogin.getUser_lvl() == 1 || beanLogin.getUser_lvl() == 2) {
             if (event.getId() == null) {
                 for (int i = 0; i < 1; i++) {
                     for (Integer in : listaUser) {
@@ -316,26 +309,18 @@ public class AgendaEjemplo implements Serializable {
                 actividades.setIdfase(new Fases());
                 actividades.setIdusuario(new Usuarios());
 
-            
-
-             
-                
-
             } else {
                 eventModel.updateEvent(event);
 
                 event = new DefaultScheduleEvent();
             }
-                MantenimientoActividades mact = new MantenimientoActividades();  
+            MantenimientoActividades mact = new MantenimientoActividades();
             lista = mact.consultar();
-         lista2 = new ArrayList();
-            lista2= fecha(lista);
-         
-                  
-        }
-        
-        else {
-            if (BeanLogin.getNiveldemando() == 3) {
+            lista2 = new ArrayList();
+            lista2 = fecha(lista);
+
+        } else {
+            if (beanLogin.getUser_lvl() == 3) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No permitido", "La accion requiere permisos de administración");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             } else {
@@ -369,51 +354,39 @@ public class AgendaEjemplo implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-    private List fecha (List<Actividades> lista){
-        
-        for ( int i = 0 ; i<lista.size();i++){
-        SimpleDateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", new Locale("es","VE"));
-        String fecha = format.format(lista.get(i).getFechaactividad());
+
+    private List fecha(List<Actividades> lista) {
+
+        for (int i = 0; i < lista.size(); i++) {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", new Locale("es", "VE"));
+            String fecha = format.format(lista.get(i).getFechaactividad());
             System.out.println(fecha);
-        try{
-         
-        actividadesf = new Actividadesf();  
-        actividadesf.setIdactividad( lista.get(i).getIdactividad());
-        actividadesf.setIdcronograma(lista.get(i).getIdcronograma());
-        actividadesf.setIdtipoactividad(lista.get(i).getIdtipoactividad());
-        actividadesf.setIdusuario(lista.get(i).getIdusuario());
-         actividadesf.setNombreactividad(lista.get(i).getNombreactividad());  
-          actividadesf.setFechaactividad(lista.get(i).getFechaactividad());
-          actividadesf.setIdfase(lista.get(i).getIdfase());
-          actividadesf.setFecha(fecha);
-         
-         
-           lista2.add(actividadesf);
-          
-     
-          
-        
-        }catch(Exception e){
-         
-            System.out.println(e.getMessage()+"este es el error");
+            try {
+
+                actividadesf = new Actividadesf();
+                actividadesf.setIdactividad(lista.get(i).getIdactividad());
+                actividadesf.setIdcronograma(lista.get(i).getIdcronograma());
+                actividadesf.setIdtipoactividad(lista.get(i).getIdtipoactividad());
+                actividadesf.setIdusuario(lista.get(i).getIdusuario());
+                actividadesf.setNombreactividad(lista.get(i).getNombreactividad());
+                actividadesf.setFechaactividad(lista.get(i).getFechaactividad());
+                actividadesf.setIdfase(lista.get(i).getIdfase());
+                actividadesf.setFecha(fecha);
+
+                lista2.add(actividadesf);
+
+            } catch (Exception e) {
+
+                System.out.println(e.getMessage() + "este es el error");
+            }
+
+        }
+
+        return lista2;
     }
-          
-       
-       
-    }
-        
-      
-       
-       
-       
-       
-    
-         return lista2;
-}
-    
+
     public void eliminar(Actividades actividades) {
-        MantenimientoActividades mact = new MantenimientoActividades(); 
+        MantenimientoActividades mact = new MantenimientoActividades();
         mact.eliminar(actividades);
         lista = mact.consultar();
         String advertencia = "";
@@ -425,10 +398,10 @@ public class AgendaEjemplo implements Serializable {
 
         }
     }
-    
+
     public void modificar(Actividades actividades) {
-        MantenimientoActividades mact = new MantenimientoActividades(); 
-        actividades=mact.consultarid(actividades.getIdactividad());
+        MantenimientoActividades mact = new MantenimientoActividades();
+        actividades = mact.consultarid(actividades.getIdactividad());
 
         String advertencia = "";
         if (actividades != null) {
@@ -438,8 +411,9 @@ public class AgendaEjemplo implements Serializable {
             advertencia = "Consulta no realizada";
         }
     }
+
     public void actualizar() {
-        MantenimientoActividades mact = new MantenimientoActividades(); 
+        MantenimientoActividades mact = new MantenimientoActividades();
         mact.Actualizar(actividades);
     }
 }

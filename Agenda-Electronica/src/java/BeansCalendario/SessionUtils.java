@@ -23,9 +23,14 @@ public class SessionUtils {
         return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
-    public static String getUsername() {
+    public static String getUser_level() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        return session.getAttribute("username").toString();
+        return session.getAttribute("user_level").toString();
+    }
+    
+    public static String getTasks() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        return session.getAttribute("tasks").toString();
     }
 
     public static String getUserId() {

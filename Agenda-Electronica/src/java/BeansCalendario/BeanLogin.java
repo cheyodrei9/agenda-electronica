@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -23,12 +24,11 @@ import org.primefaces.PrimeFaces;
 @RequestScoped
 public class BeanLogin {
 
+    HttpSession session = SessionUtils.getSession();
+
     private String username;
     private String password;
-    private static int idusuario;
-    private static int niveldemando;
-    private static int numberOFtasks;
-    private String user_id;
+    private int user_id;
     private int user_lvl;
 
     public String getUsername() {
@@ -47,33 +47,17 @@ public class BeanLogin {
         this.password = password;
     }
 
-    public static int getIdusuario() {
-        return idusuario;
-    }
-
-    public static int getNiveldemando() {
-        return niveldemando;
-    }
-
-    public static int getNumberOFtasks() {
-        return numberOFtasks;
-    }
-
-    public static void setNumberOFtasks() {
-        MantenimientoActividades ma = new MantenimientoActividades();
-        BeanLogin.numberOFtasks = ma.pendingTask();
-    }
-
-    public String getUser_id() {
+    public int getUser_id() {
+        user_id = Integer.parseInt(session.getAttribute("userid").toString());
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
     public int getUser_lvl() {
-        user_lvl = niveldemando;
+        user_lvl = Integer.parseInt(session.getAttribute("user_level").toString());
         return user_lvl;
     }
 
@@ -88,41 +72,43 @@ public class BeanLogin {
     }
 
     //Metodo de inicio de sesion
-    public void loginAgenda() throws IOException {
+    public String loginAgenda() throws IOException {
         MantenimientoUsusario manUsuario = new MantenimientoUsusario();
         Usuarios usuario = manUsuario.iniciarSesion(username, password);
         FacesMessage message = null;
         boolean loggedIn = false;
-        
+
         if (usuario != null) {
+            MantenimientoActividades ma = new MantenimientoActividades();
             //asignacion de datos del usuario a variables para su uso en restricciones u otros metodos
-            idusuario = usuario.getIdusuario();
-            user_id = usuario.getNombres();
-            niveldemando = usuario.getNiveldemando();
+            session.setAttribute("userid", usuario.getIdusuario());
+            session.setAttribute("user_level", usuario.getNiveldemando());
+            session.setAttribute("tasks", ma.pendingTask());
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getNombres());
-            FacesContext.getCurrentInstance().getExternalContext().redirect("Calendario.xhtml");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
+            return "calendario";
         } else {
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Credenciales invalidos");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
+            return "login";
         }
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
     }
 
     //metodo de cierre de session
-    public void logoutAgenda() throws IOException {
-        BeanLogin.idusuario = 0;
-        BeanLogin.niveldemando = 0;
-        FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+    public String logoutAgenda() throws IOException {
+        session.invalidate();
+        return "login";
     }
 
-    
     public void redirect(String redir) throws IOException {
         switch (redir) {
             case "TiposActividades":
-                if (niveldemando == 1 || niveldemando == 2 || niveldemando == 3) {
-                    if (niveldemando == 2 || niveldemando == 3) {
+                if (this.getUser_lvl() == 1 || this.getUser_lvl() == 2 || this.getUser_lvl() == 3) {
+                    if (this.getUser_lvl() == 2 || this.getUser_lvl() == 3) {
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No permitido", "La accion requiere permisos de administración superior");
                         PrimeFaces.current().dialog().showMessageDynamic(message);
                     } else {
