@@ -134,6 +134,7 @@ public class BeanCronograma {
         MantenimientoCronogramas mCrono = new MantenimientoCronogramas();
         System.out.println("act" + Crono.getIdcronograma());
         mCrono.Actualizar(Crono);
+        Crono= new Cronogramas();
         
 //private void Actualizar(){
 //    Mcrono.Actualizar(this.Crono);
