@@ -5,11 +5,13 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
         <navigation-case>
+            <from-action>#{beanLogin.logoutAgenda()}</from-action>
             <from-outcome>login</from-outcome>
             <to-view-id>/Login.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
+            <from-action>#{beanLogin.loginAgenda()}</from-action>
             <from-outcome>calendario</from-outcome>
             <to-view-id>/Calendario.xhtml</to-view-id>
             <redirect></redirect>

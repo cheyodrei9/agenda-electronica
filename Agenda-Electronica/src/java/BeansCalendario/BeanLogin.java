@@ -52,17 +52,9 @@ public class BeanLogin {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public int getUser_lvl() {
         user_lvl = Integer.parseInt(session.getAttribute("user_level").toString());
         return user_lvl;
-    }
-
-    public void setUser_lvl(int user_lvl) {
-        this.user_lvl = user_lvl;
     }
 
     /**
