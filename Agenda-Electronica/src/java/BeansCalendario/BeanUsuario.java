@@ -134,7 +134,15 @@ public class BeanUsuario {
     public void actualizar (){
         MantenimientoUsusario Musuario = new MantenimientoUsusario();
         System.out.println("usuario" +usuario.getIdusuario());
-        Musuario.Actualizar(usuario);
+        String adv="";
+        if (Musuario.Actualizar(usuario)==1) {
+            listaU=Musuario.consultar();
+            adv="Se ha actualizado Correctamente";
+        } else {
+            adv="Error al actualizar";
+        }
+        FacesMessage msg = new FacesMessage(adv);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
 }

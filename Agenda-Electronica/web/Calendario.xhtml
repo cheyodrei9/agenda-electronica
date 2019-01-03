@@ -53,7 +53,7 @@
                     <p:growl id="messages" showDetail="true" />
                     <h:panelGrid columnClasses="value">
                         <center><h1 class="titulo">CALENDARIO</h1></center>
-                        <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="UTC-6">
+                        <p:schedule id="schedule" locale="es" value="#{agendaEjemplo.eventModel}" widgetVar="myschedule" timeZone="GMT-6">
                             <p:ajax event="dateSelect" listener="#{agendaEjemplo.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                             <p:ajax event="eventSelect" listener="#{agendaEjemplo.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         </p:schedule>
@@ -64,7 +64,7 @@
                             <p:inputText id="nombreact" value="#{agendaEjemplo.event.title}" required="true"/>
 
                             <p:outputLabel for="from" value="Fecha Actividad:" />
-                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="UTC-6" pattern="yyyy/MM/dd "/>
+                            <p:calendar id="from" value="#{agendaEjemplo.event.startDate}" timeZone="GMT-6" pattern="yyyy/MM/dd "/>
 
                             <p:outputLabel for="tipoa" value="Tipo Actividad:" />
 

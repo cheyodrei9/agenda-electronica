@@ -20,7 +20,7 @@ and open the template in the editor.
         <div class="fases">
             <h:form id="form">
                 <p:panel header="Lista Fases">
-                    <p:dataTable value="#{beanFases.listaFase}" var="C">
+                    <p:dataTable id="Tablita" value="#{beanFases.listaFase}" var="C">
                         <p:column headerText="ID">
                             <p:outputLabel value="#{C.idfase}"/>
                         </p:column>
@@ -38,7 +38,7 @@ and open the template in the editor.
                         </p:column>
 
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
-                            <p:commandButton value="Editar" actionListener="#{beanFases.modificar(C)}" update=":form"/>
+                            <p:commandButton value="Editar" actionListener="#{beanFases.modificar(C)}" oncomplete="PF('wdlgdesplegable').show();" update=":desplegable"/>
                             <p:commandButton value="Borrar" actionListener="#{beanFases.eliminar(C)}" update=":form">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
@@ -52,5 +52,15 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
+        <p:dialog id="desplegable" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable">
+            <h:form>
+                <center>
+                    <h:outputLabel value="ID:" /><br/><p:inputText value="#{beanFases.fase.idfase}" /><br/>
+                    <h:outputLabel value="ID Tipo de Fase:" /><br/><p:inputText value="#{beanFases.fase.idtipofase.idtipofase}" /><br/>
+                    <h:outputLabel value="Fecha" /><br/><p:inputText value="#{beanFases.fase.fecha}" /><br/><br/>
+                    <p:commandButton value="Actualizar" actionListener="#{beanFases.actualizar()}" update=":form:Tablita desplegable"/>
+                </center>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

@@ -33,7 +33,7 @@ and open the template in the editor.
                         </p:column>
 
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
-                            <p:commandButton value="Editar" class="btn btn-secondary" actionListener="#{beanRoles.buscarId(R)}" update=":form"/>
+                            <p:commandButton value="Editar" oncomplete="PF('despl').show();" class="btn btn-secondary" actionListener="#{beanRoles.buscarId(R)}" update=":desplegable"/>
                             <p:commandButton value="Borrar" class="btn btn-secondary" actionListener="#{beanRoles.eliminar(R)}" update=":form">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
@@ -48,5 +48,16 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
+        <p:dialog id="desplegable" style="text-align: center;" header="actualizar" widgetVar="despl">
+            <h:form>
+                <h:outputLabel value="ID:" /><p:spacer width="7"/><p:inputText value="#{beanRoles.roles.idrol}"/>
+                <br/>
+                <h:outputLabel value="Tipo Usuario:" /><br/><p:inputText value="#{beanRoles.roles.idtipousuario.idtipousuario}" />
+                <br/>
+                <h:outputLabel value="Rol:"/><p:spacer width="8"/><p:inputText value="#{beanRoles.roles.rol}"/>
+                <br/><br/>
+                <p:commandButton value="Actualizar" actionListener="#{beanRoles.modificar()}"/>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

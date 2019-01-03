@@ -17,11 +17,12 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
+        <p:growl id="msg"  showDetail="true" life="2000"/>
         <div id="incluirPagina"/>
         <div class="usuario">
             <h:form id="form">
                 <p:panel header="Lista Usuarios" style="text-align: center;">
-                    <p:dataTable value="#{beanUsuario.listaU}" var="U">
+                    <p:dataTable id="Tablita" value="#{beanUsuario.listaU}" var="U">
                         <p:column headerText="ID">
                             <p:outputLabel value="#{U.idusuario}"/>
                         </p:column>
@@ -53,12 +54,38 @@ and open the template in the editor.
                       
 
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1}">
-                            <p:commandButton value="No esta la accion definida" actionListener="#{beanUsuario.guardar()}"/>
+                            <p:commandButton value="Editar" oncomplete="PF('wdlgdesplegable').show();" update=":desplegable" actionListener="#{beanUsuario.modificar(U)}"/>
+                            <p:commandButton value="Eliminar" actionListener="#{beanUsuario.eliminar(U)}"/>
                         </p:column>
 
                     </p:dataTable>
                 </p:panel>
             </h:form>
         </div>
+        <p:dialog id="desplegable" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable">
+            <h:form>
+                <center>
+                    <h:outputLabel style="color: #000000" value="ID: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.idusuario}" readonly="#{not facesContext.postback or facesContext.renderResponse}" style="width: 50px;"/><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Tipo Usuario: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" readonly="#{not facesContext.postback or facesContext.renderResponse}" style="width: 50px;"/><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Nombre: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.nombres}" /><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Apellido: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.apellidos}" /><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Genero " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.genero}" /><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Telefono: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.telefono}" style="width: 90px;"/><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Correo: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.correo}" /><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Nivel de mando: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.niveldemando}" style="width: 50px;" readonly="#{not facesContext.postback or facesContext.renderResponse}"/><br/>
+                    <br/><h:outputLabel style="color: #000000" value="Contraseña: " /><p:spacer width="7" height="15"/>
+                    <p:inputText value="#{beanUsuario.usuario.contra}" /><br/><br/>
+                    <br/><p:commandButton value="Actualizar" actionListener="#{beanUsuario.actualizar()}" update=":form:Tablita msg,desplegable"/>
+                </center>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

@@ -128,6 +128,8 @@ public class BeanFases {
     }
     public void actualizar() {
         MantenimientoFases Mfase = new MantenimientoFases();
+        
+fase.setEstado("activo");
         Mfase.Actualizar(fase);
     }
     
