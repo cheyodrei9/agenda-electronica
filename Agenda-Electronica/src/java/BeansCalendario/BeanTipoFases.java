@@ -105,7 +105,7 @@ public class BeanTipoFases {
         }
     }
     
-    public void Actualizar(){
+    public void actualizar(){
         MantenimientoTiposFases Mtf = new MantenimientoTiposFases();
         Mtf.Actualizar(tiposf);
     }

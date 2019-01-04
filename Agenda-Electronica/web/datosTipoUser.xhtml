@@ -19,7 +19,7 @@ and open the template in the editor.
         <div class="tipoUser">
             <h:form id="form">
                 <p:panel header="lista de Tipos de Usuarios">
-                    <p:dataTable value="#{beanTiposUsuarios.listaTu}" var="user">
+                    <p:dataTable id="Table" value="#{beanTiposUsuarios.listaTu}" var="user">
                         <p:column headerText="id">
                             <p:outputLabel value="#{user.idtipousuario}"/>
                         </p:column>
@@ -29,8 +29,7 @@ and open the template in the editor.
                         </p:column>
                         
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
-                            <p:commandButton value="Botones invalidos"/>
-                            <p:commandButton value="Editar" actionListener="#{beanTiposUsuarios.guardar()}" update=":form"/>
+                            <p:commandButton value="Editar" actionListener="#{beanTiposUsuarios.modificar(user)}" oncomplete="PF('despl').show();" update=" desplegable"/>
                             <p:commandButton value="Borrar" actionListener="#{beanTiposUsuarios.eliminar(user)}" update=":form"/>
                         </p:column>
                         
@@ -38,5 +37,12 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
+        <p:dialog id="desplegable" widgetVar="despl" header="Actualizar" style="text-align: center;" closeOnEscape="true">
+            <h:form>
+                <h:outputLabel value="ID:" /><p:spacer width="7" /><p:inputText value="#{beanTiposUsuarios.TU.idtipousuario}" /><br/><br/>
+                <h:outputLabel value="Tipo Usuario:" /><p:spacer width="7" /><p:inputText value="#{beanTiposUsuarios.TU.tipo}" /><br/><br/>
+                <p:commandButton value="Actualizar" actionListener="#{beanTiposUsuarios.actualizar()}" update=":form:Table desplegable" />
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

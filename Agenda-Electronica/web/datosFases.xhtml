@@ -52,7 +52,7 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
-        <p:dialog id="desplegable" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable">
+        <p:dialog id="desplegable" closeOnEscape="true" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable">
             <h:form>
                 <center>
                     <h:outputLabel value="ID:" /><br/><p:inputText value="#{beanFases.fase.idfase}" /><br/>
