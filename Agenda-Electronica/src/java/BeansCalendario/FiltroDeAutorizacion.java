@@ -15,6 +15,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author julio.benavidesusam
  */
-public class Filtro implements Filter {
+@WebFilter(filterName = "Filtro de Autorizaciones", urlPatterns = {"*.xhtml"})
+public class FiltroDeAutorizacion implements Filter {
 
     private static final boolean debug = true;
 
@@ -32,13 +34,13 @@ public class Filtro implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public Filtro() {
+    public FiltroDeAutorizacion() {
     }
-    
+
     @Override
-    public void  init(FilterConfig config) throws ServletException{
+    public void init(FilterConfig config) throws ServletException {
     }
-    
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
@@ -49,16 +51,15 @@ public class Filtro implements Filter {
             HttpServletResponse response1 = (HttpServletResponse) response;
             HttpSession session = request1.getSession(false);
             String reqURI = request1.getRequestURI();
-            if (reqURI.indexOf("/Login.xhtml") >= 0 || (session != null && session.getAttribute("usename") != null)
+            if (reqURI.indexOf("/Login.xhtml") >= 0 || (session != null && session.getAttribute("userid") != null)
                     || reqURI.indexOf("/public/") >= 0 || reqURI.contains("javax.faces.resourse")) {
-                chain.doFilter(request, response);                
-            }else{
-                response1.sendRedirect(request1.getContextPath()+"/faces/login.xhtml");
+                chain.doFilter(request, response);
+            } else {
+                response1.sendRedirect(request1.getContextPath() + "/faces/Login.xhtml");
             }
         } catch (IOException | ServletException e) {
-            System.out.println("Error: "+e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
-        
 }
