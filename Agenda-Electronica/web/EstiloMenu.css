@@ -1,3 +1,8 @@
+body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 .navbar-nav > li > .dropdown-menu {
     background:rgba(152,46,46,0.9);
     color: antiquewhite;
@@ -14,8 +19,8 @@
     color: antiquewhite;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-     background-color: rgba(152,46,46,0.3);
-     color: antiquewhite;
+    background-color: rgba(152,46,46,0.3);
+    color: antiquewhite;
 }
 
 .opcion{
@@ -28,7 +33,7 @@
 }
 
 .Menu{
-    margin-top: 30px;
+    margin-top: 1.5%;
     border-radius:  15px !important;
     font-size: 18px !important;
     border: 5px double;
@@ -42,10 +47,26 @@
 }
 .letra{
     color: antiquewhite;
+    margin-left: 5px;
 }
 
-#fondo{
+divider{
+    border-bottom-style: hidden;
+}
+
+divider:active{
+    border-bottom-style: hidden;
+    background-color: burlywood;
+    color:#720000;
+}
+
+#fondo1{
     background:rgba(152,46,46,0.1);
+}
+
+#fondo2{
+    position: absolute;
+    margin-left: 85%;
 }
 
 #menuLetra{
@@ -59,3 +80,75 @@
     padding-left: 25px;
 }
 
+/*Estilos para la tabla de agregar datos*/
+#tipotabla{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    border: 2px solid;
+    border-collapse: collapse;
+    border-color: #720000;
+    border-top-style: hidden;
+    border-bottom-style: dashed;
+    border-left-style: dashed;
+    border-right-style: dashed;
+    background:rgba(152,46,46,.9);
+
+}
+
+#encabezado{
+    text-align: center;
+    font-family: cursive;
+    color: #720000;
+    background:burlywood;
+    padding: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 50px 50px 50px 50px;
+}
+
+caption{
+    color: burlywood;
+    padding: 10px;
+    font-size: large;
+    font-family: cursive;
+    text-align: center;
+    background:rgba(152,46,46,.9);
+    border: 3px solid;
+}
+
+.tr-th{
+    border: 3px solid;
+    color: burlywood;
+}
+
+.espacio{
+    border: 3px solid;
+    color: burlywood;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.rotar{
+    -webkit-transform: rotate(-45deg); 
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.imagen{
+    background-image: url(Imagenes/images.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 90px 90px 90px 90px;
+    -moz-border-radius: 90px 90px 90px 90px;
+    -webkit-border-radius: 90px 90px 90px 90px;
+    border-style: solid;
+    border-color: #720000;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    left: 90%;
+}

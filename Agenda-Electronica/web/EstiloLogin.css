@@ -2,6 +2,8 @@ body{
     background-image: url(Imagenes/fondo.png);
     background-size: cover;
     background-repeat: no-repeat;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .padre {
@@ -9,14 +11,33 @@ body{
     width: 100%;
     /*IMPORTANTE*/
     position:absolute;
-    top:10px;
+    top:5%;
 }
 .hijo{
     height: 100%;
     width: 100%;
     /*IMPORTANTE*/
     position:absolute;
-    top:100px;
+    top:20%;
+    border:none;
+}
+
+.madre{
+    height: 50%;
+    width: 50%;
+    /*IMPORTANTE*/
+    position:absolute;
+    top:80%;
+    margin-left: 90%;
+    border:none;
+}
+
+.primo{
+    width: 125%;
+    /*IMPORTANTE*/
+    position:absolute;
+    top:50%;
+    margin-left: 52%;
     border:none;
 }
 

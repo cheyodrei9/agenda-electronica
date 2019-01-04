@@ -12,114 +12,170 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Agregar Datos</title>
+        <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/521/521415.png" />
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
         <div id="incluirPagina"/>
 
-        <h:form id="form">
-            <p:commandButton value="Agregar tipo de actividad" onclick="PF('dialog').show();">
-                <p:dialog id="dialog" widgetVar="dialog" closeOnEscape="true" resizable="false" header="#{beanTiposActividades.accion} Tipos Actividades" hideEffect="Fold" showEffect="Fold" width="500px">
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <p:outputLabel value="Tipo Actividad:" /><br/>
-                        <p:inputText value="#{beanTiposActividades.tip.tipoactividad}" placeholder="Escriba el nombre"/>
-                        <div> <br/></div>
-                        <f:facet name="footer">
-                            <p:commandButton value="Guardar" actionListener="#{beanTiposActividades.guardar()}" update=":form"/>
-                            <p:commandButton value="Actualizar" actionListener="#{beanTiposActividades.actualizar()}"  ajax="false" update=":form"/>
-                        </f:facet>
-                    </h:panelGrid>  
-                    <div>  </div>
-                    <p:dataTable value="#{beanTiposActividades.listTA}" var="T">
-                        <p:column headerText="Id">
-                            <p:outputLabel value="#{T.idtipoactividad}"/>
-                        </p:column>
-
-                        <p:column headerText="Tipo Actividad">
-                            <p:outputLabel value="#{T.tipoactividad}"/>
-                        </p:column>
-                        
-                        <p:column headerText="Editar">
-                            <p:commandButton value="Editar" actionListener="#{beanTiposActividades.modificar(T)}" update=":form"/>
-                        </p:column>
-                        
-                        <p:column headerText="Borrar">
-                            <p:commandButton value="Borrar" actionListener="#{beanTiposActividades.eliminar(T)}" update=":form"/>
-                        </p:column>
-                        
-                    </p:dataTable>
-                </p:dialog>
-            </p:commandButton>   
+        <h:form id="cuadro">
+            <p:commandButton value=""  onclick="PF('mensaje').show();" class="imagen"/>
+            <p:dialog id="dialog" widgetVar="mensaje" closeOnEscape="true" resizable="false" hideEffect="Fold" showEffect="Fold" width="500px">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h3 id="encabezado">
+                        Esta herramienta le presenta de manera ordenada los diferentes campos en los cuales usted puede agregar
+                        un nuevo dato. El dato ingresado se guardará en la base de datos y se podrá ver en su tabla de consulta respectiva.
+                    </h3>
+                </h:panelGrid>  
+            </p:dialog>  
         </h:form>
 
-        <div>  </div>
+        <table id="tipotabla">
+            <tr class="tr-th">
+                <th colspan="5">
+                    <caption>
+                        Seleccione una de las opciones presentes en esta tabla para agregar datos a su archivo
+                        correspondiente.
+                    </caption>
+                </th>
+            </tr>
+            <tr class="tr-th">
+                <th class="" rowspan="2">
+                    <h3 class="rotar">
+                        Agregar:
+                    </h3>
+                </th>
+                <td class="espacio">
+                    <h:form id="form">
+                        <p:commandButton value="1-) Tipo de actividad" onclick="PF('dialog').show();">
+                            <p:dialog id="dialog" widgetVar="dialog" closeOnEscape="true" resizable="false" header="#{beanTiposActividades.accion} Tipos Actividades" hideEffect="Fold" showEffect="Fold" width="500px">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Tipo Actividad:" /><br/>
+                                    <p:inputText value="#{beanTiposActividades.tip.tipoactividad}" placeholder="Escriba el nombre"/>
+                                    <br/><br/>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Guardar" actionListener="#{beanTiposActividades.guardar()}" update=":form"/>
+                                    </f:facet>
+                                </h:panelGrid>  
+                                <p:dataTable value="#{beanTiposActividades.listTA}" var="T">
+                                    <p:column headerText="Id">
+                                        <p:outputLabel value="#{T.idtipoactividad}"/>
+                                    </p:column>
 
-        <h:form id="farm">
-            <p:commandButton value="Agregar Dia" onclick="PF('dialog1').show();">
-                <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" resizable="false" header="#{beanDias.accion}Dia" hideEffect="Fold" showEffect="Fold" width="500px">
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <p:outputLabel value="Nombre De Dia:"/><br/>
-                        <p:inputText value="#{beanDias.dia.nombredia}"/><br/>
-                        <p:outputLabel value="Mes:"/><br/>
-                        <p:selectOneMenu value="#{beanDias.dia.idmes.idmes}">
-                            <f:selectItem itemValue="" itemLabel="Escoger Mes"/>
-                            <f:selectItems value="#{beanDias.listaMes}" var="lm" itemValue="#{lm.idmes}" itemLabel="#{lm.mes}"/>
-                        </p:selectOneMenu>
-                        <f:facet name="footer">
-                            <p:commandButton value="Guardar" actionListener="#{beanDias.guardar()}" update=":farm"/>
-                        </f:facet>
-                    </h:panelGrid>
-                    <div> </div>
-                    <p:dataTable value="#{beanDias.listaDias}" var="C">
-                        <p:column headerText="ID">
-                            <p:outputLabel value="#{C.iddia}"/>
-                        </p:column>
+                                    <p:column headerText="Tipo Actividad">
+                                        <p:outputLabel value="#{T.tipoactividad}"/>
+                                    </p:column>
 
-                        <p:column headerText="Nombre">
-                            <p:outputLabel value="#{C.nombredia}"/>
-                        </p:column>
+                                </p:dataTable>
+                            </p:dialog>
+                        </p:commandButton>   
+                    </h:form>
+                </td>
+                <td class="espacio">
+                    <h:form id="farm">
+                        <p:commandButton value="2-) Cronograma" onclick="PF('dialog1').show();">
+                            <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" resizable="false" header="#{beanCronograma.accion}Cronograma" hideEffect="Fold" showEffect="Fold" width="700px">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Nombre Cronograma:"/><br/>
+                                    <p:inputText value="#{beanCronograma.crono.nombre}"/><br/>
+                                    <br/>
+                                    <p:outputLabel value="Descripcion:"/><br/>
+                                    <p:inputText value="#{beanCronograma.crono.descripcion}"/><br/>
+                                    <br/>
+                                    <p:outputLabel value="Usuario:"/><br/>
+                                    <p:selectOneMenu value="#{beanCronograma.crono.idusuario.nombres}" style="width: 200px;">
+                                        <f:selectItem itemValue="" itemLabel="Elija usuario encargado"/>
+                                        <f:selectItems value="#{beanCronograma.listaUsuario}" var="lu" itemValue="#{lu.nombres}" itemLabel="#{lu.nombres}"/><br/>
+                                    </p:selectOneMenu><br/>
+                                    <br/>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Guardar" actionListener="#{beanCronograma.guardar()}" update=":form"/>
+                                    </f:facet>
+                                </h:panelGrid>
+                                <div> </div>
+                                <p:dataTable value="#{beanCronograma.listaCrono}" var="C">
+                                    <p:column headerText="Id">
+                                        <p:outputLabel value="#{C.idcronograma}"/>
+                                    </p:column>
 
-                        <p:column headerText="Mes">
-                            <p:outputLabel value="#{C.idmes.mes}"/>
-                        </p:column>
-                    </p:dataTable>
-                </p:dialog> 
-            </p:commandButton>
-        </h:form>
+                                    <p:column headerText="Nombre">
+                                        <p:outputLabel value="#{C.nombre}"/>
+                                    </p:column>
 
-        <div>  </div>
+                                    <p:column headerText="Descripcion">
+                                        <p:outputLabel value="#{C.descripcion}"/>
+                                    </p:column>
 
-        <h:form id="ferm">
-            <p:commandButton value="Agregar Mes" onclick="PF('dialog2').show();">
-                <p:dialog id="dialog" widgetVar="dialog2" closeOnEscape="true" resizable="false" header="#{beanMeses.accion}Meses" hideEffect="Fold" showEffect="Fold" width="500px">
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <p:outputLabel value="Calendario:"/><br/>
-                        <p:selectOneMenu value="#{beanMeses.meses.idcalendario.idcalendario}">
-                            <f:selectItem itemValue="" itemLabel="Escoger Año"/>
-                            <f:selectItems value="#{beanMeses.listaCalendario}" var="lm" itemValue="#{lm.idcalendario}" itemLabel="#{lm.año}"/><br/>
-                        </p:selectOneMenu><br/>
-                        <p:outputLabel value="Mes:"/><br/>
-                        <p:inputText value="#{beanMeses.meses.mes}"/>
-                        <f:facet name="footer">
-                            <p:commandButton value="Guardar" actionListener="#{beanMeses.guardar()}" update=":ferm"/>
-                        </f:facet>
-                    </h:panelGrid>
-                    <div> </div>
-                    <p:dataTable value="#{beanMeses.listaMeses}" var="M">
-                        <p:column headerText="ID">
-                            <p:outputLabel value="#{M.idmes}"/>
-                        </p:column>
+                                    <p:column headerText="Creador">
+                                        <p:outputLabel value="#{C.idusuario.nombres}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog> 
+                        </p:commandButton>
+                    </h:form>
+                </td>
+                <td class="espacio">
+                    <h:form id="ferm">
+                        <p:commandButton value="3-) Fases" onclick="PF('dialog2').show();">
+                            <p:dialog id="dialog" widgetVar="dialog2" closeOnEscape="true" resizable="false" header="#{beanFases.accion}Fases" hideEffect="Fold" showEffect="Fold" width="500px">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Tipo de Fase:"/><br/>
+                                    <p:selectOneMenu value="#{beanFases.fase.idtipofase.tipofase}" style="width: 200px;">
+                                        <f:selectItem itemValue="" itemLabel="Elija tipo fase correlativo"/>
+                                        <f:selectItems value="#{beanFases.listaTipoFase}" var="ltp" itemValue="#{ltp.tipofase}" itemLabel="#{ltp.tipofase}"/><br/>
+                                    </p:selectOneMenu><br/>
+                                    <br/>
+                                    <p:outputLabel value="Estado:"/><br/>
+                                    <p:inputText value="#{beanFases.fase.estado}"/><br/>
+                                    <br/>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Guardar" actionListener="#{beanFases.guardar()}" update=":ferm"/>
+                                    </f:facet>
+                                </h:panelGrid>
+                                <div> </div>
+                                <p:dataTable value="#{beanFases.listaFase}" var="F">
+                                    <p:column headerText="Id">
+                                        <p:outputLabel value="#{F.idfase}"/>
+                                    </p:column>
 
-                        <p:column headerText="CALENDARIO">
-                            <p:outputLabel value="#{M.idcalendario.año}"/>
-                        </p:column>
+                                    <p:column headerText="Tipo de fase">
+                                        <p:outputLabel value="#{F.idtipofase.tipofase}"/>
+                                    </p:column>
 
-                        <p:column headerText="MES">
-                            <p:outputLabel value="#{M.mes}"/>
-                        </p:column>
-                    </p:dataTable>
-                </p:dialog>
-            </p:commandButton>
-        </h:form>
+                                    <p:column headerText="Estado">
+                                        <p:outputLabel value="#{F.estado}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog>
+                        </p:commandButton>
+                    </h:form>
+                </td>
+                <td class="espacio">
+                    <h:form id="firm">
+                        <p:commandButton value="4-) Tipo fase" onclick="PF('dialog3').show();">
+                            <p:dialog id="dialog" widgetVar="dialog3" closeOnEscape="true" resizable="false" header="#{beanTipoFases.accion} Tipos de Fase" hideEffect="Fold" showEffect="Fold" width="500px">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Tipo de fase:"/><br/>
+                                    <p:inputText value="#{beanTipoFases.tiposf.tipofase}"/><br/>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Guardar" actionListener="#{beanTipoFases.guardar()}" update=":firm"/>
+                                    </f:facet>
+                                </h:panelGrid>
+                                <div> </div>
+                                <p:dataTable value="#{beanFases.listaTipoFase}" var="TF">
+                                    <p:column headerText="Id">
+                                        <p:outputLabel value="#{TF.idtipofase}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Tipo de fase">
+                                        <p:outputLabel value="#{TF.tipofase}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog> 
+                        </p:commandButton>
+                    </h:form>
+                </td>
+            </tr>
+        </table>
     </h:body>
 </html>

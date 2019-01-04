@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Tabla Fases</title>
+        <title>Tabla Actividades</title>
         <link href="EstiloVistas.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
@@ -19,7 +19,7 @@ and open the template in the editor.
         <div id="incluirPagina"/>
         <div class="fases">
             <h:form id="form">
-                <p:panel header="Lista Fases">
+                <p:panel header="Lista Actividades">
                     <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista2}" var="lista" paginatorPosition="bottom" paginator="true" rows="6">
                         <p:column headerText="Nombre Actividad" styleClass="columna" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
@@ -45,7 +45,7 @@ and open the template in the editor.
                         </p:column>
 
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
-                            <p:commandButton value="Editar" actionListener="#{agendaEjemplo.modificar(lista)}" update=":form"/>
+                            <p:commandButton value="Editar" actionListener="#{agendaEjemplo.modificar(C)}" oncomplete="PF('dialog1').show();" update=":dialog"/>
                             <p:commandButton value="Borrar" actionListener="#{agendaEjemplo.eliminar(lista)}" update=":form">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
@@ -60,6 +60,27 @@ and open the template in the editor.
 
                 </p:panel>
             </h:form>
+            <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" resizable="false" header="#{agendaEjemplo.accion} Actividades" hideEffect="Fold" showEffect="Fold" width="500px">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Id:"/>
+                        <p:inputText readonly="#{not facesContext.postback or facesContext.renderResponse}" value="#{agendaEjemplo.actividades.idactividad}"/>
+
+                        <p:outputLabel value="Fecha:"/>
+                        <p:inputText value="#{agendaEjemplo.actividades.fechaactividad}"/>
+
+                        <p:outputLabel value="Conograma"/>
+                        <p:inputText value="#{agendaEjemplo.actividades.idtipoactividad.tipoactividad}"/>
+
+                        <p:outputLabel value="Usuario"/>
+                        <p:inputText value="#{agendaEjemplo.actividades.idusuario.nombres}"/>
+                        
+                        <p:outputLabel value="Fase"/>
+                        <p:inputText value="#{agendaEjemplo.actividades.idfase.estado}"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Actualizar" actionListener="#{beanCronograma.actualizar()}" ajax="true" update=":form"/>
+                </h:form>
+            </p:dialog>
         </div>
     </h:body>
 </html>

@@ -54,6 +54,7 @@ public class AgendaEjemplo implements Serializable {
     private ScheduleModel eventModel;
     private Actividades actividades;
     private Actividadesf actividadesf;
+    private String accion;
     private List<Actividadesf> lista2 = new ArrayList();
 
     public List<Actividadesf> getLista2() {
@@ -76,6 +77,14 @@ public class AgendaEjemplo implements Serializable {
 
     public void setActividades(Actividades actividades) {
         this.actividades = actividades;
+    }
+
+    public String getAccion() {
+        return accion;
+    }
+
+    public void setAccion(String accion) {
+        this.accion = accion;
     }
 
     public List<Actividades> getLista() {
@@ -157,10 +166,10 @@ public class AgendaEjemplo implements Serializable {
             eventModel.addEvent(new DefaultScheduleEvent(actividades.getNombreactividad(), actividades.getFechaactividad(), actividades.getFechaactividad()));
 
         }
-        eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
+        /*eventModel.addEvent(new DefaultScheduleEvent("Champios League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));*/
 
         actividades = new Actividades();
         actividades.setIdcronograma(new Cronogramas());

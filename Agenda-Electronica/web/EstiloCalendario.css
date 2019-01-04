@@ -1,9 +1,10 @@
 /*Estilos para los contenedores*/
-
+            
 body{
     background-image: url(Imagenes/Agenda.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    overflow-y: hidden;
 }
 #container{
     display: flex; 
@@ -22,6 +23,7 @@ body{
     padding-right: 1.5%;
     width: 40%;
     height: 550px;
+    padding: 40px;
     border-top: 5px;
     border-bottom: 5px;
     border-left: 5px;
@@ -57,6 +59,14 @@ body{
     -webkit-border-radius: 50px 30px 30px 50px;
     float: left;
     margin-right: 10px;
+}
+
+.columna5{
+    width: 15%;
+}
+
+.columna6{
+    width: 10%;
 }
 
 .value {

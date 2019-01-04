@@ -17,55 +17,62 @@ and open the template in the editor.
         <link href="EstiloCalendario.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body style="background:  url(Imagenes/Agenda.jpg);background-size: cover;">
-        <b:navBar class="Menu" brandStyle="color:antiquewhite;" brand="Agenda" brandHref="#" fluid="true">
+        <b:navBar class="Menu" brandStyle="color:antiquewhite;" brand="AppGenda |" fluid="true">
             <b:navbarLinks >
-                <b:navLink class="letra" value="Inicio" iconAwesome="bookmark" href="Calendario.xhtml"></b:navLink>
+                <b:navLink class="letra" value="Inicio" iconAwesome="home" href="Calendario.xhtml"></b:navLink>
             </b:navbarLinks>
-            <b:navbarLinks id="fondo">
-                <b:dropMenu  value="Mantenimientos" iconAwesome="paperclip" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
+            <b:navbarLinks id="fondo1">
+                <b:dropMenu  value="Acciones" iconAwesome="fa-pencil" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
+                    <div class="divider"></div>
                     <h:form>
-                        <p:commandLink actionListener="#{beanLogin.redirect('TiposActividades')}" style="padding-left: 20px;">Agregar Datos</p:commandLink>
+                        <p:commandLink actionListener="#{beanLogin.redirect('TiposActividades')}" style="padding-left: 20px; font-family: cursive;">Agregar Datos</p:commandLink>
                     </h:form>
-                    <div class="divider" style="border: 2px double;"></div>
-                    <b:navLink  value="Consultar Fases" href="datosFases.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    <b:navLink  value="Consultar Cronograma" href="datosCronograma.xhtml"></b:navLink>
+                    <b:navLink  value="Ver Fases" href="datosFases.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    <b:navLink  value="Consultar Usuarios" href="datosUsuario.xhtml"></b:navLink>
+                    <b:navLink  value="Ver Cronograma" href="datosCronograma.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    <b:navLink  value="Consultar Roles" href="datosRoles.xhtml"></b:navLink>
+                    <b:navLink  value="Ver Actividades" href="datosActividades.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    <b:navLink  value="Consultar Tipos de Fase" href="datosTipoFace.xhtml"></b:navLink>
+                    <b:navLink  value="Ver Usuarios" href="datosUsuario.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    <b:navLink  value="Consultar Tipos de Usuarios" href="datosTipoUser.xhtml"></b:navLink>
+                    <b:navLink  value="Ver Roles" href="datosRoles.xhtml"></b:navLink>
                     <div class="divider"></div>
-                    
+                    <b:navLink  value="Ver Tipos de Fase" href="datosTipoFace.xhtml"></b:navLink>
+                    <div class="divider"></div>
+                    <b:navLink  value="Ver Tipos de Usuarios" href="datosTipoUser.xhtml"></b:navLink>
+                    <div class="divider"></div>
+
                 </b:dropMenu>
             </b:navbarLinks>
-            <b:navbarLinks style="position: absolute;left: 1030px;font-size: 15px; padding-top: 9px;" rendered="#{beanLogin.user_lvl == 1}">
-                <h:form>
-                    <p:commandButton value="Registrar Usuario" onclick="PF('dlg2').show();"/>
-                </h:form>
-            </b:navbarLinks>
-            <b:navbarLinks style="position: absolute;left: 1220px;font-size: 15px; padding-top: 9px;"> 
-                <h:form>
-                    <p:growl id="message" showDetail="true" /> 
-                    <p:commandButton value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message"> 
-                        <p:confirm header="Confirmación" message="¿Cerrar sesion?"/> 
-                    </p:commandButton> 
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" closeOnEscape="true"> 
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" /> 
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" /> 
-                    </p:confirmDialog>
-                </h:form> 
+            <b:navbarLinks id="fondo2">
+                <b:dropMenu  class="letra" value="Opciones"  iconAwesome="cog">
+                    <div class="divider" ></div>
+                    <h:form>
+                        <p:commandLink value="Registrar Usuario" onclick="PF('dlg2').show();" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}"/>
+                    </h:form>
+                    <div class="divider" ></div>
+                    <h:form>
+                        <p:growl id="message" showDetail="true" /> 
+                        <p:commandLink value="Cerrar sesion" action="#{beanLogin.logoutAgenda()}" update="message"> 
+                            <p:confirm header="Confirmación" message="¿Cerrar sesion?"/> 
+                        </p:commandLink> 
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true"> 
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" /> 
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" /> 
+                        </p:confirmDialog>
+                    </h:form> 
+                    <div class="divider" ></div>
+                </b:dropMenu>
             </b:navbarLinks>
         </b:navBar>
+
         <h:form style="margin: 20px" id="form-add_user">
             <p:dialog header="#{beanUsuario.accion} Usuario" widgetVar="dlg2" modal="true" class="altura">
                 <h:panelGrid columns="2" cellpadding="5">
                     <p:outputLabel value="Tipo de usuario:" />
                     <p:selectOneMenu value="#{beanUsuario.usuario.idtipousuario.idtipousuario}" class="ancho">
-                        <f:selectItem itemValue="" itemLabel="Escoger Tipo de Usuario:" />
+                        <f:selectItem itemValue="" itemLabel="Escoger un tipo de usuario" />
                         <f:selectItems value="#{beanTiposUsuarios.listaTu}" var="listaTu" itemLabel="#{listaTu.tipo}" itemValue="#{listaTu.idtipousuario}" />
                     </p:selectOneMenu>
 
@@ -77,7 +84,7 @@ and open the template in the editor.
 
                     <p:outputLabel value="Genero:" />
                     <p:selectOneMenu value="#{beanUsuario.usuario.genero}" effect="fold" class="ancho">
-                        <f:selectItem itemLabel="Seleccione genero" itemValue="" />
+                        <f:selectItem itemLabel="Escoger genero al usuario" itemValue="" />
                         <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
                         <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
                         <f:selectItem itemLabel="Indefinido" itemValue="Indefinido" />
@@ -93,8 +100,12 @@ and open the template in the editor.
                     <p:password  value="#{beanUsuario.usuario.contra}" placeholder="se colocará en incógnito" class="ancho"/>
 
                     <p:outputLabel value="Nivel de Mando:" />
-                    <p:inputText  value="#{beanUsuario.usuario.niveldemando}" placeholder="Escriba el nivel de mando" class="ancho"/>
-
+                    <p:selectOneMenu value="#{beanUsuario.usuario.niveldemando}" effect="fold" class="ancho">
+                        <f:selectItem itemLabel="Escoger un nivel de mando" itemValue="" />
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                        <f:selectItem itemLabel="3" itemValue="3" />
+                    </p:selectOneMenu>
                     <f:facet name="footer">
                         <p:commandButton value="Guardar" action="#{beanUsuario.guardar()}" update=":form" >
                             <f:ajax render ="@all"/>
