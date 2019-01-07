@@ -84,5 +84,6 @@ public class BeanTiposUsuarios {
     public void actualizar() {
         MantenimientoTipoUsuario Muser = new MantenimientoTipoUsuario();
         Muser.Actualizar(TU);
+        listaTu=Muser.consultar();
     }
 }

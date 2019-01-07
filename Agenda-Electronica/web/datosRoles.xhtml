@@ -19,7 +19,7 @@ and open the template in the editor.
         <div class="roles">
             <h:form id="form">
                 <p:panel header="Lista de Roles">
-                    <p:dataTable value="#{beanRoles.listaRoles}" var="R">
+                    <p:dataTable id="TabRol" value="#{beanRoles.listaRoles}" var="R">
                         <p:column headerText="Id">
                             <p:outputLabel value="#{R.idrol}"/>
                         </p:column>
@@ -48,7 +48,7 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
-        <p:dialog id="desplegable" style="text-align: center;" header="actualizar" widgetVar="despl">
+        <p:dialog id="desplegable" closeOnEscape="true" style="text-align: center;" header="actualizar" widgetVar="despl">
             <h:form>
                 <h:outputLabel value="ID:" /><p:spacer width="7"/><p:inputText value="#{beanRoles.roles.idrol}"/>
                 <br/>
@@ -56,7 +56,7 @@ and open the template in the editor.
                 <br/>
                 <h:outputLabel value="Rol:"/><p:spacer width="8"/><p:inputText value="#{beanRoles.roles.rol}"/>
                 <br/><br/>
-                <p:commandButton value="Actualizar" actionListener="#{beanRoles.modificar()}"/>
+                <p:commandButton value="Actualizar" actionListener="#{beanRoles.modificar()}" update=":form:TabRol"/>
             </h:form>
         </p:dialog>
     </h:body>

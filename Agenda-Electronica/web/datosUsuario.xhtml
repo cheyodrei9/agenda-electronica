@@ -55,7 +55,7 @@ and open the template in the editor.
 
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1}">
                             <p:commandButton value="Editar" oncomplete="PF('wdlgdesplegable').show();" update=":desplegable" actionListener="#{beanUsuario.modificar(U)}"/>
-                            <p:commandButton value="Eliminar" actionListener="#{beanUsuario.eliminar(U)}"/>
+                            <p:commandButton value="Borrar" actionListener="#{beanUsuario.eliminar(U)}" update=":form"/>
                         </p:column>
 
                     </p:dataTable>

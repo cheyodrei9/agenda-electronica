@@ -28,7 +28,7 @@ public class BeanUsuario {
 
     private List<Usuarios> listaU = new ArrayList();
     private List<Tiposusuarios> listaTu = new ArrayList();
-    private MantenimientoUsusario Musuario;
+    private MantenimientoUsusario Musuario=new MantenimientoUsusario();
     private Usuarios usuario;
     private String accion;
     String adver = "";
@@ -109,14 +109,7 @@ public class BeanUsuario {
 
     public void eliminar (Usuarios usuario){
         Musuario.eliminar(usuario);
-        listaU = Musuario.consultar();
-        
-        if(Musuario.eliminar(usuario)==1){
-            adver = "se elimino con exito";
-        } else {
-            adver = "ocurrio un error";
-        }
-        System.out.println(adver);
+        listaU=Musuario.consultar();
     }
     
     public void modificar (Usuarios user){

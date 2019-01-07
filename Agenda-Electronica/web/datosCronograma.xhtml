@@ -20,7 +20,7 @@ and open the template in the editor.
         <div class="cronograma">
             <h:form id="form">
                 <p:panel header="Lista Cronograma">
-                    <p:dataTable value="#{beanCronograma.listaCrono}" var="C">
+                    <p:dataTable id="Tab" value="#{beanCronograma.listaCrono}" var="C">
                         <p:column headerText="Id">
                             <p:outputLabel value="#{C.idcronograma}"/>
                         </p:column>
@@ -38,9 +38,9 @@ and open the template in the editor.
                         </p:column>
                         <p:column headerText="Acciones" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">
                             <!--<p:commandButton value="Editar" update=":form"/>-->
-                            <p:commandButton value="Editar" actionListener="#{beanCronograma.modificar(C)}" oncomplete="PF('dialog1').show();" update=":dialog">
+                            <p:commandButton value="Editar" actionListener="#{beanCronograma.modificar(C)}" oncomplete="PF('dialog1').show();" update="dialog">
                             </p:commandButton>
-                            <p:commandButton value="Borrar" actionListener="#{beanCronograma.eliminar(C)}" update=":form">
+                            <p:commandButton value="Borrar" actionListener="#{beanCronograma.eliminar(C)}" update=":form:Tab">
                                 <p:confirm header="Eliminar" message="¿Eliminar registro?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
 
@@ -52,7 +52,7 @@ and open the template in the editor.
                     </p:dataTable>
                 </p:panel>
             </h:form>
-            <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" resizable="false" header="#{beanCronograma.accion}Cronograma" hideEffect="Fold" showEffect="Fold" width="500px">
+            <p:dialog id="dialog" widgetVar="dialog1" closeOnEscape="true" header="Actualizar" >
                 <h:form>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Id:"/>
@@ -67,7 +67,7 @@ and open the template in the editor.
                         <p:outputLabel value="Usuario"/>
                         <p:inputText value="#{beanCronograma.crono.idusuario.idusuario}"/>
                     </h:panelGrid>
-                    <p:commandButton value="Actualizar" actionListener="#{beanCronograma.actualizar()}" ajax="true" update=":form"/>
+                    <p:commandButton value="Actualizar" actionListener="#{beanCronograma.actualizar()}" update=":form:Tab dialog"/>
                 </h:form>
             </p:dialog>
         </div>    

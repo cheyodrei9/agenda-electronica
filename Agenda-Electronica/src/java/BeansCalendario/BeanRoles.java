@@ -132,6 +132,7 @@ public class BeanRoles {
         MantenimientoRoles rol = new MantenimientoRoles ();
         System.out.println("rol "+roles.getIdrol());
         rol.actualizar(roles);
+        listaRoles=rol.consultar();
     }
     
 }

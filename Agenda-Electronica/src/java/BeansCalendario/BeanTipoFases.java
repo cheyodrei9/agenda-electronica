@@ -108,5 +108,6 @@ public class BeanTipoFases {
     public void actualizar(){
         MantenimientoTiposFases Mtf = new MantenimientoTiposFases();
         Mtf.Actualizar(tiposf);
+        ListaTipoFases= Mtf.consultar();
     }
 }
