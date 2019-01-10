@@ -126,31 +126,6 @@
 
 
                     </p:dataTable>
-
-                    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                        <p:outputPanel id="carDetail" style="text-align:center;">
-                            <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
-                                <f:facet name="header">
-                                    <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
-                                </f:facet>
-
-                                <h:outputText value="Cronograma :" />
-                                <h:outputText value="#{dataListView.selectedCar.id}" />
-
-                                <h:outputText value="Tipo Actividad" />
-                                <h:outputText value="#{dataListView.selectedCar.year}" />
-
-                                <h:outputText value="Nombre:" />
-                                <h:outputText value="#{dataListView.selectedCar.color}" />
-
-                                <h:outputText value="Fecha" />
-                                <h:outputText value="$#{dataListView.selectedCar.price}" />
-
-                                <h:outputText value="Fase" />
-                                <h:outputText value="$#{dataListView.selectedCar.price}" />
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </p:dialog>
                 </h:form>
             </div>
         </div>
