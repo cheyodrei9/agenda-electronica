@@ -49,7 +49,7 @@ and open the template in the editor.
                 <b:dropMenu  class="letra" value="Opciones"  iconAwesome="cog">
                     <div class="divider" ></div>
                     <h:form>
-                        <p:commandLink value="Registrar Usuario" onclick="PF('dlg2').show();" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}"/>
+                        <p:commandLink value="Registrar Usuario" onclick="PF('dlg2').show();" rendered="#{beanLogin.user_lvl == 1}"/>
                     </h:form>
                     <div class="divider" ></div>
                     <h:form>
