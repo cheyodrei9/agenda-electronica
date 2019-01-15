@@ -101,7 +101,7 @@ idusuario INT(11) NOT NULL,
 idactividad INT(11) NOT NULL,
 fechaasignada TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 diasrestantes INT(3) NOT NULL,
-color VARCHAR(10) NOT NULL DEFAULT '#ffffff',
+color VARCHAR(10) NOT NULL DEFAULT '#FFFFFF',
 estado_notificacion VARCHAR (10) NOT NULL DEFAULT 'no visto',
 PRIMARY KEY (idnotificacion),
 FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
@@ -157,7 +157,11 @@ DELIMITER ;
 CREATE TABLE registro_actividad(
 id_registro_actividad INT NOT NULL AUTO_INCREMENT,
 idusuario INT NOT NULL,
-
+idactividad INT NOT NULL,
+fechaasignada TIMESTAMP NOT NULL,
+PRIMARY KEY (id_registro_actividad),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
+FOREIGN KEY (idactividad) REFERENCES actividades (idactividad)
 );
 
 DELIMITER \\
