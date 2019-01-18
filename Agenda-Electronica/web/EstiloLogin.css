@@ -1,6 +1,6 @@
 body{
     background-image: url(Imagenes/fondo.png);
-    background-size: cover;
+    background-size: cover; 
     background-repeat: no-repeat;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -18,26 +18,16 @@ body{
     width: 100%;
     /*IMPORTANTE*/
     position:absolute;
-    top:20%;
+    top:17%;
     border:none;
 }
 
 .madre{
-    height: 50%;
     width: 50%;
     /*IMPORTANTE*/
     position:absolute;
     top:80%;
-    margin-left: 90%;
-    border:none;
-}
-
-.primo{
-    width: 125%;
-    /*IMPORTANTE*/
-    position:absolute;
-    top:50%;
-    margin-left: 52%;
+    margin-left: 88%;
     border:none;
 }
 
@@ -71,4 +61,69 @@ body{
 
 .altura{
     height: 400px;
+}
+
+@media (max-width:500px) {
+    /* Nuestras reglas con este ancho de pantalla */
+
+    body{
+        background-image: url(Imagenes/alternativo3.png);
+        background-size: auto;
+        background-repeat: no-repeat;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        min-width: 300px;
+        min-height: 800px;
+    }
+
+    .padre{
+        width: 320%;
+        height: 1000px;
+        /*IMPORTANTE*/
+        top:2%;
+        margin-left: 1%;
+    }
+    .hijo{
+        width: 310%;
+        height: 1000px;
+        /*IMPORTANTE*/
+        top:2%;
+        margin-left: 50%;
+    }
+
+    .madre{
+        width: 150%;
+        /*IMPORTANTE*/
+        top:80%;
+        margin-left: 40%;
+    }
+
+    .sesion{
+        font-family: cursive;
+        color: brown;
+        position:absolute;
+        top:30%;
+        left:10%;
+    }
+
+    .ui-dialog-titlebar{/*Panel en el q dice login*/
+        background-color: #720000;
+        color: antiquewhite;
+        font-family: fantasy;
+    }
+    .ui-dialog-content{/*Letra*/
+        color: darkgoldenrod;
+    }
+    .ui-dialog .ui-dialog-content {/*Fondo*/
+        background-color: antiquewhite;
+    }
+    .ui-button-text-only .ui-button-text {/*Boton */
+        background: darkgoldenrod;
+        color: antiquewhite;
+    }
+
+    .ui-icon, ui-icon-closethick{
+        background-color: antiquewhite;
+    }
+
 }

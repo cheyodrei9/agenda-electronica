@@ -102,7 +102,7 @@
                 <div> </div>
                 <h:form id="form">
                     <p:dataTable  rowStyleClass="tabla" id="Table" value="#{agendaEjemplo.lista2}" var="lista" paginatorPosition="bottom" paginator="true" rows="10">
-                        <p:column headerText="Nombre Actividad" styleClass="columna1" >
+                        <p:column headerText="Actividad" styleClass="columna1" >
                             <h:outputText value="#{lista.nombreactividad}"></h:outputText>
                         </p:column>
                         <p:column headerText="Fecha" styleClass="columna2" filterBy="#{lista.fecha}"  sortBy="#{lista.fecha}" filterMatchMode="contains">
@@ -111,10 +111,10 @@
 
                             </h:outputLabel>
                         </p:column>
-                        <p:column  headerText="Cronograma3" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
+                        <p:column  headerText="Cronograma"  styleClass="columna3" filterBy="#{lista.idcronograma.nombre}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idcronograma.nombre}"></h:outputText>
                         </p:column>
-                        <p:column headerText="Tipo Actividad4"  filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
+                        <p:column headerText="Tipo Actividad" styleClass="columna4" filterBy="#{lista.idtipoactividad.tipoactividad}" filterMatchMode="contains">
                             <h:outputText value="#{lista.idtipoactividad.tipoactividad}"></h:outputText>
                         </p:column>
                         <p:column headerText="Responsable" styleClass="columna5" filterBy="#{lista.idusuario.nombres}" filterMatchMode="contains" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}">

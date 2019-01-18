@@ -52,13 +52,14 @@ and open the template in the editor.
                 </p:panel>
             </h:form>
         </div>
-        <p:dialog id="desplegable" closeOnEscape="true" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable">
+        <p:dialog id="desplegable" closeOnEscape="true" style="text-align: center;background-image: url(imagenes/fondos/fondo4.jpg)" header="Actualizar" widgetVar="wdlgdesplegable" resizable="false">
             <h:form>
                 <center>
                     <h:outputLabel value="ID:" /><br/><p:inputText value="#{beanFases.fase.idfase}" /><br/>
                     <h:outputLabel value="ID Tipo de Fase:" /><br/><p:inputText value="#{beanFases.fase.idtipofase.idtipofase}" /><br/>
-                    <h:outputLabel value="Fecha" /><br/><p:inputText value="#{beanFases.fase.fecha}" /><br/><br/>
-                    <p:commandButton value="Actualizar" actionListener="#{beanFases.actualizar()}" update=":form:Tablita desplegable"/>
+                    <h:outputLabel value="Estado" /><br/><p:inputText value="#{beanFases.fase.estado}" /><br/><br/>
+                    <p:commandButton value="Actualizar" actionListener="#{beanFases.actualizar()}" update=":form"/>
+                    <h:outputLabel value="" /><br/><p:inputText value="#{beanFases.fase.fecha}" style="display: none;" /><br/><br/>     
                 </center>
             </h:form>
         </p:dialog>

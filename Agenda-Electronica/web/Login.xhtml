@@ -7,6 +7,7 @@
     <h:head>
         <title>Inicio de Sesión</title>
         <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/521/521415.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="EstiloLogin.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
@@ -30,21 +31,23 @@
                 <img src="Imagenes/registro.png" alt="" style="width: 15%" onclick="PF('dlg2').show();"/>
                 <p:growl id="gruwl" sticky="true" showDetail="true" life="3000" />
             </div>
-            <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true" width="400px" showEffect="fold" hideEffect="fold" closeOnEscape="true">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel for="Username" value="Usuario o Correo:" />
-                    <p:inputText id="username" value="#{beanLogin.username}" required="true" label="username"/>
+            <div class="tio">
+                <p:dialog header="Entrar" widgetVar="dlg" resizable="false" modal="true" width="400px" showEffect="fold" hideEffect="fold" closeOnEscape="true">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="Username" value="Usuario o Correo:"/>
+                        <p:inputText id="username" value="#{beanLogin.username}" required="true" label="username"/>
 
-                    <h:outputLabel for="Password" value="Contraseña" />
-                    <p:password id="password" value="#{beanLogin.password}" required="true" label="password" />
+                        <h:outputLabel for="Password" value="Contraseña" />
+                        <p:password id="password" value="#{beanLogin.password}" required="true" label="password" />
 
-                    <f:facet name="footer">
-                        <p:commandButton value="Acceder" update="growl" action="#{beanLogin.loginAgenda()}"
-                                         oncomplete="handleLoginRequest(xhr, status, args)" />
-                    </f:facet>  
-                </h:panelGrid>
-            </p:dialog> 
-             <div class="madre">
+                        <f:facet name="footer">
+                            <p:commandButton value="Acceder" update="growl" action="#{beanLogin.loginAgenda()}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:dialog> 
+            </div>
+            <div class="madre">
                 <img src="Imagenes/manual.png" alt="" style="width: 15%"/>
             </div>
         </h:form>
@@ -101,7 +104,7 @@
             </h:graphicImage>
         </p:dialog>
         <p:messages>
-            
+
         </p:messages>
     </h:body>
 </html>
