@@ -155,12 +155,46 @@ public class MantenimientoNotificaciones {
             
             em.getTransaction().commit();
             listaN = query.getResultList();
+            if(listaN == null){
+                System.out.println("esta nula");
+            } else {
+                System.out.println("no esta nula");
+            }
             return listaN;
         } catch (Exception e) {
+            System.out.println("error "+e);
             em.getTransaction().rollback();
             return null;
         }finally{
             em.close();
         }
     }
+    
+    public int Actualizar2(Notificaciones notificacion){
+        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+        Notificaciones not = null;
+        em.getTransaction().begin();
+        int flag = 0;
+        try {
+            not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
+            not.setIdnotificacion(notificacion.getIdnotificacion());
+            not.setIdusuario(notificacion.getIdusuario()); 
+            not.setIdactividad(notificacion.getIdactividad());
+            not.setDiasrestantes(notificacion.getDiasrestantes());
+            not.setColor(notificacion.getColor());
+            not.setEstadoNotificacion("visto");
+
+            em.getTransaction().commit();
+            flag = 1;
+            System.out.println("Actualizacion exitosa");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            flag = 0;
+            System.out.println("Error al acualizar Mantenimiento Notificaciones"+e);
+        }finally{
+            em.close();
+        }
+        return flag;
+    }
+    
 }

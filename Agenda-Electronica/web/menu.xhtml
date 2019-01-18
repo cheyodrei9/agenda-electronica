@@ -48,7 +48,7 @@ and open the template in the editor.
             </b:navbarLinks>
             <b:navbarLinks >
                 <!--<b:navLink id="boton" value="" iconAwesome="globe" onclick="#{beanNotificaciones}" oncomplete=""/> -->
-                <b:navLink id="boton" value="" iconAwesome="globe" onclick="PF('dialog').show();" oncomplete=""/> 
+                <b:navLink id="boton" value="" iconAwesome="globe" onclick="PF('dialog').show();" oncomplete=""/>     
                 <span id="noty" ></span>
                 <h:form>
                     <p:remoteCommand name="noty" actionListener="#{beanNotificaciones.execute()}" oncomplete="fun()" update="notificacion"/>
@@ -57,7 +57,7 @@ and open the template in the editor.
                 </h:form>
 
                 <p:dialog id="dialog" widgetVar="dialog" closeOnEscape="true" resizable="false" header="#{beanNotificaciones.consultar3()}" hideEffect="Fold" showEffect="Fold" width="700px">
-                    <p:dataTable value="#{beanNotificaciones.consultar3()}" var="n">
+                    <p:dataTable value="#{beanNotificaciones.listaNotificaciones}" var="n">
                         <p:column headerText="nombre">
                             <p:outputLabel value="#{n.idactividad.nombreactividad}"/>
                         </p:column>
@@ -75,7 +75,9 @@ and open the template in the editor.
                         </p:column>
                         
                         <p:column headerText="boton">
-                            <p:outputLabel value="#{n.fechaasignada}"/>
+                            <h:form>
+                                <p:commandButton value="Actualizar" actionListener="#{beanNotificaciones.actualizar2}" ajax="false" update=":dialog"/>
+                            </h:form>
                         </p:column>
 
                         
@@ -158,8 +160,8 @@ and open the template in the editor.
                 'use strinct';
                 var timer = setInterval(function () {
                     noty();
-                    //console.log("estoy en el timer");
-                }, 3000);
+                }, 20000);
+                
             })();
             var x = document.querySelector(".fa-globe");
             var y = document.querySelector(".fa-plane");
@@ -174,6 +176,7 @@ and open the template in the editor.
                 } else {
                     y.classList.remove('fa-plane');
                     y.classList.add('fa-globe');
+                    
                     console.log('en el else');
                 }
                 

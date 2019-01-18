@@ -36,6 +36,17 @@ public class BeanNotificaciones {
     private MantenimientoNotificaciones MNot;
     private Notificaciones notificaciones;
     private String accion;
+    private String claseIcono;
+
+    public String getClaseIcono() {
+        return claseIcono;
+    }
+
+    public void setClaseIcono(String claseIcono) {
+        this.claseIcono = claseIcono;
+    }
+    
+    
 
     public List<Notificaciones> getListaNotificaciones() {
         return ListaNotificaciones;
@@ -158,9 +169,13 @@ public class BeanNotificaciones {
     public void execute() {
         MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
         if (mn.consultar2().equals("SI")) {
+            this.claseIcono="fa-globe";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Hay una nueva actividad", "por favor marcarla como leida"));
             
+        }else{
+            this.claseIcono="fa-pencil";
         }
+        System.out.println("desde el bean: "+this.claseIcono);
 //        System.out.println("esta haciendo la consulta");
 
     }
@@ -174,7 +189,15 @@ public class BeanNotificaciones {
     public void consultar3() {
         MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
         ListaNotificaciones = mn.consultar3();
-        System.out.println("esta haciendo la consulta");
+        System.out.println("esta haciendo la consulta en el bean");
+
+    }
+    
+    public void Actualizar2() {
+        System.out.println("act" + notificaciones.getIdnotificacion());
+        MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
+        System.out.println("act" + notificaciones.getIdnotificacion());
+        MMMnot.Actualizar2(notificaciones);
 
     }
     
