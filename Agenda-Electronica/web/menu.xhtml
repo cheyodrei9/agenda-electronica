@@ -16,7 +16,7 @@ and open the template in the editor.
         <link href="EstiloMenu.css" rel="stylesheet" type="text/css"/>
         <link href="EstiloCalendario.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    <h:body style="background:  url(Imagenes/Agenda.jpg);background-size: cover;">
+    <h:body style="background:  url(Imagenes/Agenda.jpg);background-size: cover;" >
         <b:navBar class="Menu" brandStyle="color:antiquewhite;" brand="AppGenda |" fluid="true">
             <b:navbarLinks >
                 <b:navLink class="letra" value="Inicio" iconAwesome="home" href="Calendario.xhtml"></b:navLink>
@@ -42,14 +42,52 @@ and open the template in the editor.
                     <div class="divider"></div>
                     <b:navLink  value="Ver Tipos de Usuarios" href="datosTipoUser.xhtml"></b:navLink>
                     <div class="divider"></div>
-
+                    <b:navLink  value="datos notificacion" href="datosNotificacion.xhtml"></b:navLink>
+                    <div class="divider"></div>
                 </b:dropMenu>
+            </b:navbarLinks>
+            <b:navbarLinks >
+                <!--<b:navLink id="boton" value="" iconAwesome="globe" onclick="#{beanNotificaciones}" oncomplete=""/> -->
+                <b:navLink id="boton" value="" iconAwesome="globe" onclick="PF('dialog').show();" oncomplete=""/> 
+                <span id="noty" ></span>
+                <h:form>
+                    <p:remoteCommand name="noty" actionListener="#{beanNotificaciones.execute()}" oncomplete="fun()" update="notificacion"/>
+                    <p:growl id="notificacion" showDetail="true"/>
+                    <!--<p:commandButton type="button" onclick="noty()" value="Execute" icon="pi pi-refresh" />-->
+                </h:form>
+
+                <p:dialog id="dialog" widgetVar="dialog" closeOnEscape="true" resizable="false" header="#{beanNotificaciones.consultar3()}" hideEffect="Fold" showEffect="Fold" width="700px">
+                    <p:dataTable value="#{beanNotificaciones.consultar3()}" var="n">
+                        <p:column headerText="nombre">
+                            <p:outputLabel value="#{n.idactividad.nombreactividad}"/>
+                        </p:column>
+
+                        <p:column headerText="usuario">
+                            <p:outputLabel value="#{n.idusuario.nombres}"/>
+                        </p:column>
+
+                        <p:column headerText="not">
+                            <p:outputLabel value="#{n.estadoNotificacion}"/>
+                        </p:column>
+
+                        <p:column headerText="fecha asignada">
+                            <p:outputLabel value="#{n.fechaasignada}"/>
+                        </p:column>
+                        
+                        <p:column headerText="boton">
+                            <p:outputLabel value="#{n.fechaasignada}"/>
+                        </p:column>
+
+                        
+                    </p:dataTable>
+                </p:dialog>
+
             </b:navbarLinks>
             <b:navbarLinks id="fondo2">
                 <b:dropMenu  class="letra" value="Opciones"  iconAwesome="cog">
                     <div class="divider" ></div>
                     <h:form>
-                        <p:commandLink value="Registrar Usuario" onclick="PF('dlg2').show();" rendered="#{beanLogin.user_lvl == 1 or beanLogin.user_lvl == 2}"/>
+                        <p:commandLink value="Registrar Usuario" onclick="PF('dlg2').show();" rendered="#{beanLogin.user_lvl == 1}"/>
                     </h:form>
                     <div class="divider" ></div>
                     <h:form>
@@ -115,5 +153,32 @@ and open the template in the editor.
                 </h:panelGrid>     
             </p:dialog>
         </h:form>
+        <script>
+            (function () {
+                'use strinct';
+                var timer = setInterval(function () {
+                    noty();
+                    //console.log("estoy en el timer");
+                }, 3000);
+            })();
+            var x = document.querySelector(".fa-globe");
+            var y = document.querySelector(".fa-plane");
+            function fun() {
+                //var x = document.getElementById("boton");
+                console.log("HOLA");
+                //const not = document.getElementById('boton');
+                if (x) {
+                    x.classList.remove('fa-globe');
+                    x.classList.add('fa-plane');
+                    console.log('estoy en el if');
+                } else {
+                    y.classList.remove('fa-plane');
+                    y.classList.add('fa-globe');
+                    console.log('en el else');
+                }
+                
+                //console.log('not ' +not);
+            }
+        </script>
     </h:body>
-</html>
+</html> 

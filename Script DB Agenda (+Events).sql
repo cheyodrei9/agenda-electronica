@@ -1,23 +1,23 @@
 DROP DATABASE IF EXISTS agenda;
-create DATABASE agenda;
+CREATE DATABASE agenda;
 
 USE agenda;
 
 /*tablas simples*/
 CREATE TABLE tiposactividades(
-idtipoactividad INTEGER(11) NOT NULL AUTO_INCREMENT,
+idtipoactividad INT(11) NOT NULL AUTO_INCREMENT,
 tipoactividad VARCHAR(150) NOT NULL,
 PRIMARY KEY (idtipoactividad)
 );
 
 create table tiposfases(
-idtipofase INTEGER(11) NOT NULL AUTO_INCREMENT,
+idtipofase INT(11) NOT NULL AUTO_INCREMENT,
 tipofase VARCHAR(150) NOT NULL,
 PRIMARY KEY (idtipofase)
 );
 
 CREATE TABLE tiposusuarios(
-idtipousuario INTEGER(11) NOT NULL AUTO_INCREMENT,
+idtipousuario INT(11) NOT NULL AUTO_INCREMENT,
 tipo VARCHAR(50) NOT NULL,
 PRIMARY KEY (idtipousuario)
 );
@@ -25,55 +25,55 @@ PRIMARY KEY (idtipousuario)
 /*tablas con foranea*/
 
 CREATE TABLE usuarios(
-idusuario INTEGER(11) NOT NULL AUTO_INCREMENT,
-idtipousuario INTEGER(11) NOT NULL,
+idusuario INT(11) NOT NULL AUTO_INCREMENT,
+idtipousuario INT(11) NOT NULL,
 nombres VARCHAR(100) NOT NULL,
 apellidos VARCHAR(100) NOT NULL,
 genero VARCHAR(25) NOT NULL,
 telefono VARCHAR(25) NOT NULL,
 correo VARCHAR(50) NOT NULL,
 contra VARCHAR(16) NOT NULL,
-niveldemando INTEGER(1) NOT NULL,
+niveldemando INT(1) NOT NULL,
 PRIMARY KEY (idusuario),
 FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
 );
 
 CREATE TABLE cronogramas(
-idcronograma INTEGER(11) NOT NULL AUTO_INCREMENT,
+idcronograma INT(11) NOT NULL AUTO_INCREMENT,
 nombre VARCHAR(50) NOT NULL,
 descripcion VARCHAR(150) NOT NULL,
-idusuario INTEGER(11) NOT NULL,
+idusuario INT(11) NOT NULL,
 PRIMARY KEY (idcronograma),
 FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
 );
 
 CREATE TABLE calendarios(
-idcalendario INTEGER(11) NOT NULL AUTO_INCREMENT,
-idcronograma INTEGER(11) NOT NULL,
-año INTEGER(11) NOT NULL,
+idcalendario INT(11) NOT NULL AUTO_INCREMENT,
+idcronograma INT(11) NOT NULL,
+año INT(11) NOT NULL,
 PRIMARY KEY (idcalendario),
 FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma)
 );
 
 CREATE TABLE meses(
-idmes INTEGER(11) NOT NULL AUTO_INCREMENT,
-idcalendario INTEGER(11) NOT NULL,
+idmes INT(11) NOT NULL AUTO_INCREMENT,
+idcalendario INT(11) NOT NULL,
 mes VARCHAR(45) NOT NULL,
 PRIMARY KEY (idmes),
 FOREIGN KEY (idcalendario) REFERENCES calendarios (idcalendario)
 );
 
 CREATE TABLE dias(
-iddia INTEGER(11) NOT NULL AUTO_INCREMENT,
-idmes INTEGER(11) NOT NULL,
+iddia INT(11) NOT NULL AUTO_INCREMENT,
+idmes INT(11) NOT NULL,
 nombredia VARCHAR(15) NOT NULL,
 PRIMARY KEY (iddia),
 FOREIGN KEY (idmes) REFERENCES meses (idmes)
 );
 
 CREATE TABLE fases(
-idfase INTEGER(11) NOT NULL AUTO_INCREMENT,
-idtipofase INTEGER(11) NOT NULL,
+idfase INT(11) NOT NULL AUTO_INCREMENT,
+idtipofase INT(11) NOT NULL,
 estado VARCHAR(50) NOT NULL,
 fecha DATE NOT NULL,
 PRIMARY KEY (idfase),
@@ -81,13 +81,13 @@ FOREIGN KEY (idtipofase) REFERENCES tiposfases (idtipofase)
 );
 
 CREATE TABLE actividades(
-idactividad INTEGER(11) NOT NULL AUTO_INCREMENT,
-idcronograma INTEGER(11) NOT NULL,
-idtipoactividad INTEGER(11) NOT NULL,
-idusuario INTEGER(11) NOT NULL,
+idactividad INT(11) NOT NULL AUTO_INCREMENT,
+idcronograma INT(11) NOT NULL,
+idtipoactividad INT(11) NOT NULL,
+idusuario INT(11) NOT NULL,
 nombreactividad VARCHAR(150) NOT NULL,
 fechaactividad DATE NOT NULL,
-idfase INTEGER(11) NOT NULL,
+idfase INT(11) NOT NULL,
 PRIMARY KEY (idactividad),
 FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma),
 FOREIGN KEY (idtipoactividad) REFERENCES tiposactividades (idtipoactividad),
@@ -96,23 +96,123 @@ FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
 );
 
 CREATE TABLE notificaciones(
-idnotificacion INTEGER(11) NOT NULL AUTO_INCREMENT,
-idusuario INTEGER(11) NOT NULL,
-idactividad INTEGER(11) NOT NULL,
-rango VARCHAR(200) NOT NULL,
+idnotificacion INT(11) NOT NULL AUTO_INCREMENT,
+idusuario INT(11) NOT NULL,
+idactividad INT(11) NOT NULL,
+fechaasignada TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+diasrestantes INT(3) NOT NULL,
+color VARCHAR(10) NOT NULL DEFAULT '#FFFFFF',
+estado_notificacion VARCHAR (10) NOT NULL DEFAULT 'no visto',
 PRIMARY KEY (idnotificacion),
 FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
 FOREIGN KEY (idactividad) REFERENCES actividades(idactividad)
 );
 
 CREATE TABLE roles(
-idrol INTEGER(11) NOT NULL AUTO_INCREMENT,
+idrol INT(11) NOT NULL AUTO_INCREMENT,
 rol VARCHAR(50) NOT NULL,
-idtipousuario INTEGER(11) NOT NULL,
+idtipousuario INT(11) NOT NULL,
 PRIMARY KEY (idrol),
 FOREIGN KEY (idtipousuario) REFERENCES tiposusuarios (idtipousuario)
 );
 
+DELIMITER \\
+DROP TRIGGER IF EXISTS notificacion_inicial \\
+CREATE TRIGGER notificacion_inicial AFTER INSERT ON actividades FOR EACH ROW
+BEGIN
+	INSERT INTO notificaciones (idusuario, idactividad, diasrestantes) VALUES (NEW.idusuario, NEW.idactividad, DATEDIFF(NEW.fechaactividad, CURDATE()));
+END \\
+DELIMITER ;
+
+DELIMITER \\
+DROP PROCEDURE IF EXISTS alerta_notificacion \\
+CREATE PROCEDURE alerta_notificacion()
+BEGIN
+	DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE id_notificacion INT;
+    DECLARE id_actividad INT;
+    DECLARE days_left INT;
+    DECLARE update_notification CURSOR FOR SELECT idnotificacion, idactividad FROM notificaciones WHERE visto != 'finalizada';
+    DECLARE CONTINUE handler FOR NOT FOUND SET done = TRUE;
+    OPEN update_notification;
+    update_notification_loop: LOOP
+		FETCH update_notification INTO id_notificacion, id_actividad;
+        IF done THEN
+			leave update_notification_loop;
+		END IF;
+        SET days_left = DATEDIFF((SELECT fechaactividad FROM actividades WHERE idactividad = id_actividad), CURDATE());
+        IF days_left <= 0 THEN
+			UPDATE notificaciones SET diasrestantes = 0, color = '#808080', estado_notificacion = 'finalizada' WHERE idnotificacion = id_notificacion;
+        ElSEIF days_left <= 3 THEN
+			UPDATE notificaciones SET diasrestantes = days_left, color = '#FF0000', estado_notificacion = 'no visto' WHERE idnotificacion = id_notificacion;
+		ELSEIF days_left <= 6 THEN
+			UPDATE notificaciones SET diasrestantes = days_left, color = '#FFFF00', estado_notificacion = 'no visto' WHERE idnotificacion = id_notificacion;
+		ELSEIF days_left <= 10 THEN
+			UPDATE notificaciones SET diasrestantes = days_left, color = '#00FF00', estado_notificacion = 'no visto' WHERE idnotificacion = id_notificacion;
+		END IF;
+	END LOOP;
+END \\
+DELIMITER ;
+
+CREATE TABLE registro_actividad(
+id_registro_actividad INT NOT NULL AUTO_INCREMENT,
+idusuario INT NOT NULL,
+idactividad INT NOT NULL,
+fechaasignada TIMESTAMP NOT NULL,
+PRIMARY KEY (id_registro_actividad),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario),
+FOREIGN KEY (idactividad) REFERENCES actividades (idactividad)
+);
+
+DELIMITER \\
+DROP TRIGGER IF EXISTS guarda_registros \\
+CREATE TRIGGER guarda_registros AFTER UPDATE ON notificaciones FOR EACH ROW
+BEGIN
+	
+END \\
+DELIMITER ;
+
+SET lc_time_names = 'es_ES';
+
+SET GLOBAL EVENT_SCHEDULER = on;
+
+DROP EVENT IF EXISTS event_monitor;
+CREATE EVENT event_monitor ON SCHEDULE EVERY 1 DAY
+STARTS '2018-01-01 00:00:01'
+DO CALL alerta_notificacion();
+
+/*-------O-------*/
+SELECT CONCAT(UPPER(LEFT(DAYNAME(CURDATE()),1)), SUBSTR(DAYNAME(CURDATE()), 2)) AS nombre_dia;
+
+DROP EVENT IF EXISTS nombre_mes;
+CREATE EVENT nombre_mes
+ON SCHEDULE EVERY 1 MONTH
+STARTS '2018-01-01 00:00:00'
+BEGIN
+	CALL alerta_notificacion();
+    
+END ;
+
+
+DROP EVENT IF EXISTS cambio_nombre_dia;
+CREATE EVENT cambio_nombre_dia
+ON SCHEDULE EVERY 1 DAY
+STARTS '2018-01-01 00:00:00'
+DO
+BEGIN
+	
+END
+
+SELECT 
+    fecha, DAYOFWEEK(fecha)
+FROM
+    calendario
+WHERE
+    fecha BETWEEN '2017-02-01' AND '2017-02-15'
+        AND DAYOFWEEK(fecha) IN (2,3,4,5,6) /*--agregar--*/ and DAYOFWEEK(fecha) not in (feriado/*--sub-consulta--*/)
+		
+		
+/*--- OLD PROCEDURE --- Crear notificacion
 DELIMITER \\
 DROP PROCEDURE IF EXISTS alertas_actividades \\
 CREATE PROCEDURE alertas_actividades()
@@ -135,7 +235,9 @@ BEGIN
 	END LOOP;
     CLOSE make_notification;
 END \\
+---*/
 
+/*--- OLD PROCEDURE --- Actualizar notificaciones
 DELIMITER \\
 DROP PROCEDURE IF EXISTS actualizar_actividades \\
 CREATE PROCEDURE actualizar_actividades()
@@ -163,43 +265,4 @@ BEGIN
 		END IF;
     END LOOP;
 END \\
-
-SET lc_time_names = 'es_ES';
-
-SET GLOBAL EVENT_SCHEDULER = on;
-
-DROP EVENT IF EXISTS notificacion;
-CREATE EVENT notificacion ON SCHEDULE EVERY 1 DAY
-STARTS '2018-01-01 00:00:00'
-DOUBLE
-BEGIN
-	
-    
-END ;
-
-/*-------O-------*/
-SELECT CONCAT(UPPER(LEFT(DAYNAME(CURDATE()),1)), SUBSTR(DAYNAME(CURDATE()), 2)) AS nombre_dia;
-
-DROP EVENT IF EXISTS nombre_mes;
-CREATE EVENT nombre_mes
-ON SCHEDULE EVERY 1 MONTH
-STARTS '2018-01-01 00:00:00'
-DO
-
-
-DROP EVENT IF EXISTS cambio_nombre_dia;
-CREATE EVENT cambio_nombre_dia
-ON SCHEDULE EVERY 1 DAY
-STARTS '2018-01-01 00:00:00'
-DO
-BEGIN
-	
-END
-
-SELECT 
-    fecha, DAYOFWEEK(fecha)
-FROM
-    calendario
-WHERE
-    fecha BETWEEN '2017-02-01' AND '2017-02-15'
-        AND DAYOFWEEK(fecha) IN (2,3,4,5,6) /*--agregar--*/ and DAYOFWEEK(fecha) not in (feriado/*--sub-consulta--*/)
+---*/
