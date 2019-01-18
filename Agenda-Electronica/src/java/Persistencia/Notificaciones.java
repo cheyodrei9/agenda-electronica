@@ -6,6 +6,7 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +18,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author eliseo.garciausam
+ * @author fernando.medranousam
  */
 @Entity
 @Table(name = "notificaciones")
@@ -29,7 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Notificaciones.findAll", query = "SELECT n FROM Notificaciones n")
     , @NamedQuery(name = "Notificaciones.findByIdnotificacion", query = "SELECT n FROM Notificaciones n WHERE n.idnotificacion = :idnotificacion")
-    , @NamedQuery(name = "Notificaciones.findByRango", query = "SELECT n FROM Notificaciones n WHERE n.rango = :rango")})
+    , @NamedQuery(name = "Notificaciones.findByFechaasignada", query = "SELECT n FROM Notificaciones n WHERE n.fechaasignada = :fechaasignada")
+    , @NamedQuery(name = "Notificaciones.findByDiasrestantes", query = "SELECT n FROM Notificaciones n WHERE n.diasrestantes = :diasrestantes")
+    , @NamedQuery(name = "Notificaciones.findByColor", query = "SELECT n FROM Notificaciones n WHERE n.color = :color")
+    , @NamedQuery(name = "Notificaciones.findByEstadoNotificacion", query = "SELECT n FROM Notificaciones n WHERE n.estadoNotificacion = :estadoNotificacion")})
 public class Notificaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,8 +45,18 @@ public class Notificaciones implements Serializable {
     @Column(name = "idnotificacion")
     private Integer idnotificacion;
     @Basic(optional = false)
-    @Column(name = "rango")
-    private String rango;
+    @Column(name = "fechaasignada")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaasignada;
+    @Basic(optional = false)
+    @Column(name = "diasrestantes")
+    private int diasrestantes;
+    @Basic(optional = false)
+    @Column(name = "color")
+    private String color;
+    @Basic(optional = false)
+    @Column(name = "estado_notificacion")
+    private String estadoNotificacion;
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuarios idusuario;
@@ -55,9 +71,12 @@ public class Notificaciones implements Serializable {
         this.idnotificacion = idnotificacion;
     }
 
-    public Notificaciones(Integer idnotificacion, String rango) {
+    public Notificaciones(Integer idnotificacion, Date fechaasignada, int diasrestantes, String color, String estadoNotificacion) {
         this.idnotificacion = idnotificacion;
-        this.rango = rango;
+        this.fechaasignada = fechaasignada;
+        this.diasrestantes = diasrestantes;
+        this.color = color;
+        this.estadoNotificacion = estadoNotificacion;
     }
 
     public Integer getIdnotificacion() {
@@ -68,12 +87,36 @@ public class Notificaciones implements Serializable {
         this.idnotificacion = idnotificacion;
     }
 
-    public String getRango() {
-        return rango;
+    public Date getFechaasignada() {
+        return fechaasignada;
     }
 
-    public void setRango(String rango) {
-        this.rango = rango;
+    public void setFechaasignada(Date fechaasignada) {
+        this.fechaasignada = fechaasignada;
+    }
+
+    public int getDiasrestantes() {
+        return diasrestantes;
+    }
+
+    public void setDiasrestantes(int diasrestantes) {
+        this.diasrestantes = diasrestantes;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getEstadoNotificacion() {
+        return estadoNotificacion;
+    }
+
+    public void setEstadoNotificacion(String estadoNotificacion) {
+        this.estadoNotificacion = estadoNotificacion;
     }
 
     public Usuarios getIdusuario() {
