@@ -158,24 +158,10 @@ public class BeanNotificaciones {
     public void execute() {
         MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
         if (mn.consultar2().equals("SI")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Hay una nueva actividad", "por favor marcarla como leida"));
-            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Hay una nueva actividad"));
         }
 //        System.out.println("esta haciendo la consulta");
 
     }
 
-//    public void Notificaciones(Notificaciones notificaciones){
-//        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
-//        notificaciones.setEstadoNotificacion("visto");
-//        mn.Actualizar(notificaciones);
-//    }
-    
-    public void consultar3() {
-        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
-        ListaNotificaciones = mn.consultar3();
-        System.out.println("esta haciendo la consulta");
-
-    }
-    
 }

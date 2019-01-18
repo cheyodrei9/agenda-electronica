@@ -146,21 +146,4 @@ public class MantenimientoNotificaciones {
         }
     }
     
-    public List<Notificaciones> consultar3(){
-        List<Notificaciones> listaN = null;
-        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        try {
-            Query query = em.createQuery("SELECT e FROM Notificaciones e WHERE e.estadoNotificacion = 'no visto'");
-            
-            em.getTransaction().commit();
-            listaN = query.getResultList();
-            return listaN;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            return null;
-        }finally{
-            em.close();
-        }
-    }
 }
