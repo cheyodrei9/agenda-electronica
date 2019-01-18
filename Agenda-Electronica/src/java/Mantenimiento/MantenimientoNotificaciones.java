@@ -6,7 +6,6 @@
 package Mantenimiento;
 
 import Persistencia.Notificaciones;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -87,9 +86,7 @@ public class MantenimientoNotificaciones {
             not.setIdnotificacion(notificacion.getIdnotificacion());
             not.setIdusuario(notificacion.getIdusuario()); 
             not.setIdactividad(notificacion.getIdactividad());
-            not.setDiasrestantes(notificacion.getDiasrestantes());
-            not.setColor(notificacion.getColor());
-            not.setEstadoNotificacion(notificacion.getEstadoNotificacion());
+            not.setRango(notificacion.getRango());
 
             em.getTransaction().commit();
             flag = 1;
@@ -125,25 +122,4 @@ public class MantenimientoNotificaciones {
         }
         return flag; 
     }
-    
-    public String consultar2(){
-        List<Notificaciones> listaN = null;
-        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        try {
-            Query query = em.createQuery("SELECT e FROM Notificaciones e WHERE e.estadoNotificacion = 'no visto'");
-            em.getTransaction().commit();
-            listaN = query.getResultList();
-            String respuesta = listaN.size()>0?"SI":"NO";
-           // System.out.println(respuesta);
-            return respuesta;
-            
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            return null;
-        }finally{
-            em.close();
-        }
-    }
-    
 }

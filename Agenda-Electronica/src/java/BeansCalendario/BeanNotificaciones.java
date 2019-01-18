@@ -15,12 +15,8 @@ import Persistencia.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import static org.primefaces.component.contextmenu.ContextMenu.PropertyKeys.event;
-import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -133,35 +129,18 @@ public class BeanNotificaciones {
         notificaciones = MMMnot.consultarId(notificaciones.getIdnotificacion());
         String advertencia = "";
         if (notificaciones != null) {
-            this.notificaciones = notificaciones;
+            this.notificaciones= notificaciones;
             advertencia = "datos consultados corectamente";
         } else {
             advertencia = "consulta no realizada";
         }
     }
 
-    public void Actualizar() {
+    public void Actualizar() { 
         System.out.println("act" + notificaciones.getIdnotificacion());
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
         System.out.println("act" + notificaciones.getIdnotificacion());
         MMMnot.Actualizar(notificaciones);
 
     }
-
-    public void consultar() {
-        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
-        String respuesta = mn.consultar2();
-        System.out.println("esta haciendo la consulta");
-
-    }
-
-    public void execute() {
-        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
-        if (mn.consultar2().equals("SI")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Hay una nueva actividad"));
-        }
-//        System.out.println("esta haciendo la consulta");
-
-    }
-
 }
