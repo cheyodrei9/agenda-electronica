@@ -96,7 +96,7 @@ public class BeanNotificaciones {
         MantenimientoNotificaciones not = new MantenimientoNotificaciones();
         MantenimientoUsusario usr = new MantenimientoUsusario();
         MantenimientoActividades Mact = new MantenimientoActividades();
-        ListaNotificaciones = not.consultar();
+        ListaNotificaciones = not.consultar3();
         ListaUsuarios = usr.consultar();
         ListaAct = Mact.consultar();
     }
@@ -171,7 +171,6 @@ public class BeanNotificaciones {
         if (mn.consultar2().equals("SI")) {
             this.claseIcono="fa-globe";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Hay una nueva actividad", "por favor marcarla como leida"));
-            
         }else{
             this.claseIcono="fa-pencil";
         }
@@ -186,19 +185,20 @@ public class BeanNotificaciones {
 //        mn.Actualizar(notificaciones);
 //    }
     
-    public void consultar3() {
-        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
-        ListaNotificaciones = mn.consultar3();
-        System.out.println("esta haciendo la consulta en el bean");
-
-    }
-    
-    public void Actualizar2() {
-        System.out.println("act" + notificaciones.getIdnotificacion());
+//    public void consultar3() {
+//        MantenimientoNotificaciones mn = new MantenimientoNotificaciones();
+//        ListaNotificaciones = mn.consultar3();
+//        System.out.println("esta haciendo la consulta en el bean");
+//    }
+//    
+    public void actualizar2(Notificaciones n) {
         MantenimientoNotificaciones MMMnot = new MantenimientoNotificaciones();
-        System.out.println("act" + notificaciones.getIdnotificacion());
-        MMMnot.Actualizar2(notificaciones);
-
+        //Notificaciones not = MMMnot.consultarId(n.getIdnotificacion());
+        //not.setEstadoNotificacion("visto");
+        System.out.println("este es el id en actualizar2 "+n.getIdnotificacion());
+        MMMnot.Actualizar2(n);
+//        ListaNotificaciones = MMMnot.consultar3();
+//        notificaciones = new Notificaciones();
     }
     
 }

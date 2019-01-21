@@ -5,6 +5,7 @@
  */
 package Mantenimiento;
 
+import BeansCalendario.BeanLogin;
 import Persistencia.Notificaciones;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MantenimientoNotificaciones {
     }
     
     public Notificaciones consultarId(int idnotificacion){
-        System.out.println("Algo no se");
+        System.out.println("entre a buscar por id");
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Notificaciones notificacion = null;
         em.getTransaction().begin();
@@ -55,7 +56,7 @@ public class MantenimientoNotificaciones {
         }finally{
             em.close();
         }
-        System.out.println("act24");
+        System.out.println("salio del mantenimiento");
         return notificacion;
     }
     
@@ -148,10 +149,12 @@ public class MantenimientoNotificaciones {
     
     public List<Notificaciones> consultar3(){
         List<Notificaciones> listaN = null;
+        BeanLogin beanLogin = new BeanLogin();
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createQuery("SELECT e FROM Notificaciones e WHERE e.estadoNotificacion = 'no visto'");
+            Query query = em.createQuery("SELECT e FROM Notificaciones e WHERE e.estadoNotificacion = 'no visto' AND e.idusuario.idusuario=?1");
+            query.setParameter(1, beanLogin.getUser_id());
             
             em.getTransaction().commit();
             listaN = query.getResultList();
@@ -175,7 +178,9 @@ public class MantenimientoNotificaciones {
         Notificaciones not = null;
         em.getTransaction().begin();
         int flag = 0;
+        System.out.println("entre al metodo");
         try {
+            System.out.println("entre al try");
             not = em.find(Notificaciones.class, notificacion.getIdnotificacion());
             not.setIdnotificacion(notificacion.getIdnotificacion());
             not.setIdusuario(notificacion.getIdusuario()); 
@@ -183,7 +188,7 @@ public class MantenimientoNotificaciones {
             not.setDiasrestantes(notificacion.getDiasrestantes());
             not.setColor(notificacion.getColor());
             not.setEstadoNotificacion("visto");
-
+            System.out.println("pase por los seteos");
             em.getTransaction().commit();
             flag = 1;
             System.out.println("Actualizacion exitosa");
