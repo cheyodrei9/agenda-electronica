@@ -58,7 +58,7 @@ FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
 create table calendarios(
 idcalendario int(11) NOT NULL AUTO_INCREMENT,
 idcronograma int(11) NOT NULL,
-año int(11) NOT NULL,
+aÃ±o int(11) NOT NULL,
 PRIMARY KEY (idcalendario),
 FOREIGN KEY (idcronograma) REFERENCES cronogramas (idcronograma)
 );
