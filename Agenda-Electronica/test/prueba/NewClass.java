@@ -123,7 +123,11 @@ public class NewClass {
   /*MantenimientoTipoUsuario man = new MantenimientoTipoUsuario();
   
         System.out.println(man.consultar());*/
-        
+    	/*MantenimientoTipoUsuario man = new MantenimientoTipoUsuario();
+    	  
+        System.out.println(man.consultar());*/
+  
+         
         MantenimientoTiposActividades TA = new MantenimientoTiposActividades();
         System.out.println(TA.consultar());
         
